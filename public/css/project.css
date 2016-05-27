@@ -1,0 +1,99 @@
+.main{
+	width:90%;
+	margin:0 auto;
+}
+/*项目css*/
+.new-content {
+	width:100%;
+}
+/*设置其他属性*/
+.new-content ul:first-child{
+	margin-left: 0px;
+}
+.new-cart {
+	width:266px;/*24%;*/
+	-webkit-transition: all 0.4s ease;
+	-moz-transition: all 0.4s ease;
+	-o-transition: all 0.4s ease;
+	transition: all 0.4s ease;
+}
+/*设置样式主要属性*/
+.new-cart{
+	float:left;
+	box-shadow:0 0 4px #aaa;
+	/*margin: 1% 0.8% 1% 0;*/
+	margin: 1% 0px 1% 2%;
+	background-color:#F3F3F3;
+}
+.new-cart:hover{
+	background:#4CB1CA;
+	-webkit-transition: all 0.4s ease;
+	-moz-transition: all 0.4s ease;
+	-o-transition: all 0.4s ease;
+	transition: all 0.4s ease;
+	color:white;
+}
+.new-cart:hover .title{
+	color:white;
+}
+.new-cart img{
+	display:block;
+	border:2px solid #f0f0f0;
+}
+.hits img{
+	border:0px;
+	float:left;
+}
+/*发起项目*/
+.process{
+	height: 140px;
+	background-color:#F5F5F5;
+}
+.process h3{
+	width: 70%;
+	height: 62px;
+	background-image:url(../images/bg-project-edit-new.png);
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+}
+.process h2{
+	height:23px;
+}
+.tit-wrap{
+	height: 40px;
+	line-height: 22px;
+	/*font-family:"Microsoft YaHei";*/
+	font-size:24px;
+	font-weight: bold;
+	border-bottom-color: #E4E4E4;
+	border-bottom-style: solid;
+	border-bottom-width: 2px;
+	margin-bottom:40px;
+}
+.display{
+	display:inline;
+	height:45px;
+}
+/*project-Info*/
+.process2 h3{
+	width: 70%;
+	height: 62px;
+	background-image:url(../images/bg-project-edit-new.png);
+	background-position: 0px -64px;
+	background-repeat: no-repeat;
+	text-align:center;
+}
+.pro-table{
+border: 1px solid #E4E4E4;
+border-spacing: 0px 0px;
+color: #333;
+font-size: 14px;
+font-weight: 400;
+line-height: 22px;
+width: 670px;
+}
+.pro-table tr td{
+	border:1px solid #e4e4e4;
+}
+
+

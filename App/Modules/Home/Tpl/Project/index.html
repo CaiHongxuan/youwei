@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>项目</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" type="image/png" href="__PUBLIC__/images/youwei30x30.png">
+<link href="__PUBLIC__/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="__PUBLIC__/css/form.css" rel="stylesheet" type="text/css" media="all" />
+<script src="__PUBLIC__/js/jquery1.min.js"></script>
+<link href="__PUBLIC__/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<link href="__PUBLIC__/css/project.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="__PUBLIC__/js/megamenu.js"></script>
+<script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.jscrollpane.min.js"></script>
+<script type="text/javascript" id="sourcecode">
+	$(function(){
+		$('.scroll-pane').jScrollPane();
+	});
+ function favor(formId) {
+  
+    if(!formId.split('_')[1]) 
+        return false;
+
+    $.ajax({
+        type:"POST",
+        url:"{:U('Index/favor')}",
+        data:$("#"+formId).serialize(),
+        async:false,
+        success:function(data) {
+        
+            if(data.status) {
+    
+                document.getElementById(formId).getElementsByTagName('span')[0].innerHTML=data.data;
+                return false;
+            }
+            return false;
+
+        }
+    });
+ }
+</script>
+</head>
+<body>
+
+<!-- head begin -->
+<include file="Public/header" />
+<!-- head end -->
+
+<div class="main">
+  <div class="wrap">
+    <div class="section group">
+      <div class="cont span_2_of_3" style="width:100%">
+        <div id="bNav" class="bNav" >
+          <ul>
+            <li><a href="{:U('Project/index')}">全部</a></li>
+            <volist name="categories" id="vo">
+               <li><a href="{:U('Project/index')}?cateId={$vo.id}">{$vo.name}</a></li>
+            </volist>
+          </ul>
+        </div>
+        <!--content begin-->
+        <div class="new-content">
+            <empty name="projects">
+               <h2 style="text-align: center;font-size: 30px;font-weight: bold;color:#555;margin-top: 20px;margin-bottom: 300px;">暂无相关类别项目</h2>
+
+            <else/>
+
+                <div class="top-box">   
+                <volist name="projects" id="pro">                
+                  <div class="col_1_of_3 span_1_of_3">
+                    <div class="inner_content clearfix">
+                      <div class="product_image"> 
+                        <a href="{:U('Project/detail',array('id'=>$pro['id']))}">
+                          <div class="type"> 
+                            <img src="{$pro.pro_pic_url}" alt="后台标题简介限定为十个至十六个字" width="246px" height="185px";/> 
+                          </div>
+                        </a>
+                      </div>
+                      <div class="price">
+                        <div class="cart-left">
+                          <h3> 
+                            <a href="#">
+                              <p class="title">{$pro.name}</p>
+                            </a> 
+                          </h3>
+                        </div>
+                          <div class="cart-left">
+                              <hr  style="FILTER: alpha(opacity=100,finishopacity=0,style=1)" width="100%" color=#4CB1CA SIZE=2 />
+                              <span>目标：{$pro.days}天</span>&nbsp;&nbsp;<span>剩余：{$pro.remain_day}天</span>
+                              <span class="hits">
+                                  <form id="{$pro.id}_{$Think.session.user_id}" method="post">
+                                      <a title="赞" href="" class="z-like" onclick="return favor('{$pro.id}_{$Think.session.user_id}');"></a>
+                                      (<span style="display:inline;float:none;">{$pro.favor}</span>)
+                                      <input type="hidden" name="proid" value="{$pro.id}" />
+                                  </form>
+                              </span>
+                          </div>
+                      </div>
+                      <div class="clear"></div>
+                    </div>
+                  </div>
+                  <if condition="$i%4===0">
+                      <div class="clear"></div>
+                      </div>
+                      <div class="top-box">
+                  </if>
+                </volist>
+                </div>
+
+            </empty>
+        </div>
+      </div>
+      <div class="clear"> </div>
+      <div class='pagebar' style='text-align: center;margin:20px;color:#555;'>{$page}</div>
+    </div>
+  </div>
+</div>
+
+<!-- footer begin -->
+<include file="Public/footer" />
+<!-- footer end -->
+
+</body>
+</html>

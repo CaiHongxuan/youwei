@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>密码修改</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" type="image/png" href="__PUBLIC__/images/youwei30x30.png">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/zhongchou.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/launchproject.css">
+<link href="__PUBLIC__/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery1.min.js"></script>
+<!-- start menu -->
+<link href="__PUBLIC__/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="__PUBLIC__/js/megamenu.js"></script>
+<script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+<script src="__PUBLIC__/js/jquery.easydropdown.js"></script>
+<script  type="text/javascript">
+  
+function pwdupdate_submit(){
+   $.ajax({ 
+    type: "POST", 
+    url: "{:U('User/pwdUpdate')}", 
+    data: $("#pwdupdate").serialize() , 
+    async : false, 
+    success: function(data) { 
+
+      if(!data.status) {
+        var oSpan_errors =  document.getElementById(data.data);
+        oSpan_errors.innerHTML = data.info;
+        oSpan_errors.style.display="block";
+        return flase;
+      }
+
+      alert(data.info);
+      if(data.data)
+        window.location= data.data;
+    }
+  });
+ }
+
+</script> 
+</head>
+<body>
+<!-- head begin -->
+  <include file="Public/header" />
+<!-- head end -->
+
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/alter.css">
+<!--main static-->
+<div class="wrap pb116 clearfix">
+  <h2 class="personal-set"><a href="percenter.html" class="mm-blue ml-pm a-personal-set  ">返回个人中心</a>个人设置</h2>
+  <!--left side static-->
+  <div class="personal-set-left">
+    <ul>
+      <li><a href="{:U('User/infoUpdate')}">资料修改</a></li>
+      <li class="selected"><a href="{:U('User/pwdUpdate')}">密码修改</a></li>
+      <li><a href="{:U('User/imageUpdate')}">头像修改</a></li>
+    </ul>
+  </div>
+  <!--left side end--> 
+  
+  <!--right side static-->
+  <div class="personal-set-right">
+    <form autocomplete="off" id="pwdupdate" action="" method="POST" name="passModify" class="setting-form"  >
+
+      <div class="form-item clearfix">
+        <div class="row clearfix">
+          <label>原始密码：</label><!-- 
+          <input class="input-wid" placeholder="" value="" name="old_pwd" wx-validator-rule="required|rangelength" wx-validator-param="|1-16" type="password"> -->
+
+          <input class="input-wid" placeholder="" value="" name="old_pwd" type="password">
+          <span class="errors" id="old_pwd"></span>
+        </div>
+        <div class="row clearfix">
+          <label>新密码：</label>
+          
+          <input class="input-wid" placeholder="" value="" name="new_pwd"  type="password">
+        <span class="errors" id="new_pwd"></span>
+
+         
+        <!--   <input class="input-wid" placeholder="" value="" name="new_pwd" wx-validator-rule="required|rangelength" wx-validator-param="|6-16" type="password">  -->
+
+          
+        </div>
+        <div class="row clearfix">
+          <label>确认密码：</label>
+         <input class="input-wid" placeholder="" value="" name="re_new_pwd"   type="password">
+
+ 
+     <!--      <input class="input-wid" placeholder="" value="" name="re_new_pwd" wx-validator-rule="required|equalTo" wx-validator-param="|user_pwd" type="password"> -->
+
+
+         
+       </div>
+
+        <p class="p-btn"><input type="button" value="提交" style="border:none;" onclick="return pwdupdate_submit();" class=" a-btn-blue btn-effect-blue"></p>
+
+          <!-- 
+                  <p class="p-btn"><a type="submit" common-sprite="" href="#" class=" a-btn-blue btn-effect-blue">保存</a></p> -->
+      </div>
+    </form>
+  </div>
+  <!--right side end--> 
+</div>
+
+<!-- footer begin -->
+<include file="Public/footer" />
+<!-- footer end -->
+
+<script type="text/javascript" src="__PUBLIC__/js/prompt.js"></script>
+<script type="text/javascript">
+	function passModify(data){
+		if(data.status==1){
+			wx.alert("保存成功",function(){
+				location.reload();
+			});
+		} else {
+			wx.alert(data.info);
+		}
+	}
+</script>
+</body>
+</html>

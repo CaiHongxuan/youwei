@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="__PUBLIC__/backend/utilLib/bootstrap.min.css" type="text/css" media="screen" />
+</head>
+<body>
+    
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+              <div style="margin-bottom: 40px;">
+                 <form  class="form-inline" action="{:U('Log/loglist')}" method="POST">
+               
+   
+                   <div class="form-group">
+                    <!-- <label for="exampleInputEmail2">搜索</label> -->
+                    <input type="text" name='keyword' class="form-control" id="Input4Key" placeholder="管理员名称、操作内容" style='width:300px;' value="{$keyword}">
+                  </div>
+                  <button type="submit" id='subtn' class="btn btn-default">搜索</button>
+            
+                </form>
+
+            </div>
+            <table class="table table-bordered table-hover ">
+                <thead >
+                    <tr style="background-color:#37A0B9;">
+                        <th>
+                           管理员名称
+                        </th>
+                        <th>
+                            操作内容
+                        </th>
+                        <th>
+                            操作时间
+                        </th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <empty name="log">
+                        <tr>
+                            <td colspan='100%' align='center'>
+                                尚无操作
+                            </td>
+                         </tr>
+                    <else/>
+                    <volist name='log' id='vo'>
+                         <tr>
+                            <td>
+                                {$vo.name}
+                            </td>
+                            <td>
+                               {$vo.operation}
+                            </td>
+                            <td>
+                              {$vo.created_time}
+                            </td>
+                          </tr>
+                    </volist>
+                         <tr>
+                            <td colspan='100%' align='center'>
+                                {$page}
+                            </td>
+                         </tr>
+                </empty>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+    
+</body>
+</html>

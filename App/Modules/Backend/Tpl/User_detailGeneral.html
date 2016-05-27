@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="__PUBLIC__/backend/utilLib/bootstrap.min.css" type="text/css" media="screen" />
+</head>
+<body>
+
+	<div class="container-fluid">
+		<div class="row-fluid">
+		<div class="span12">
+
+			    <table class='table table-bordered table-hover table-striped'>
+			   
+			      <tbody>
+			      	<tr style="background: #37a0b9">
+			      		<th>表格信息</th>
+			      		<th>用户信息</th>
+			      	</tr>
+			        <tr>
+			          <th scope="row">
+			          		用户名
+			          </th>
+			          <td>{$userInfos['name']}</td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+			            	账号
+			          </th>
+			          <td>{$userInfos['account']}</td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+			           	性别	
+			          </th>
+			          <td>{$generalInfos['gender']}</td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+			           	手机	
+			          </th>
+			          <td>{$generalInfos['telephone']}</td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+			           	身份证号	
+			          </th>
+			          <td>{$generalInfos['idcard']}</td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+			             身份证与本人合照头像
+			          </th>
+			          <td>
+			          	<if condition="$generalInfos['idcard_path']">
+			   
+							<img alt="140x140" src="__ROOT__/{$generalInfos['idcard_path']}"  class="img-thumbnail" width='140px' height='140px'/>
+						</if>
+					  </td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+			            头像
+			          </th>
+			          <td>
+			          	<if condition="$generalInfos['headpic_path']">
+			          	 
+							<img alt="140x140" src="__ROOT__/{$generalInfos['headpic_path']}"  class="img-thumbnail" width='140px' height='140px'/>
+						</if>
+					  </td>
+			        </tr>
+			        
+			        <tr>
+			          <th scope="row">
+			           	单位	
+			          </th>
+			          <td>{$generalInfos['unit']}</td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+			           	职务	
+			          </th>
+			          <td>{$generalInfos['position']}</td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+						地址
+			          </th>
+			          <td>{$generalInfos['address']}</td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+			           	视频链接	
+			          </th>
+			          <td><a href='{$generalInfos['video_url']}' target='_blank'>{$generalInfos['video_url']}</a></td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+			            简介
+			          </th>
+			          <td>{$generalInfos['resume']}</td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+			            注册时间
+			          </th>
+			          <td>{$userInfos['created_time']}</td>
+			        </tr>
+			      </tbody>
+			    </table>
+		</div></div>
+	</div>
+
+ 
+	
+</body>
+</html>

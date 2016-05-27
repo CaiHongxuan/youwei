@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>注册</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" type="image/png" href="__PUBLIC__/images/youwei30x30.png">
+<link href="__PUBLIC__/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery1.min.js"></script>
+<!-- start menu -->
+<link href="__PUBLIC__/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="__PUBLIC__/js/megamenu.js"></script>
+<script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+<script src="__PUBLIC__/js/jquery.easydropdown.js"></script>
+<script type="text/javascript" language="javascript">
+function isselectedfile() {
+   var oTxt_isupload = document.getElementById('isUpload');
+   var oSpan_filepath = document.getElementById('filepath');
+   var oInput_file = document.getElementById('upfile');
+
+   if(oInput_file.value==='') {
+      oSpan_filepath.innerHTML='未选择文件';
+      oTxt_isupload.value='' ;
+   } else {
+      var filename = oInput_file.value.split('\\');
+      oSpan_filepath.innerHTML=filename[filename.length-1]; 
+      oTxt_isupload.value='1';
+   }
+}
+</script>
+<!--[if ! IE 9]>  
+<style type="text/css">
+.register_account form input[type="text"], .register_account form input[type="password"], register_account form select {
+  border: 1px solid #eee;
+}
+</style>
+<![endif]-->
+</head>
+<body>
+
+<!-- head begin -->
+<include file="Public/header" />
+<!-- head end -->
+
+<div class="register_account">
+  <div class="wrap">
+    <p class="title">注册新用户（无带*号可选填）</p>
+    <form action="{:U('User/register')}" method="POST" enctype="multipart/form-data">
+      <div class="col_1_of_2 span_1_of_2">
+        <div class="messagebox">
+          <div class="message">用户名*: </div>
+          <input type="text"  onblur="changeTip(this);" id="user" placeholder="" name="username" value="{$form_data['username']}"/>
+          <span class='errors'>{$errors['name']}</span>
+        </div>
+
+        <div class="messagebox">
+          <div class="message">手机号码*: </div>
+          <input type="text"  onblur="changeTip(this);" id="tele" placeholder="" name="telephone" value="{$form_data['telephone']}"/> 
+          <span class='errors'>{$errors['telephone']}</span>
+        </div>
+
+        <div class="messagebox">
+          <div class="message">邮箱*: </div>
+          <input type="text"  onblur="changeTip(this);" id="mail" placeholder="" name="email" value="{$form_data['email']}"/>
+          <span class='errors'>{$errors['account']}</span>
+        </div>
+
+        <div class="messagebox">
+          <div class="message">密码*: </div>
+          <input type="password" onblur="changeTip(this);" id="pass" placeholder="" name="pass" value=""/>
+          <span class='errors'>{$errors['password']}</span>
+        </div>
+
+        <div class="messagebox">
+
+          <div class="message">确定密码*: </div>
+          <input type="password"  onblur="changeTip(this);" id="recog" placeholder="" name="repass" value=""/>
+          <span class='errors'>{$errors['repassword']}</span>
+        </div>
+      </div>
+
+      <div class="col_1_of_2 span_1_of_2">
+        <div class="messagebox">
+          <span class="message">居住地址: </span>
+          <input type="text"  onblur="changeTip1(this);" id="addre" placeholder="" name="addr" value="{$form_data['addr']}"/>
+
+        </div>
+
+        <div class="messagebox">
+          <span class="message">工作单位: </span>
+          <input type="text"  onblur="changeTip1(this);" id="work" placeholder="" name="unit" value="{$form_data['unit']}"/>
+
+        </div>
+
+        <div class="messagebox">
+          <span class="message">工作职务: </span>
+          <input type="text"  onblur="changeTip1(this);" id="duty" placeholder="" name="job" value="{$form_data['job']}"/>
+
+        </div>
+
+        <div class="messagebox">
+          <span class="message">身份证号: </span>
+          <input type="text"  onblur="changeTip1(this);" id="idcard" placeholder="" name="idcard" value="{$form_data['idcard']}"/>
+          <span class='errors'>{$errors['idcard']}</span>
+        </div>
+
+        <div class="messagebox">
+          <a href="javascript:void(0)" onClick="javascript:document.getElementById('upfile').click();" style="display:block;">
+            <span class='filespan'>身份证与本人合照</span>
+            <img src="__PUBLIC__/images/upload_log.png" alt="选择文件上传" style="width:40px;height:30px"/>
+            <span type="text" id="filepath" class='filespan'>未选择文件</span>            
+            <span class='errors'>{$errors['upfile']}</span>
+            <input type="file" name="file" style="display:none;" onChange="isselectedfile();" id="upfile"/>
+            <input type="hidden" name="isUpload" id="isUpload" value=''/>
+          </a>
+        </div>
+      </div>
+      <button class="grey">提交</button>
+      <p class="terms">By clicking 'Create Account' you agree to the <a href="#">Terms &amp; Conditions</a>.</p>
+      <div class="clear"></div>
+    </form>
+  </div>
+</div>
+
+<!-- footer begin -->
+<include file="Public/footer" />
+<!-- footer end -->
+
+</body>
+</html>

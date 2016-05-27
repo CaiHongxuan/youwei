@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="__PUBLIC__/backend/utilLib/bootstrap.min.css" type="text/css" media="screen" />
+</head>
+<body>
+    
+<div class="container-fluid">
+    <div class="row-fluid">
+            <div class="span12">
+            <div style="margin-bottom: 40px;">
+                 <form  class="form-inline" action="{:U('User/tutorList')}" method="POST">
+                  
+                   <div class="form-group">
+                   <!--  <label for="exampleInputEmail2">搜索</label> -->
+                    <input type="text" name='keyword' class="form-control" id="exampleInputEmail2" placeholder="账号、手机、职务、单位" style='width:300px;' value="{$key}">
+                  </div>
+                  <button type="submit" id='subtn' class="btn btn-default">搜索</button>
+                  <a class="btn btn-danger" href="{:U('User/addTutor')}" role="button">新增导师</a>
+
+            
+                </form>
+
+            </div>
+            <table class="table table-bordered table-hover table-condensed">
+                <thead>
+                    <tr>
+                        <th>
+                           名称
+                        </th>
+                        <th>
+                            邮箱
+                        </th>
+                        <th>
+                           手机
+                        </th>
+                        <th>
+                           级别
+                        </th>
+                        <th>
+                            学历
+                        </th>
+                        <th>
+                            证件号
+                        </th>
+                        <th>
+                            职务
+                        </th>
+                        <th>
+                            单位
+                        </th>
+                        <th>
+                            详细
+                        </th>
+                        <th>
+                            启/禁用
+                        </th>
+                        <th>
+                            删除
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <empty name="tutors">
+                        <tr>
+                            <td colspan='100%' align='center'>
+                                尚无记录
+                            </td>
+                         </tr>
+                    <else/>
+                    <volist name='tutors' id='vo'>
+                         <tr>
+                            <td>{$usrInfos[$i-1]['name']}</td>
+                            <td>{$vo.mail}</td>
+                            <td>{$vo.tele}</td>
+                            <td>{$vo.level}</td>
+                            <td>{$vo.education}</td>
+                            <td>{$vo.idcard}</td>
+                            <td>{$vo.position}</td>
+                            <td>{$vo.unit}</td>
+                            <td> 
+                                <a class="btn btn-info" href="{:U('User/detailTutor',array('id'=>$vo['id'],'user_id'=>$vo['user_id']))}" role="button">详细</a>
+                            </td>
+                        
+                            <td>
+                               <if condition="$usrInfos[$i-1]['status'] eq 0">
+                                    <a class="btn btn-default" href="{:U('User/lockOrUnlock',array('id'=>$vo['user_id'],'islock'=>0))}" onclick="javascript:return confirm('确定解锁该用户?')" role="button">解锁</a>
+                               <else/> 
+                                    <a class="btn btn-default" href="{:U('User/lockOrUnlock',array('id'=>$vo['user_id'],'islock'=>1))}" onclick="javascript:return confirm('确定锁定该用户?')" role="button">锁定</a>
+                               </if>
+                            </td>
+                             <td> 
+                                <a class="btn btn-danger" href="{:U('User/deleteUser',array('id'=>$vo['user_id'],'type'=>'Tutor'))}" role="button" onclick="javascript:return confirm('确定删除该用户?')">删除</a>
+                            </td>
+                         </tr>
+                    </volist>
+                         <tr>
+                            <td colspan='100%' align='center'>
+                                {$page}
+                            </td>
+                         </tr>
+                </empty>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+    
+</body>
+</html>

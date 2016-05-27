@@ -1,0 +1,168 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>活动</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" type="image/png" href="__PUBLIC__/images/youwei30x30.png">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/style.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/zhongchou.css">
+    <link href="__PUBLIC__/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="__PUBLIC__/js/projecteffect.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/megamenu.js"></script>
+    <script src="__PUBLIC__/js/jquery.easydropdown.js"></script>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/projectview.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/activityview.css">
+    <script>
+    $(document).ready(function() {
+        $(".megamenu").megamenu();
+    });
+
+    function loginsubmit() {
+        $.ajax({
+            type: "POST",
+            url: "{:U('Index/login')}",
+            data: $("#loginform").serialize(),
+            async: false,
+            success: function(data) {
+                if (!data.status) {
+                    var oSpan_errors = document.getElementById('login_errors');
+                    oSpan_errors.innerHTML = data.info;
+                    oSpan_errors.style.display = "block";
+                    change_code();
+                    return flase;
+                }
+                window.location = data.data;
+            }
+        });
+    }
+
+    function attend() {
+        $.ajax({
+            type: "post",
+            url: "{:U('Activity/attend')}",
+            data: $("#attend-form").serialize(),
+            async: false,
+            success: function(data) {
+                if(data.status==1){
+                    document.getElementById("attend").innerHTML="已报名";
+                }
+                alert(data.info);
+            }
+        });
+    }
+
+    function change_code() {
+        var verifyURL = "{:U('User/verify','','')}";
+        $("#code").attr("src", verifyURL + '/' + Math.random());
+        return false;
+    }
+
+    $(function(){
+        $(".rad").click(function(){
+            if($(this).attr("value")=="1")
+                $("#show").show();
+            else
+                $("#show").hide();
+        });
+    });
+    </script>
+</head>
+
+<body>
+
+<!-- head begin -->
+<include file="Public/header" />
+<!-- head end -->
+
+    <div class="activity">
+        <div class="tit-wrap">
+            <h3>活动内容</h3>
+        </div>
+        <ul class="breadcrumb breadcrumb__t">
+            <div class="position"><span>当前位置：</span><a href="{:U('Activity/index')}">活动</a><span>->&nbsp;活动内容</span><input type="button" class='btn' value='返回' style="z-index: 1" onclick="javascript:history.go(-1);"/></div>
+        </ul>
+        <div class="content">
+            <div id="head_css">{$vo.aname}</div>
+            <div class="newtag"><span>发布者：</span><a href="">{$vo.uname}</a>&nbsp;&nbsp;<span>点击数：{$vo.click}</span>&nbsp;&nbsp;<span>更新时间：{$vo.passed_time}</span></div>
+            <div class="main_m">
+                <h1>{$vo.aname}</h1><br>
+                <div class="abstruct">简介：<p>{$vo.description}</p></div>
+                {$vo.detail|htmlspecialchars_decode}
+
+                <empty name="Think.session.name">
+                    <div class="join Js-show-more"><a>我要参与</a></div>
+                    <else />
+                    <div class="join">
+                        <empty name="vo.file_attachment_id">
+                            <else/>
+                            <a href="{:U('Activity/download', array('id'=>$vo['file_attachment_id']))}">下载附件</a><br><br><br>
+                        </empty>
+                        <empty name="is_attend">
+                            <a onclick="attend()" id="attend">确认报名</a>
+                            <form method="post" id="attend-form"><input type="hidden" name="id" value="{$vo.aid}">
+                            </form>
+                        <else/>
+                            <a>已报名</a>
+                        </empty>
+                    </div>
+                </empty>
+
+            </div>
+            <div class="article">
+                <empty name="front">
+                    <p><span>&nbsp;</span></p>
+                    <else/>
+                    <p><span>上一篇文章：</span>
+                        <a href="{:U('Activity/message',array('id'=>$front['id']))}">
+                            {$front.name}
+                        </a>
+                    </p>
+                </empty>
+                <empty name="after">
+                    <p><span>&nbsp;</span></p>
+                    <else/>
+                    <p><span>下一篇文章：</span>
+                        <a href="{:U('Activity/message',array('id'=>$after['id']))}">
+                            {$after.name}
+                        </a>
+                    </p>
+                </empty>
+            </div>
+        </div>
+    </div>
+    <!-- 快捷登录弹出框 -->
+    <div style="height: 589px; display: none;" class="popwrap">
+        <div class="support-item">
+            <h2>登录<i class="close"></i></h2>
+            <div class="support-content">
+                <div class="subscribe">
+                    <form id="loginform" method="post">
+                        <input name="username" type="text" value="用户名" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = '用户名';}">
+                        <input type="text" onfocus="changeTip(this);" id="passText" name="passText" value="密码" />
+                        <input style="display:none;" type="password" onblur="changeTip(this);" id="pass" placeholder="" name="password" value="" />
+                        <div>
+                            <input name="verify_code" type="text" value="验证码" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = '验证码';}" class="" style="width:108px;">
+                            <img src="{:U('User/verify','','')}" id="code" alt="看不清点击更换" style="width:50px;height:25px;" onclick='change_code();' />
+                        </div>
+                        <span style="display:none;font-size: 14px; margin:6px 4px;" class="errors" id="login_errors"></span>
+                        <input type="button" id=" btn" value="登录" onclick="loginsubmit()" style="width:180px;height:30px;background-color:#4cb1ca;color:#fff;border:none;margin-top:4px;">
+                    </form>
+                    <p>没有账号？<a href="{:U('User/register')}">前往注册</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- footer begin -->
+<include file="Public/footer" />
+<!-- footer end -->
+
+    <script type="text/javascript" src="__PUBLIC__/js/projectview.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/prompt.js"></script>
+    
+</body>
+</html>

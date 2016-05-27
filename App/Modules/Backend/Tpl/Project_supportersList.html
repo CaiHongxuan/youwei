@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>项目回报</title>
+    <link rel="stylesheet" href="__PUBLIC__/backend/utilLib/bootstrap.min.css" type="text/css" media="screen" />
+    <style type="text/css">
+      .table—th{width: 15%;}
+      .table—head{background-color: red;}
+    </style>
+</head>
+<body>
+    
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+          <label>支持者列表</label>
+            <span>-- [{$project_name}] </span>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            支持者
+                        </th>
+                        <th>
+                            支持选项
+                        </th>
+                        <th>
+                            支持时间
+                        </th>
+                      
+                    </tr>
+                </thead>
+                <tbody>
+                    <empty name="supportersInfo">
+                        <tr>
+                            <td colspan='100%' align='center'>
+                                该项目尚未设置回报
+                            </td>
+                        </tr>
+                    <else/>
+                    <volist name='supportersInfo' id='vo'>
+
+                         <tr>
+                            
+                            <td>
+                                <a href="{:U('User/detail'.$vo['type'],array('user_id'=>$vo['user_id']))}">{$vo.name}</a>  
+                            </td>
+                            <td><p>{$vo.reward_content}<p></td>
+                            <td>{$vo.created_time}</td>  
+                            
+                        </tr>
+
+                    </volist>
+                         <tr>
+                            <td colspan='100%' align='center'>
+                                {$page}
+                            </td>
+                         </tr>
+                </empty>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

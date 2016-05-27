@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>注册成功，请激活账号</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" type="image/png" href="__PUBLIC__/images/youwei30x30.png">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/zhongchou.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/launchproject.css">
+<link href="__PUBLIC__/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery1.min.js"></script>
+<link href="__PUBLIC__/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/alter.css">
+<script type="text/javascript" src="__PUBLIC__/js/megamenu.js"></script>
+<script src="__PUBLIC__/js/jquery.easydropdown.js"></script>
+<script>
+$(document).ready(function(){
+    $(".megamenu").megamenu();
+
+    $.post("{:U('User/sentMail')}",{
+        email:"{$email}",
+        uid:"{$uid}"
+    }
+    );
+
+
+});
+
+
+</script>
+</head>
+<body>
+
+<!-- head begin -->
+<include file="Public/header" />
+<!-- head end -->
+
+<div class="login">
+  <div class="wrap">
+    
+<div id="user_page">
+
+    <h2>您已注册成功！</h2>
+  
+    <p>
+
+        
+    请 <em style="font-style:normal;color:#c00;">打开邮箱 ({$email}) 收取账号激活邮件</em>，
+    <br>并点击邮件中的激活链接，方可使用该账号。
+    <br><br>
+    如果您一直收不到激活邮件，请检查：
+        <ol>
+            <li>1. 请确认是否填写正确的邮箱地址：<strong style="text-decoration:underline;">{$email}</strong></li>
+            <li>2. 请注意查看您邮箱中的垃圾邮件，可能有为的邮件被误杀了</li>            
+        </ol>
+    <br><a href="{:U('User/login')}" style="color: #4cb1ca;">进入登录页面»</a>       
+    
+    </p>
+
+
+</div>
+
+  </div>
+</div>
+<!-- footer begin -->
+<include file="Public/footer" />
+<!-- footer end -->
+
+</body>
+</html>

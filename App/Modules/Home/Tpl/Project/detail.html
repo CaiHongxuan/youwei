@@ -1,0 +1,434 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>项目标题</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" type="image/png" href="__PUBLIC__/images/youwei30x30.png">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/style.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/zhongchou.css">
+    <link href="__PUBLIC__/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="__PUBLIC__/js/projecteffect.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/megamenu.js"></script>
+    <script>
+
+    function reply(id) {
+        formsubmit_ajax(id);
+    }
+    
+    function formsubmit_ajax(formid){
+
+        //获取评论内容、并判断经过trim()过滤后的内容是否为空
+        var oDivForm = document.getElementById(formid);
+        if(oDivForm.getElementsByTagName('textarea')[0].value.trim() == '')
+        {
+            alert("内容不能为空");
+            return;
+        }
+            
+        $.ajax({
+            type: "POST",
+            url: "{:U('Project/comment')}",
+            data: $("#"+formid).serialize(),
+            async: false,
+            success: function(data) {
+                if(!data.status) {
+                    alert(data.info);
+                    window.location=data.data;
+                }else if(data.info){
+                    alert(data.info);
+                }else {
+                    alert('评论成功');
+                    oDivForm.getElementsByTagName('textarea')[0].value = '';
+
+                    //将新评论添加到首位
+                    var com = document.getElementById('Ul_Comment');
+                    var newItem=document.createElement("li");
+                    newItem.className="Js-talkList";
+                    newItem.id="Js-";
+                    newItem.innerHTML=data.data;
+                    // alert($(data));
+                    // alert(newItem);
+                    com.insertBefore(newItem,com.childNodes[0]);
+                    //评论后收起评论框
+                    $(".Js-showComment").parent().next().slideUp().find("textarea").val("");
+                }
+            }
+        });window.location.reload();  //这里暂时使用刷新方式（待改善）
+    }
+
+    $(document).ready(function() {
+        $("#comment").click(function(){
+            formsubmit_ajax("comment_form");
+        });
+    });
+
+    </script>
+</head>
+
+<body>
+
+<!-- head begin  onload="welcome()"-->
+<include file="Public/header" />
+<!-- head end -->
+
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/projectview.css">
+    <div class="bg-white clearfix">
+        <div class="wrap content-top">
+            <div class="project-left">
+                <a class="a-img">
+                    <img src="{$projectInfos['path']}" style='border:2px solid #eee'></a>
+                <div class="clearfix">
+                    <span>
+                        <a id="deal_detail_like" href="javascript:;" class="z-gf Js-like_top bn gray-btn"><i class="z-like"></i>已赞</a>(<span style="display:inline;float:none;">{$projectInfos['favor']}</span>)
+                    </span>
+                    <div class="share">
+                    </div>
+                </div>
+            </div>
+            <div class="project-right">
+                <h2><a>{$projectInfos['name']}</a></h2>
+                <p class="p-color">{$projectInfos['introduce']}</p>
+                
+                <empty name="rewardInfos">
+                    <p class="p-color">主人尚未设置回报</p>
+                <else/>
+                    <div class="support-d ">
+                        <ul>
+                            <volist name='rewardInfos'  id='vo' offset="0" length="3">
+                                
+                                <li class="first-li" style="z-index:<php>echo (3-$i);</php>">
+
+                
+                                    <if condition="$vo['is_supp']">
+                                       <a name="supp"  href="{:U('Project/support',array('rid'=>$vo['id'],'stau'=>0,'pid'=>$projectInfos['pid']))}" class=" a-btn Js-support Js-mshowLogin">
+                                            <span>取消支持</span>
+                                        </a>
+                                        
+                                    <else/>
+                                        <a name="supp"  href="{:U('Project/support',array('rid'=>$vo['id'],'stau'=>1,'pid'=>$projectInfos['pid']))}" class=" a-btn Js-support Js-mshowLogin">
+                                            <span>支持</span>
+                                        </a>
+                                    </if>
+
+                                    <div class="d-content">
+                                        <p class="description">{$vo.reward_content}</p>
+                                        <p class="support_info">已有 {$vo.support_num} 位支持者</p>
+                                        
+                                        <p>配送费用：                                            
+                                            <if condition="$vo.reward_type eq 1">
+                                                需要邮寄
+                                            <else/>
+                                                免运费
+                                            </if>
+                                        </p>
+
+                                        <p>限定名额：{$vo.reward_quota}</p>
+                                        <p>预计回报发送时间：{$vo.reward_time}</p>
+                                        <p></p>
+                                    </div>
+                                </li>
+
+                            </volist>
+                        </ul>
+                        <a id="support_more" class="show-more Js-show-more">更多<i></i></a>
+                    </div>
+
+                </empty>
+    
+
+                
+            </div>
+        </div>
+    </div>
+    <div style="height: 589px; display: none;" class="popwrap">
+        <div class="support-item">
+            <h2>请选择支持项<i class="close"></i></h2>
+            <div class="suppport-content">
+                <volist name='rewardInfos'  id='vo'>
+                    <div class="support-ds c_border ">
+                        <p class="zcz_money ">
+                            <span style="color:#999;"><!-- <em>¥219</em> -->已有 {$vo.support_num} 位支持者</span>
+                            <if condition="$vo['is_supp']">
+                                <a href="{:U('Project/support',array('rid'=>$vo['id'],'stau'=>0,'pid'=>$projectInfos['pid']))}" class=" a-btn Js-support Js-mshowLogin">取消支持</a>
+                            <else/>
+                                <a href="{:U('Project/support',array('rid'=>$vo['id'],'stau'=>1,'pid'=>$projectInfos['pid']))}" class=" a-btn Js-support Js-mshowLogin">支持</a>
+
+                            </if>
+                        </p>
+                        <div class="s_c">
+                            <p>{$vo.reward_content}</p>
+                            <div class="span-image clearfix">
+                                <p>配送费用：
+                                    <if condition="$vo.reward_type eq 1">
+                                        需要邮寄
+                                    <else/>
+                                        免运费
+                                    </if>
+                                </p>
+
+                                <p>限定名额：{$vo.reward_quota}</p>
+                                <p>预计回报发送时间：{$vo.reward_time}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </volist>
+            </div>
+        </div>
+    </div>
+    <!--  项目进展弹框  -->
+    <style type="text/css">
+    .particulars-left .m-matter p {
+        padding: 11px 0;
+    }
+    </style>
+    <!-- particulars static -->
+    <div class="particulars clearfix">
+        <a name="maodian"></a>
+        <div class="particulars-left">
+        <div id="tab" class="tabD1">
+            <script type="text/javascript">
+            <!--
+            //var i=parseInt(location.hash.replace("#",""));//hash版
+            var i = parseInt(window.name); //window.name版
+            if (i) document.getElementById("tab").className = "tabD" + i;
+
+            $(document).ready(function(){
+              if ($('ul').hasClass('selected')) {
+                $("ul").firstChild("li").addClass("selected");
+              }
+              $("li").click(function(){
+                $("li").removeClass("selected");
+                $(this).addClass("selected");
+              });
+            });
+            //-->
+            </script>
+            <div id="Js-detail" class="m-matter white">
+                <ul class="tabU particulars-list-nav clearfix Js-topbill">
+                    <li onclick="javascript:c(1)"><a id="deal_detail_home" class="tabB1" href="#support_more">项目主页</a></li>
+                    <li onclick="javascript:c(2)"><a id="deal_detail_progress" class="tabB2" href="#support_more">项目进展（{$progressInfos|count}）</a></li>
+                    <li onclick="javascript:c(3)"><a id="deal_detail_comment" class="tabB3" href="#support_more"> 评论（{$commentCount}）</a></li>
+                    <li onclick="javascript:c(4)"><a id="deal_detail_supporter" class="tabB4" href="#support_more">支持者（{$supportTotal}）</a></li>
+                </ul>
+                <!-- 项目主页 -->
+                <div class="tabC tabC1 content">
+                <table width="670px" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td>
+                    <h2>{$projectInfos['name']}</h2>
+                    <div>
+                        <p>{$projectInfos['detail']|htmlspecialchars_decode}</p>
+                    </div>
+                    <div class="z-corner">
+                        <span>分类：<a href="">{$projectInfos['category_name']}</a></span>
+                        <span>标签：<a href="">{$projectInfos['label']}</a></span>
+                    </div>
+                        </td>
+                    </tr>
+                </table>
+                </div>
+                <!-- 项目进展 -->
+                <div class="tabC tabC2 m-topics m-topics2">
+                <table width="670px" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td>
+                    <div class="m-entire m-entire2">
+                        <i></i>这里记录了发起人为梦想努力的一些成果，快来看看吧~
+                    </div>
+                    <ul class="time-list">
+                        <volist name='progressInfos' id='vo'>
+                            <li>
+                                <i class="circlek"></i>
+                                <span class="time-zhou">{$vo.created_time|strtotime=###|date='m-d',###}</span>
+                                <if condition="$i eq 1">
+                                    <p class="fqr"><span>{$userInfos['name']}</span><em>发起人</em></p>
+                                </if>
+                                <p class="p-content">{$vo.effect}</p>
+                                <if condition="$vo['path']">
+                                    <a rel="imgroup" class="Js-fancybox" href="__ROOT__/Uploads/pro_pics/{$vo.path}">
+                                        <img class="comment_img" src="__ROOT__/Uploads/pro_pics/{$vo.path}">
+                                    </a>
+                                </if>
+                                <p class="line"></p>
+                            </li>
+                        </volist>
+                    </ul> 
+                   
+                    <div class="pager">
+                    </div>
+                        </td>
+                    </tr>
+                </table>
+                </div>
+                <!-- 评论 -->
+                <div class="tabC tabC3 m-topics m-topics3">
+                <table width="670px" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td>
+                    <form autocomplete="off" name="commentBlock" id='comment_form' method="POST" action="">
+                        <input value="{$projectInfos['pid']}" name="pro_id" type="hidden">
+                        <input value="0" name="type" type="hidden">
+                        <input value="0" name="comment_id" type="hidden">
+                        <textarea name="content" cols="" rows=""></textarea>
+                        
+                         <div class="hom-gn Js-img_insert">
+                            <div class="use-width"></div>
+                            <a href="javascript:;" id = 'comment' class="mm-blue ml-pm">发表评论</a>
+                        </div>
+                    </form>
+
+                    <div class="m-entire">
+                        <a href="{:U('Project/detail',array('id'=>$projectInfos['pid'],'prostatus'=>0))}"
+                        <if condition="$prostatus eq 0">
+                            class="no-01"
+                        </if>>全部</a>
+                        <a href="{:U('Project/detail',array('id'=>$projectInfos['pid'],'prostatus'=>1))}"
+                        <if condition="$prostatus eq 1">
+                            class="no-01"
+                        </if>>前期</a>
+                        <a href="{:U('Project/detail',array('id'=>$projectInfos['pid'],'prostatus'=>2))}"
+                        <if condition="$prostatus eq 2">
+                            class="no-01"
+                        </if>>中期</a>
+                        <a href="{:U('Project/detail',array('id'=>$projectInfos['pid'],'prostatus'=>3))}"
+                        <if condition="$prostatus eq 3">
+                            class="no-01"
+                        </if>>后期</a>
+                    </div>
+                    <ul id="Ul_Comment">
+                        <volist name="commentInfos" id="vo">
+
+                       <li id="Js-" class="Js-talkList">
+                            <div class="f-outs">
+                                <div class="f-outs-updow clearfix">
+                                    <a href="" class="cyclo-img01">
+                                        <img src="__PUBLIC__/images/noavatar_small.gif"></a>
+                                    <div class="fl">
+                                        <p>
+                                            <a href="">{$vo.username}</a>&nbsp;
+                                            <if condition="$vo['reply_name']">
+                                                <span style="font-size: 14px;">回复</span>
+                                                <a>{$vo.reply_name}</a>
+                                                
+                                            </if>
+                                            <span>{$vo.created_time|strtotime|date='m-d H:i',###}</span>
+                                        </p>
+                                        <p>{$vo.content}</p>
+                                    </div>
+                                </div>
+                                <p class="lp-hn">
+                                    <a href="javascript:;" class="Js-showComment">回复</a>
+                                </p>
+                                <div class="clearfix" style="display:none">
+                                    <div class="f-criticism">
+                                       <form method="POST" class="comment-input" action="" id="{$vo.created_time|strtotime=###}">
+                                             <input value="{$projectInfos['pid']}" name="pro_id" type="hidden">
+                                             <input value="1" name="type" type="hidden">
+                                            <input name="comment_id" value="{$vo.id}" type="hidden">
+                                            <textarea name="content"></textarea>
+                                            <p><a href="javascript:reply({$vo.created_time|strtotime=###});" class="Js-showLogin mm-blue text-01">回复</a></p>
+                                        </form>
+                                        <div class="Js-commentList">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        </volist>                      
+                    </ul>
+
+                    <div class="pager">
+                        {$commentPage}
+                    </div>
+
+                        </td>
+                    </tr>
+                </table>
+                </div>
+                <!-- 支持者 -->
+                <div class="tabC tabC4 m-topics m-topics4">
+                    <table class="support-table">
+                        <colgroup>
+                            <col width="20%">
+                            <col width="55%">
+                            <col width="25%">
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <th>支持者</th>
+                                <th>回报</th>
+                                
+                                <th>支持时间</th>
+                            </tr>
+                            <volist name='supporters' id = 'vo'>
+                                
+                                 <tr>
+                                    <td class="fw">
+                                        <a href="">{$vo.name}</a>
+                                    </td>
+                                    <td>{$vo.reward_content}</td>
+
+                                    <td>{$vo.created_time}</td>
+                                </tr>
+                            </volist>
+                            <td colspan='100%' align='center'>
+                                {$page}
+                            </td>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="particulars-right particulars-right-white">
+            <div class="particulars-right-top">
+                <div class="clearfix">
+                    <a class="a-header" href=""><img src="{$generalInfos['headpic_path']}"></a>
+                    <span class="fqr">发起人 <br><em class="name">{$userInfos['name']}</em></span>
+                    
+
+                </div>
+                <p class="p-c">项目地点 <span>{$projectInfos['address']}</span></p>
+                <p class="p-c p-pb">个人简介 <span>{$generalInfos['resume']}</span></p>
+                <p class="bfb_ts clearfix">
+                    <!-- <span>51%</span> -->
+                    <span>{$projectInfos['remain_day']}天<em>/{$projectInfos['days']}天</em></span>
+                </p>
+                <p class="ywc_sy clearfix">
+
+                    <span>剩余</span>
+                </p>
+
+            </div>
+            
+
+            <div style="height: 10px;" id="focusbox" class="m-advertisement">
+            </div>
+        </div>
+    </div>
+    
+<!-- footer begin -->
+<include file="Public/footer" />
+<!-- footer end -->
+
+    <script type="text/javascript" src="__PUBLIC__/js/projectview.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/prompt.js"></script>
+    <script>
+    var user_id = "",status =1;
+    function commentBlock_before($form){
+        var id = "";
+        $(".Js-removeImage").each(function(){
+            id+='<input type="hidden" name="image_id[]" value="'+$(this).attr('data-id')+'"/>';
+        });
+        $form.append(id);
+        return true;
+    }
+    </script>
+</body>
+</html>

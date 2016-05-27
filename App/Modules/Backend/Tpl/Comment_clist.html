@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="__PUBLIC__/backend/utilLib/bootstrap.min.css" type="text/css" media="screen" />
+    <script type="text/javascript">
+    function selectChange() {
+        document.getElementById("Input4Key").value = '';
+        document.getElementById("subtn").click();
+    }
+    </script>
+    <style>
+    td.pager a{
+        margin-right: 4px;
+        margin-left: 2px;
+    }
+    </style>
+</head>
+<body>
+    
+<div class="container-fluid">
+    <div class="row-fluid">
+            <div class="span12">
+              <div style="margin-bottom: 40px;">
+                <form  class="form-inline" action="{:U('Comment/clist')}" method="POST">
+               
+                  <!-- <div class="form-group">
+                    <label for="StatuSelect">状态</label> 
+                    <select name="category_id" class="form-control" onchange='selectChange()'  id="StatuSelect">
+                      
+                        <option value=" " selected='selected'> </option>
+                       
+                    </select>
+                  </div>  -->   
+                   <div class="form-group">
+                    <!-- <label for="exampleInputEmail2">搜索</label> -->
+                    <input type="text" name='keyword' class="form-control" id="Input4Key" placeholder="相关项目、评论内容" style='width:300px;' value="{$key}">
+                  </div>
+                  <button type="submit" id='subtn' class="btn btn-default">搜索</button>
+               
+
+            
+                </form> 
+
+            </div>
+            <table class="table table-bordered table-hover table-condensed">
+                <thead>
+                    <tr>
+                        <th style="width:100px;">
+                            评论用户
+                        </th>
+
+                        <th>
+                            所评项目
+                        </th>
+                        <th style="width:45%;">
+                            评论内容
+                        </th>
+                       
+              
+                        <th style="width:150px">
+                            评论时间
+                        </th>
+                        
+                        <th style="width:80px;">
+                            操作
+                        </th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <empty name="comments">
+                        <tr>
+                            <td colspan='100%' align='center'>
+                                尚无记录
+                            </td>
+                         </tr>
+                    <else/>
+                    <volist name='comments' id='vo'>
+                         <tr>
+                            <td>
+                                <a href="{:U('User/detail'.$vo['user_type'],array('user_id'=>$vo['user_id']))}">{$vo.username}</a>
+                            </td>
+                            <td>
+                                <a href="{:U('Project/detailProject',array('id'=>$vo['project_id']))}">{$vo.project_name}</a>
+                            </td>
+                            <td>{$vo.content}</td>
+                       
+                            <td>{$vo.created_time}</td>
+
+                            <td> 
+                                <a class="btn btn-danger" href="{:U('Comment/delete',array('id'=>$vo['id']))}" role="button" onclick="javascript:return confirm('确定删除该记录?')">删除</a>
+                            </td>
+                         </tr>
+                    </volist>
+                         <tr>
+                            <td colspan='100%' align='center' class="pager">
+                                {$page}
+                            </td>
+                         </tr>
+                </empty>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+    
+</body>
+</html>

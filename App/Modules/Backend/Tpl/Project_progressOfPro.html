@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>项目回报</title>
+    <link rel="stylesheet" href="__PUBLIC__/backend/utilLib/bootstrap.min.css" type="text/css" media="screen" />
+    <style type="text/css">
+      .table—th{width: 15%;}
+      .table—head{background-color: red;}
+    </style>
+</head>
+<body>
+    
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+          <label>项目进程详情</label>
+            <span>-- [{$project_name}] </span>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th style="width:110px;">
+                            进程编号
+                        </th>
+                        <th style="width:60%;">
+                            进度效果
+                        </th>
+                        <th style="width:110px;">
+                            说明图片
+                        </th>
+                        <th style="width:80px;">
+                            进程状态
+                        </th>
+                        <th style="width:100px;">创建时间</th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    <empty name="progressInfos">
+                        <tr>
+                            <td colspan='100%' align='center'>
+                                尚无进度信息
+                            </td>
+                        </tr>
+                    <else/>
+                    <volist name='progressInfos' id='pro'>
+
+                         <tr>
+                            
+                            <td>{$pro.progress_no}</td>
+                            <td>{$pro.effect}</td>  
+                            <td>
+                                <if condition="$pro['path']">
+                                    <img src="__ROOT__/Uploads/pro_pics/{$pro.path}" width='100px' height='100px'/>
+                                <else/>
+                                </if>
+                            </td>
+                            <td>
+                                <if condition="$pro.progress_status eq 0">
+                                    筹集阶段
+                                <elseif condition="$pro.progress_status eq 1"/>
+                                    项目前期 
+                                <elseif condition="$pro.progress_status eq 2"/>
+                                    项目中期
+                                <elseif condition="$pro.progress_status eq 3"/>
+                                    项目后期
+                                <else/>
+
+                                </if>
+                            </td>
+                            <td>{$pro.created_time}</td> 
+                        </tr>
+
+                    </volist>
+                         <tr>
+                            <td colspan='100%' align='center'>
+                                {$page}
+                            </td>
+                         </tr>
+                </empty>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

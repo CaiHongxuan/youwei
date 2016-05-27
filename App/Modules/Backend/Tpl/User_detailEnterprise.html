@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="__PUBLIC__/backend/utilLib/bootstrap.min.css" type="text/css" media="screen" />
+</head>
+<body>
+
+	<div class="container-fluid">
+		<div class="row-fluid">
+		<div class="span12">
+
+			    <table class='table table-bordered table-hover table-striped'>
+			   
+			      <tbody>
+
+			      	<tr style="background: #37a0b9">
+			      		<th style='width:15%;'>企业信息</th>
+			      		<th></th>
+			      	</tr>
+			        <tr>
+			          <th scope="row">
+			          	 企业名称
+			          </th>
+			          <td>{$userInfos['name']}</td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+			             企业联系人
+			          </th>
+			          <td>{$enterpriseInfos['linkman']}</td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+			           	企业联系人电话	
+			          </th>
+			          <td>{$enterpriseInfos['linkman_tele']}</td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+			           	企业员工总数	
+			          </th>
+			          <td>{$enterpriseInfos['staff_amount']}</td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+			           	企业电子邮箱	
+			          </th>
+			          <td>{$enterpriseInfos['mail']}</td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+			           企业注册资金
+			          </th>
+			          <td>
+							{$enterpriseInfos['register_fund']}		
+					  </td>
+			        </tr>
+			        
+			        <tr>
+			          <th scope="row">
+			           	企业地址	
+			          </th>
+			          <td>{$enterpriseInfos['address']}</td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+			           	营业执照	
+			          </th>
+			          <td>{$enterpriseInfos['license']}</td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+						企业营业执照图片
+			          </th>
+			          <td>
+			          	<if condition="$enterpriseInfos['license_path']">
+			          	 
+							<img alt="140x140" src="__ROOT__/{$enterpriseInfos['license_path']}"  class="img-thumbnail" width='140px' height='140px'/>
+						</if></td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+			           	企业营业执照所在地	
+			          </th>
+			          <td>
+							<p>{$enterpriseInfos['license_address']}</p>
+			          </td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+			            营业执照有效期
+			          </th>
+			          <td>{$enterpriseInfos['license_indate']}</td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+			            法定经营范围
+			          </th>
+			          <td>{$enterpriseInfos['scope']}</td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+			            组织机构代码
+			          </th>
+			          <td>{$enterpriseInfos['code']}</td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+			            组织机构代码证电子版（图）
+			          </th>
+			          <td>
+			          	<if condition="$enterpriseInfos['code_path']">
+			          	 
+							<img alt="140x140" src="__ROOT__/{$enterpriseInfos['code_path']}"  class="img-thumbnail" width='140px' height='140px'/>
+						</if></td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+			            注册时间
+			          </th>
+			          <td>{$enterpriseInfos['created_time']}</td>
+			        </tr>
+			      </tbody>
+			    </table>
+		</div></div>
+	</div>
+
+ 
+	
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>重置登录密码 (1-2)</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" type="image/png" href="__PUBLIC__/images/youwei30x30.png">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/zhongchou.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/launchproject.css">
+<link href="__PUBLIC__/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery1.min.js"></script>
+<link href="__PUBLIC__/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/alter.css">
+<script type="text/javascript" src="__PUBLIC__/js/megamenu.js"></script>
+<script src="__PUBLIC__/js/jquery.easydropdown.js"></script>
+<script>
+$(document).ready(function(){
+    $(".megamenu").megamenu();
+});
+</script>
+<style>
+ #user_page {
+  font-size: 10pt;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+}
+#user_page #form_user h2 {
+  font-size: 16pt;
+  font-weight: normal;
+  color: #333;
+  border-bottom: 2px solid #ddd;
+  margin: 0 50px 0 0;
+  padding-bottom: 10px;
+}
+#user_page #form_user {
+  float: left;
+  width: 650px;
+}
+#user_page #login_tip {
+  float: right;
+  width: 300px;
+  font-size: 10.5pt;
+  color: #666;
+}
+#user_page form th {
+  font-size: 10.5pt;
+  text-align: right;
+  padding: 10px;
+}
+#user_page form input.TXT {
+  font-size: 16px;
+  padding: 3px;
+  border: 1px solid #ccc;
+}
+#user_page form input.BTN {
+  padding: 1px 6px;
+  font-size: 14px;
+  height: 30px;
+  font-weight: bold;
+  border:solid 1px #ebebeb;
+}
+#user_page #login_tip h3 {
+  margin: 30px 0 10px 0;
+  font-size: 11pt;
+  display: block;
+  font-weight: bold;
+
+}
+#user_page #login_tip ul {
+  font-size: 10pt;
+  display: block;
+  text-align: left;color: #666;
+  padding: 10px 5px;
+  list-style-type: none;
+  list-style-position: inside;
+}
+</style>
+
+</head>
+<body>
+
+<!-- head begin -->
+<include file="Public/header" />
+<!-- head end -->
+
+<div class="login">
+  <div class="wrap">
+    
+<div id="user_page">
+<script>
+function change_code(){
+
+  var verifyURL = "{:U('User/verify','','')}";
+  $("#code").attr("src",verifyURL+'/'+Math.random());
+  return false;
+}
+function sendmail(){
+
+    $.ajax({ 
+        type: "POST", 
+        url: "{:U('User/reset_pwd')}", 
+        data: $("#form_user").serialize() , 
+        async : false, 
+        success: function(data) { 
+         
+          document.getElementById('error_msg').innerHTML=data.info;
+          if(!data.status) {
+            change_code();
+          }
+        }
+    });
+
+  }
+</script>
+   <form id="form_user" action="" method="POST">  
+    
+    <h2>重置登录密码 (1-2)</h2>
+    <table>
+        <tbody>
+            <tr>
+                <td colspan="2" style="padding:20px 0;color:#40AA53;">请输入您注册的邮箱地址，系统将发送重置密码的链接到邮箱中
+                </td>
+            </tr>
+            <tr>
+                <th>注册邮箱</th>
+                <td><input type="text" class="TXT" name="email" value=""></td>
+            </tr>
+            <tr>
+
+                <th>验证码</th>
+                <td>
+                    <input type="text" name="verifyCode" size="6"  class="TXT" >
+                    <img alt="..." src="{:U('User/verify','','')}" style="border:2px solid #ccc;"id="code">
+                    <span><a href="javascript:change_code();">看不清,换一个</a></span>
+                </td>
+            </tr>
+            <tr>
+                
+                <th>&nbsp;</th>
+                <td>
+                    <input type="button" value="给我发送重置密码链接»" class="BTN" onclick="sendmail();">
+                </td>
+            </tr>
+            <tr>
+                <th>&nbsp;</th>
+                <td>
+                <a href="{:U('User/login')}" style="color:#4cb1ca;text-decoration: underline;">转到登录页面？</a>
+                </td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td><span id="error_msg" class="error_msg" style="display: inline;color:#e88;font-size:12px;"></span>  
+              </td>
+            </tr>
+            <tr></tr>
+        </tbody>
+    </table>      
+  </form>
+
+
+    <div id="login_tip" >
+        <h3>为什么收不到重置密码邮件？</h3>
+        <ul>
+            <li>1、是否输入正确的邮箱地址(注册时使用的);</li>
+            <li>2、可能被邮件系统当成垃圾邮件，检查垃圾箱;</li>
+            <li>3、可能是本站的邮件系统繁忙或者故障，请稍候再试或者联系管理员;</li>
+        </ul>
+    </div>
+</div>
+
+  </div>
+</div>
+<!-- footer begin -->
+<include file="Public/footer" />
+<!-- footer end -->
+
+</body>
+</html>

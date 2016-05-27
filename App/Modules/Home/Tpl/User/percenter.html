@@ -1,0 +1,643 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>个人中心</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" type="image/png" href="__PUBLIC__/images/youwei30x30.png">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/zhongchou.css">
+<link href="__PUBLIC__/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery1.min.js"></script>
+<link href="__PUBLIC__/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="__PUBLIC__/js/megamenu.js"></script>
+<script src="__PUBLIC__/js/jquery.easydropdown.js"></script>
+<!-- <script type="text/javascript" src="__PUBLIC__/js/projectview.js"></script> -->
+    <script>
+    $(document).ready(function() {
+    $('.popwrap').height($(window).height());
+    $('.tabB1').live('click',function(){
+        $('.popwrap').show();
+        $('body').css('overflow','hidden');
+    });
+    $('.close').live('click',function(){
+        $('.popwrap').hide();
+        $('body').css('overflow','auto');
+    })
+
+        $(".m-topics").hide();
+        $(".all").click(function(){
+            $(".m-topics").hide();
+            $(".content").show();
+            $(".list-nav > li > a").removeClass("z-own");
+            $(".all").addClass("z-own");
+        });
+        $(".progress").click(function(){
+            $(".content").hide();
+            $(".m-topics").hide();
+            $(".m-topics2").show();
+            $(".list-nav > li > a").removeClass("z-own");
+            $(".progress").addClass("z-own");
+        })
+        $(".successful").click(function(){
+            $(".content").hide();
+            $(".m-topics").hide();
+            $(".m-topics3").show();
+            $(".list-nav > li > a").removeClass("z-own");
+            $(".successful").addClass("z-own");
+        })
+        $(".aborted").click(function(){
+            $(".content").hide();
+            $(".m-topics").hide();
+            $(".m-topics4").show();
+            $(".list-nav > li > a").removeClass("z-own");
+            $(".aborted").addClass("z-own");
+        })
+    });
+    </script>
+<style type="text/css">
+.popwrap {
+    /*display: none;*/
+    z-index: 11;
+    background: rgba(0, 0, 0, .7);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+.support-item {
+    background: #e9ecf0;
+    position: absolute;
+    z-index: 2;
+    width: 732px;
+    top: 50%;
+    left: 50%;
+    margin-left: -366px;
+    height: 600px;
+    margin-top: -300px;
+}
+
+.support-item h2 {
+    position: relative;
+    width: 732px;
+    height: 44px;
+    background: url('__PUBLIC__/images/title-bg.png') repeat-x;
+    line-height: 44px;
+    text-align: center;
+    font-size: 18px;
+    color: #ffffff;
+    background: #37A0B9;
+}
+
+.support-item h2 i {
+    background: url('__PUBLIC__/images/close.png');
+    display: block;
+    width: 22px;
+    height: 23px;
+    position: absolute;
+    top: 10px;
+    right: 32px;
+    cursor: pointer;
+}
+
+.suppport-content {
+    padding: 20px 26px 25px;
+    overflow-Y: scroll;
+    height: 500px;
+}
+.support-table {
+    margin: 20px 24px 0 2px;
+    text-align: center;
+    width: 673px;
+}
+
+.support-table th {
+    background: #eff3f6;
+    font-size: 12px color: #666666;
+    text-align: center;
+    padding: 13px 0;
+}
+
+.support-table td {
+    font-size: 12px;
+    padding: 6px 0 6px;
+    border-bottom: 1px solid #eff3f6;
+}
+
+.support-table td.fw {
+    font-weight: bold;
+}
+
+.support-table td.fc {
+    color: #ff568a;
+    font-weight: bold;
+}
+
+.support-table tr {
+    border-left: 2px solid #eff3f6;
+    border-right: 2px solid #eff3f6;
+    color: #333333;
+}
+</style>
+</head>
+<body>
+
+<!-- head begin -->
+<include file="Public/header" />
+<!-- head end -->
+
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/personalcenter.css">
+
+<!--favicon static-->
+<div class="m-favicon">
+  <div class="wrap clearfix"> <a href="#" class="z-portrait"><img src=
+          <empty name="headpic_path">"__PUBLIC__/images/noavatar_middle.gif"
+          <else/> "__ROOT__/Uploads/head_pics/{$headpic_path}"
+         </empty>></a>
+    <div class="z-introduced">
+      <div class="z-chance clearfix">
+        <div class="ch-left">
+          <h2 class="fl">{$phone}</h2>
+        </div>
+        <div class="ch-right">
+            <if condition="$_SESSION['type'] eq 'Enterprise' ">
+                <a class="z-browse" href="{:U('Activity/launchActivity')}">发起活动</a>
+            </if>
+            <a class="z-browse" href="{:U('User/infoUpdate')}">个人设置</a><a class="z-browse" href="#">消息中心</a></div>
+        <div class="clear"></div>
+        <span>
+             <empty name="resume">你很忙，忙的什么都没来得及留下。
+                 <else/> {$resume}
+             </empty>
+        </span>
+      </div>
+      <div class="z-calculations">
+      </div>
+    </div>
+  </div>
+</div>
+<!--favicon end-->
+<div class="wrap m-ulitem">
+    <div id="tab" class="tabD1">
+        <script type="text/javascript">
+        <!--
+        //var i=parseInt(location.hash.replace("#",""));//hash版
+        var i = parseInt(window.name); //window.name版
+        if (i) document.getElementById("tab").className = "tabD" + i;
+
+        $(document).ready(function(){
+          if ($('ul').hasClass('z-select')) {
+            $(".tabB1").addClass("z-select");
+          }
+          $("li").click(function(){
+            $("a").removeClass("z-select");
+            $(this).children("a").addClass("z-select");
+          });
+        });
+        //-->
+        </script>
+        <div class="particulars-nav clearfix">
+          <ul class="tabU clearfix">
+              <if condition="$_SESSION['type'] neq 'Enterprise' ">
+                  <li class="mm-op"><a onclick="javascript:c(1)" href="#tab" class="tabB1"><i></i>支持的项目<em>{$count_support}</em></a></li>
+                  <li><a onclick="javascript:c(2)" href="#tab" class="tabB2"><i></i>发起的项目<em> {$count}</em></a></li>
+                  <li><a onclick="javascript:c(3)" href="#tab" class="tabB3"><i></i>参与的活动<em> {$count_activity}</em></a></li>
+              <else />
+                  <li><a onclick="javascript:c(4)" href="#tab" class="tabB4"><i></i>发布的活动<em> 2</em></a></li>
+              </if>
+          </ul>
+        </div>
+
+        <!-- 支持的项目 -->
+        <div class="tabC tabC1">
+            <table width="1136px" border="0" cellspacing="0" cellpadding="0">
+                <empty name="project_support">
+                    <tr>
+                        <td>
+                            <div class="m-footprint">
+                                <p class="m-footprintimg"><img src="__PUBLIC__/images/prompt.png"></p>
+                                <h2>你很懒...什么都没有留下哦！</h2>
+                                <p><span>您可以立即行动哦！</span></p>
+                                <p><a href="{:U('Project/index')}">浏览更多项目</a></p>
+                            </div>
+                        </td>
+                    </tr>
+                    <else/>
+                    <tr>
+                        <td>
+                            <ul class="list-nav clearfix">
+                                <li><a class="z-own all">所有</a></li>
+                                <li><a class="progress">众筹中</a></li>
+                                <li><a class="successful">已成功</a></li>
+                                <li><a class="aborted">已失败</a></li>
+                            </ul>
+                            <div class="m-location">
+                                <table>
+                                    <colgroup>
+                                        <col width="41%">
+                                        <col width="16%">
+                                        <col width="16%">
+                                        <col width="7%">
+                                        <col width="11%">
+                                    </colgroup>
+                                    <tbody>
+                                    <tr class="bg-tr">
+                                        <td class="par-name">项目名称</td>
+                                        <td>发布日期</td>
+                                        <td>截止日期</td>
+                                        <td>目标</td>
+                                        <td>进度</td>
+                                        <td>状态</td>
+                                    </tr>
+                                    <volist name="project_support" id="vo">
+                                        <tr>
+                                            <td><div class="z-reference clearfix">
+                                                <a href="#" target="_blank" class="z-referenceimg">
+                                                    <img src= <empty name="vo.p_path">"__PUBLIC__/images/noavatar_middle.gif"
+                                                    <else/> " __ROOT__/Uploads/pro_pics/{$vo.p_path}"
+                                                    </empty>>
+                                                </a>
+                                                <div class="z-referencetext">
+                                                    <p><a href="#" target="_blank">{$vo.name}</a></p>
+                                                </div>
+                                            </td>
+                                            <td><div class="z-day"> <span>{$vo.commit_time}</span> </div></td>
+                                            <td><div class="z-day"> <span>-</span> </div></td>
+                                            <td class="no-hl">{$vo.name}</td>
+                                            <td> 0元<br> 0% </td>
+                                            <td>
+                                                <if condition="$vo.iscommited eq 1 "><label>提交审核</label><br/><else /><label>草稿</label><br/><a class="z-payment" href="{:U('Project/delete', array('id' => $vo['id']))}">删除</a>|<a class="z-payment" href="#">编辑</a><br/>
+                                                </if>
+                                                <a class="z-payment" href="#" target="_blank">预览</a>
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                </empty>
+            </table>
+        </div>
+        <!-- 发起的项目 -->
+        <div class="tabC tabC2">
+            <table width="1136px" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td>
+                      <ul class="list-nav clearfix">
+                        <li><a class="z-own all">所有</a></li>
+                        <li><a class="progress">众筹中</a></li>
+                        <li><a class="successful">已成功</a></li>
+                        <li><a class="aborted">已失败</a></li>
+                      </ul>
+                      <div class="m-location">
+                        <table>
+                          <colgroup>
+                          <col width="41%">
+                          <col width="16%">
+                          <col width="16%">
+                          <col width="7%">
+                          <col width="11%">
+                          </colgroup>
+                          <tbody>
+                            <tr class="bg-tr">
+                              <td class="par-name">项目名称</td>
+                              <td>发布日期</td>
+                              <td>截止日期</td>
+                              <td>目标</td>
+                              <td>进度</td>
+                              <td>状态</td>
+                            </tr>
+                            <volist name="project" id="vo">
+                                <!-- 所有（发起的项目） -->
+                                <tr class="content">
+                                    <td><div class="z-reference clearfix">
+                                        <a href="#" target="_blank" class="z-referenceimg">
+                                            <img src= <empty name="vo.p_path">"__PUBLIC__/images/noavatar_middle.gif"
+                                            <else/> " __ROOT__/Uploads/pro_pics/{$vo.p_path}"
+                                            </empty>>
+                                        </a>
+                                        <div class="z-referencetext">
+                                            <p><a href="#" target="_blank">{$vo.name}</a></p>
+                                        </div>
+                                    </div></td>
+                                    <td><div class="z-day"> <span>{$vo.commit_time}</span> </div></td>
+                                    <td><div class="z-day"> <span>-</span> </div></td>
+                                    <td class="no-hl">{$vo.name}</td>
+                                    <td> 0元<br> 0% </td>
+                                    <td><if condition="$vo.iscommited eq 1 "><label>提交审核</label><br/><else /><label>草稿</label><br/><a class="z-payment" href="{:U('Project/delete', array('id' => $vo['id']))}">删除</a>|<a class="z-payment" href="#">编辑</a><br/>
+                                    </if>
+                                        <a class="z-payment" href="#" target="_blank">预览</a></td>
+                                </tr>
+                                <!-- 众筹中（发起的项目） -->
+                                <tr class="m-topics m-topics2">
+                                    <td><div class="z-reference clearfix">
+                                        <a href="#" target="_blank" class="z-referenceimg">
+                                            <img src= <empty name="vo.p_path">"__PUBLIC__/images/noavatar_middle.gif"
+                                            <else/> " __ROOT__/Uploads/pro_pics/{$vo.p_path}"
+                                            </empty>>
+                                        </a>
+                                        <div class="z-referencetext">
+                                            <p><a href="#" target="_blank">{$vo.name}</a></p>
+                                        </div>
+                                    </div></td>
+                                    <td><div class="z-day"> <span>{$vo.commit_time}</span> </div></td>
+                                    <td><div class="z-day"> <span>-</span> </div></td>
+                                    <td class="no-hl">{$vo.name}</td>
+                                    <td> 0元<br> 0% </td>
+                                    <td><if condition="$vo.iscommited eq 1 "><label>提交审核</label><br/><else /><label>草稿</label><br/><a class="z-payment" href="{:U('Project/delete', array('id' => $vo['id']))}">删除</a>|<a class="z-payment" href="#">编辑</a><br/>
+                                    </if>
+                                        <a class="z-payment" href="#" target="_blank">预览</a></td>
+                                </tr>
+                                <!-- 已成功（发起的项目） -->
+                                <tr class="m-topics m-topics3">
+                                    <td><div class="z-reference clearfix">
+                                        <a href="#" target="_blank" class="z-referenceimg">
+                                            <img src= <empty name="vo.p_path">"__PUBLIC__/images/noavatar_middle.gif"
+                                            <else/> " __ROOT__/Uploads/pro_pics/{$vo.p_path}"
+                                            </empty>>
+                                        </a>
+                                        <div class="z-referencetext">
+                                            <p><a href="#" target="_blank">{$vo.name}</a></p>
+                                        </div>
+                                    </div></td>
+                                    <td><div class="z-day"> <span>{$vo.commit_time}</span> </div></td>
+                                    <td><div class="z-day"> <span>-</span> </div></td>
+                                    <td class="no-hl">{$vo.name}</td>
+                                    <td> 0元<br> 0% </td>
+                                    <td><if condition="$vo.iscommited eq 1 "><label>提交审核</label><br/><else /><label>草稿</label><br/><a class="z-payment" href="{:U('Project/delete', array('id' => $vo['id']))}">删除</a>|<a class="z-payment" href="#">编辑</a><br/>
+                                    </if>
+                                        <a class="z-payment" href="#" target="_blank">预览</a></td>
+                                </tr>
+                                <!-- 已失败（发起的项目） -->
+                                <tr class="m-topics m-topics4">
+                                    <td><div class="z-reference clearfix">
+                                        <a href="#" target="_blank" class="z-referenceimg">
+                                            <img src= <empty name="vo.p_path">"__PUBLIC__/images/noavatar_middle.gif"
+                                            <else/> " __ROOT__/Uploads/pro_pics/{$vo.p_path}"
+                                            </empty>>
+                                        </a>
+                                        <div class="z-referencetext">
+                                            <p><a href="#" target="_blank">{$vo.name}</a></p>
+                                        </div>
+                                    </div></td>
+                                    <td><div class="z-day"> <span>{$vo.commit_time}</span> </div></td>
+                                    <td><div class="z-day"> <span>-</span> </div></td>
+                                    <td class="no-hl">{$vo.name}</td>
+                                    <td> 0元<br> 0% </td>
+                                    <td><if condition="$vo.iscommited eq 1 "><label>提交审核</label><br/><else /><label>草稿</label><br/><a class="z-payment" href="{:U('Project/delete', array('id' => $vo['id']))}">删除</a>|<a class="z-payment" href="#">编辑</a><br/>
+                                    </if>
+                                        <a class="z-payment" href="#" target="_blank">预览</a></td>
+                                </tr>
+                            </volist>
+                          </tbody>
+                        </table>
+                        <div class="pager"></div>
+                      </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!-- 参与的活动 -->
+        <div class="tabC tabC3">
+            <table width="1136px" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td>
+                        <ul class="list-nav clearfix">
+                            <li><a class="z-own all">所有</a></li>
+                            <li><a class="progress">进行中</a></li>
+                            <li><a class="successful">已结束</a></li>
+                        </ul>
+                        <div class="m-location">
+                            <table>
+                                <colgroup>
+                                    <col width="41%">
+                                    <col width="16%">
+                                    <col width="16%">
+                                    <col width="7%">
+                                    <col width="11%">
+                                </colgroup>
+                                <tbody>
+                                    <tr class="bg-tr">
+                                        <td class="par-name">活动标题</td>
+                                        <td>发布日期</td>
+                                        <td>截止日期</td>
+                                        <td>参与人数</td>
+                                        <td>状态</td>
+                                    </tr>
+                                    <volist name="activitys_attend" id="vo">
+                                        <!-- 所有（参与的活动） -->
+                                        <tr class="content">
+                                            <td>
+                                                <div class="z-reference clearfix"> <a href="#" target="_blank" class="z-referenceimg">
+                                                    <img src= <empty name="vo.path">"__PUBLIC__/images/noavatar_middle.gif"
+                                                    <else/> " __ROOT__/Uploads/activity/{$vo.path}"
+                                                    </empty>>
+                                                </a>
+                                                    <div class="z-referencetext">
+                                                        <p><a href="#" target="_blank">{$vo.name}</a></p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="z-day">
+                                                <span>
+                                                    <empty name="vo.published_time">- <else/>{$vo.published_time}</empty>
+                                                </span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="z-day">
+                                                <span>
+                                                    <empty name="vo.deadline">- <else/>{$vo.deadline}</empty>
+                                                </span>
+                                                </div>
+                                            </td>
+                                            <td class="no-hl">1234人<br><a class="z-payment" href="#">查看</a></td>
+                                            <td>
+                                                <if condition="$vo.isdead eq 1 "><label>已结束</label><br/><else /><label>进行中</label><br/>
+                                                </if>
+
+                                            </td>
+                                        </tr>
+                                        <!-- 进行中（参与的活动） -->
+                                        <tr class="m-topics m-topics2">
+                                            <td>
+                                                <div class="z-reference clearfix"> <a href="#" target="_blank" class="z-referenceimg"><img src="__PUBLIC__/images/youwei128x128.png" height="128" width="128"></a>
+                                                    <div class="z-referencetext">
+                                                        <p><a href="#" target="_blank">计算机技术</a></p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><div class="z-day"> <span>-</span> </div></td>
+                                            <td><div class="z-day"> <span>-</span> </div></td>
+                                            <td class="no-hl">4322人<br><a class="z-payment" href="#">查看</a></td>
+                                            <td>进行中</td>
+                                        </tr>
+                                        <!-- 已结束（参与的活动） -->
+                                        <tr class="m-topics m-topics3">
+                                            <td>
+                                                <div class="z-reference clearfix"> <a href="#" target="_blank" class="z-referenceimg"><img src="__PUBLIC__/images/youwei128x128.png" height="128" width="128"></a>
+                                                    <div class="z-referencetext">
+                                                        <p><a href="#" target="_blank">逗比技术</a></p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><div class="z-day"> <span>-</span> </div></td>
+                                            <td><div class="z-day"> <span>-</span> </div></td>
+                                            <td class="no-hl">4322人<br><a class="z-payment" href="#">查看</a></td>
+                                            <td>已结束</td>
+                                        </tr>                                    
+                                    </volist>
+                                </tbody>
+                            </table>
+                            <div class="pager"></div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    <!--<if condition="$_SESSION['type'] neq 'Enterprise' ">-->
+        <!--&nbsp;-->
+        <!--<else />-->
+            <!-- 发布的活动 -->
+            <div class="tabC tabC4">
+                <table width="1136px" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td>
+                            <ul class="list-nav clearfix">
+                                <li><a class="z-own all">所有</a></li>
+                                <li><a class="progress">进行中</a></li>
+                                <li><a class="successful">已结束</a></li>
+                                <li><a class="aborted">草稿</a></li>
+                            </ul>
+                            <div class="m-location">
+                                <table>
+                                    <colgroup>
+                                        <col width="41%">
+                                        <col width="16%">
+                                        <col width="16%">
+                                        <col width="7%">
+                                        <col width="11%">
+                                    </colgroup>
+                                    <tbody>
+                                    <tr class="bg-tr">
+                                        <td class="par-name">活动标题</td>
+                                        <td>发布日期</td>
+                                        <td>截止日期</td>
+                                        <td>参与人数</td>
+                                        <td>状态</td>
+                                    </tr>
+                                    <!-- 所有（发布的活动） -->
+                                    <tr class="content">
+                                        <td><div class="z-reference clearfix"> <a href="#" target="_blank" class="z-referenceimg"><img src="__PUBLIC__/images/youwei128x128.png"></a>
+                                            <div class="z-referencetext">
+                                                <p><a href="#" target="_blank">电脑优化</a></p>
+                                            </div>
+                                        </div></td>
+                                        <td><div class="z-day"> <span>-</span> </div></td>
+                                        <td><div class="z-day"> <span>-</span> </div></td>
+                                        <td class="no-hl">1234人<br><a class="z-payment" href="#">查看</a></td>
+                                        <td> 草稿<br>
+                                            <a class="z-payment" href="#">编辑</a> <a class="z-payment" href="#" target="_blank">预览</a>
+                                        </td>
+                                    </tr>
+                                    <!-- 进行中（发布的活动） -->
+                                    <tr class="m-topics m-topics2">
+                                        <td><div class="z-reference clearfix"> <a href="#" target="_blank" class="z-referenceimg"><img src="__PUBLIC__/images/youwei128x128.png"></a>
+                                            <div class="z-referencetext">
+                                                <p><a href="#" target="_blank">电脑优化</a></p>
+                                            </div>
+                                        </div></td>
+                                        <td><div class="z-day"> <span>-</span> </div></td>
+                                        <td><div class="z-day"> <span>-</span> </div></td>
+                                        <td class="no-hl">1234人<br><a class="z-payment" href="#">查看</a></td>
+                                        <td>进行中</td>
+                                    </tr>
+                                    <!-- 已结束（发布的活动） -->
+                                    <tr class="m-topics m-topics3">
+                                        <td><div class="z-reference clearfix"> <a href="#" target="_blank" class="z-referenceimg"><img src="__PUBLIC__/images/youwei128x128.png"></a>
+                                            <div class="z-referencetext">
+                                                <p><a href="#" target="_blank">电脑优化</a></p>
+                                            </div>
+                                        </div></td>
+                                        <td><div class="z-day"> <span>-</span> </div></td>
+                                        <td><div class="z-day"> <span>-</span> </div></td>
+                                        <td class="no-hl">1234人<br><a class="z-payment" href="#">查看</a></td>
+                                        <td>已结束</td>
+                                    </tr>
+                                    <!-- 草稿（发布的活动） -->
+                                    <tr class="m-topics m-topics4">
+                                        <td><div class="z-reference clearfix"> <a href="#" target="_blank" class="z-referenceimg"><img src="__PUBLIC__/images/youwei128x128.png" height="128" width="128"></a>
+                                            <div class="z-referencetext">
+                                                <p><a href="#" target="_blank">计算机技术</a></p>
+                                            </div>
+                                        </div></td>
+                                        <td><div class="z-day"> <span>-</span> </div></td>
+                                        <td><div class="z-day"> <span>-</span> </div></td>
+                                        <td class="no-hl">4322人<br><a class="z-payment" href="#">查看</a></td>
+                                        <td> 草稿<br>
+                                            <a class="z-payment" href="#">编辑</a> <a class="z-payment" href="#" target="_blank">预览</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="pager"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!--</if>-->
+        </div>
+
+    <div style="height: 589px; display: none;" class="popwrap">
+        <div class="support-item">
+            <h2>请选择支持项<i class="close"></i></h2>
+            <div class="suppport-content">
+                <table class="support-table">
+                    <colgroup>
+                        <col width="20%">
+                        <col width="55%">
+                        <col width="25%">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th>支持者</th>
+                            <th>回报</th>                            
+                            <th>支持时间</th>
+                        </tr>
+                        <volist name='supporters' id = 'vo'>
+                            
+                             <tr>
+                                <td class="fw">
+                                    <a href="">{$vo.name}</a>
+                                </td>
+                                <td>{$vo.reward_content}</td>
+
+                                <td>{$vo.created_time}</td>
+                            </tr>
+                        </volist>
+                        <td colspan='100%' align='center'>
+                            {$page}
+                        </td>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- footer begin -->
+<include file="Public/footer" />
+<!-- footer end -->
+
+<script type="text/javascript" src="__PUBLIC__/js/prompt.js"></script>
+</body>
+</html>

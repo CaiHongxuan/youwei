@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>活动</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" type="image/png" href="__PUBLIC__/images/youwei30x30.png">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/style.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/zhongchou.css">
+    <link href="__PUBLIC__/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="__PUBLIC__/js/projecteffect.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/megamenu.js"></script>
+    <script src="__PUBLIC__/js/jquery.easydropdown.js"></script>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/activityview.css">
+    <script>
+    $(document).ready(function() {
+        $(".megamenu").megamenu();
+    });
+    </script>
+</head>
+
+<body>
+
+<!-- head begin -->
+<include file="Public/header" />
+<!-- head end -->
+
+    <div class="activity">
+        <div class="tit-wrap">
+            <h3>活动</h3>
+        </div>
+        <div id="bNav" class="bNav" >
+            <ul>
+                <li><a href="{:U('Activity/index')}">全部</a></li>
+                <volist name="category" id="vo">
+                    <li><a href="{:U('Activity/index')}?cateId={$vo.id}">{$vo.name}</a></li>
+                </volist>
+            </ul>
+        </div>
+        <empty name="activitys">
+            <h2 style="text-align: center;font-size: 30px;font-weight: bold;color:#555;margin-top: 20px;margin-bottom: 100px;">暂无相关类别活动</h2>
+
+            <else/>
+        <table class="messages">
+            <tr>
+                <th>活动标题</th>
+                <th width="15%">类型</th>
+                <th width="15%">发布时间</th>
+            </tr>
+            <volist name="activitys" id="vo">
+                <tr>
+                    <td><a href="{:U('Activity/message')}?id={$vo.aid}">{$vo.aname}</a></td>
+                    <td>{$vo.cname}</td>
+                    <td>{$vo.passed_time}</td>
+                </tr>
+            </volist>
+            
+        </table>
+        </empty>
+        <div class="pager" style='text-align: center;margin:20px;color:#555;'>
+             {$page}
+        </div>
+    </div>
+
+<!-- footer begin -->
+<include file="Public/footer" />
+<!-- footer end -->
+
+    <script type="text/javascript" src="__PUBLIC__/js/projectview.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/prompt.js"></script>
+
+</body>
+</html>

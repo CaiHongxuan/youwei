@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="__PUBLIC__/backend/utilLib/bootstrap.min.css" type="text/css" media="screen" />
+    <script type="text/javascript">
+    function selectChange() {
+        document.getElementById("Input4Key").value = '';
+        document.getElementById("subtn").click();
+    }
+    </script>
+</head>
+<body>
+    
+<div class="container-fluid">
+    <div class="row-fluid">
+            <div class="span12">
+            <div style="margin-bottom: 40px;">
+                 <form  class="form-inline" action="{:U('User/userlist')}" method="POST">
+               
+                  <div class="form-group">
+                    <label for="StatuSelect">状态</label> 
+                    <select name='status' class="form-control" id="StatuSelect" onchange='selectChange()'> 
+                        <option value='1' class="form-control"
+                        <if condition="status eq 1">selected='selected'
+                        </if>
+                        >已激活</option>
+                        <option value='0'  class="form-control"
+                        <if condition="$status eq 0">selected='selected'
+                        </if>>未激活</option>
+                    </select>
+                  </div>    
+                   <div class="form-group">
+                   <!--  <label for="exampleInputEmail2">搜索</label> -->
+                    <input type="text" name='keyword' class="form-control" id="Input4Key" placeholder="账号、手机、职务、单位、地址" style='width:300px;' value="{$key}">
+                  </div>
+                  <button type="submit" id='subtn' class="btn btn-default">搜索</button>
+                  <a class="btn btn-danger" href="{:U('User/deleteNagetive')}"  onclick="javascript:return confirm('确定删除所有未激活用户?')" role="button">一键删除未激活</a>
+                </form>
+                <php>$action = U('User/userList',array('status'=>$status,'keyword'=>$key));</php>
+            </div>
+            <table class="table table-bordered table-hover table-condensed">
+                <thead>
+                    <tr>
+                        <th>
+                            用户名
+                        </th>
+
+                        <th>
+                            账号
+                        </th>
+                        <th>
+                            手机
+                        </th>
+                        <th>
+                            地址
+                        </th>
+              
+                        <th>
+                            证件号
+                        </th>
+                        <th>
+                            状态
+                        </th>
+                        <th>
+                            查看
+                        </th>
+                        <th>
+                            启/禁用
+                        </th>
+                        <th>
+                            操作
+                        </th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <empty name="users">
+                        <tr>
+                            <td colspan='100%' align='center'>
+                                尚无记录
+                            </td>
+                         </tr>
+                    <else/>
+                    <volist name='users' id='vo'>
+                         <tr>
+                            <td>{$usrInfos[$i-1]['name']}</td>
+                            <td>{$vo.email}</td>
+                            <td>{$vo.telephone}</td>
+                            <td>{$vo.address}</td>
+                          
+
+                            <td>{$vo.idcard}</td>
+                            <td>
+                                <if condition="$vo.status eq 1">已激活<else/>未激活</if>
+                            </td>
+                            <td>  <a class="btn btn-info" href="{:U('User/detailGeneral',array('user_id'=>$vo['user_id']))}" role="button">详细</a></td>
+                            <td>
+
+                                
+
+                               <if condition="$usrInfos[$i-1]['status'] eq 0">
+                                    <a class="btn btn-default" href="{:U('User/lockOrUnlock',array('id'=>$vo['user_id'],'islock'=>0),'').'?action='.$action}" onclick="javascript:return confirm('确定解锁该用户?')" role="button">解锁</a>
+                               <else/> 
+                                    <a class="btn btn-default" href="{:U('User/lockOrUnlock',array('id'=>$vo['user_id'],'islock'=>1),'').'?action='.$action}" onclick="javascript:return confirm('确定锁定该用户?')" role="button">锁定</a>
+                               </if>
+
+                               
+                            </td>
+                             <td> 
+                                <a class="btn btn-danger" href="{:U('User/deleteUser',array('id'=>$vo['user_id'],'type'=>'General'))}" role="button" onclick="javascript:return confirm('确定删除该用户?')">删除</a>
+                            </td>
+                         </tr>
+                    </volist>
+                         <tr>
+                            <td colspan='100%' align='center'>
+                                {$page}
+                            </td>
+                         </tr>
+                </empty>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+    
+</body>
+</html>

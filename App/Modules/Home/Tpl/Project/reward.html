@@ -1,0 +1,181 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>回报设置</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" type="image/png" href="__PUBLIC__/images/youwei30x30.png">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/launchproject.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/zhongchou.css">
+<link href="__PUBLIC__/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery1.min.js"></script>
+<link href="__PUBLIC__/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="__PUBLIC__/js/megamenu.js"></script>
+<script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+<script src="__PUBLIC__/js/jquery.easydropdown.js"></script>
+</head>
+<body>
+
+<!-- head begin -->
+<include file="Public/header" />
+<!-- head end -->
+
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/sty.css">
+<div class="process"> 
+  <div class="project-edit-nav">
+    <h3 class="steps-2">回报设置</h3>
+  </div>
+</div>
+<div class="main clearfix">
+  <div class="process-wrap clearfix">
+    <div class="tit-wrap">
+      <h3>项目信息</h3>
+    </div>
+    <!--project start-->
+    <div class="project-box">
+      <div class="project-con fl w760">
+        <div class="project-set"> 
+          <!--project-info static-->
+          <div class="project-info">
+            <table>
+              <colgroup>
+              <col width="40">
+              <col width="60">
+              <col width="290">
+              <col width="80">
+              <col width="60">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>回报</th>
+                  <td>名额</td>
+                  <td>回报内容</td>
+                  <td>回报时间</td>
+                  <td>操作</td>
+                </tr>
+              <volist name="reward" id="vo">
+                <tr>
+                  <td>0{$i}</td>
+                  <td>{$vo.reward_quota}</td>
+          <td>{$vo.reward_content}</td>
+          <td>{$vo.reward_time}天</td>
+          <td><a href="">编辑||<a >删除</a></td>
+                </tr>
+        </volist>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+          <!--project-info end--> 
+          <!--project-set-form static-->
+          <div class="project-set-form">
+            <div id="Js-edit-num" class="form-item-tit">支持回报选项0{$i+1}</div>
+            <form method="post" id="reward">
+              <div class= "form-item clearfix">
+                <label>回报内容：</label>
+                <textarea placeholder="请填写关于回报或任何你希望项目发起人知道的信息,不多于500字"  name="description" id="content"></textarea>
+                <span id="content-error" style="color:red;"></span>
+              </div>
+
+              <div class="form-item clearfix">
+                <label>限定名额：</label>
+                <input class="w188" placeholder="“0”为不限名额" name="limit_num" value="0"  type="text" id="num">
+                <em>个</em> 
+                <span class="input-tips gray" id="num-error">“0”为不限名额</span>
+                <span style="color:red" id="num-error"></span>
+              </div>
+              <div class="form-item clearfix">
+                <label>回报时间：</label>
+                <em class="w80"></em>
+                <input class="w107" placeholder="“0”为项目结束后立即发送" name="repaid_day" value="0" type="text" id="day" >
+                <em>天</em> <span class="input-tips gray" >“0”为项目结束后立即发送</span>
+                <span style="color:red" id="day-error"></span>
+              </div>
+              <div class="form-item clearfix">
+                <label>回报类型：</label>
+                <input class="hblx" checked="checked" name="return_type" id="return_type1" group="grp_return_type" value="1" type="radio">
+                <span class="input-notes">实物回报(需要快递／邮寄的)</span>
+                <input class="hblx" name="return_type" id="return_type2" group="grp_return_type" value="2" type="radio">
+                <span class="input-notes">虚拟回报(不需要快递/邮寄的，电子照片等)</span> </div>
+                <span id="warn"style="color:red;" ></span>
+                <span id="success"style="color:red;" ></span>
+
+              <div class="form-submit" name="finish"> 
+                <a class="remin-save" onClick="reward();">保存</a>
+                <a class="remin-save" href=""><span id="cancel_item">取消保存</span></a>
+              </div>
+              <input name="id" value="{$_SESSION['pro_id']}" type="hidden">
+            </form>
+            <div class="action fl">
+             <a class="btn-effect-blue btn-sub w170" onClick="windows.history.go(-1);">上一步</a> 
+             <a class="btn-effect-blue btn-sub w170" href="{:U('Project/sponsorInfo')}">下一步</a> 
+            </div>
+          </div>
+          <!--project-set-form static--> 
+          
+        </div>
+      </div>
+      <!--project end--> 
+      <!--side static-->
+      <div class="sidebar w413 fr"> 
+        <!--side-list static-->
+        <div class="reminder fs14">
+          <h3>温馨提示</h3>
+          <p class="black fb">3个以上的回报</p>
+          <p>多些选择能提高项目的支持率。</p>
+          <p class="black fb">几十、几百、上千元的支持</p>
+          <p>3个不同档次的回报，能让你的项目 更快成功。</p>
+          <p class="black fb">回报最好是项目的衍生品</p>
+          <p>与项目内容有关的回报更能吸引到大家的支持。</p>
+        </div>
+        <!--side-list end--> 
+      </div>
+      <!--side end--> 
+    </div>
+  </div>
+</div>
+
+<!-- footer begin -->
+<include file="Public/footer" />
+<!-- footer end -->
+
+<script type="text/javascript" src="__PUBLIC__/js/prompt.js"></script>
+<script type="text/javascript">
+  $(".Js-del-item").click(function(){
+    var id = $(this).attr("data-id");
+    wx.confirm("确认删除吗?",function(){
+      wx.sendData("/projectnew-del_item","id="+id,function(data){
+        location.reload();
+      });
+    });
+  });
+  //验证回报内容
+  $("textarea[name='description']").blur(function(){
+    var description = $("textarea[name='description']");
+    if (description.val().trim() == '') {
+      description.parent().find("span").remove().end().append("<span class='error-text' style='color:red;'>不能为空</span>");
+      return;
+    }
+    else{
+      description.parent().find("span").remove();
+    }
+  });
+  function reward() {
+
+    $.post("{:U('Project/add2')}",
+            $("#reward").serialize(),
+            function(data) {
+                if(data.status ==1)
+                  window.location.reload();
+                 if (data.status ==2)
+                   alert("请检查您所填写的内容，不允许为空(去空格)");
+            },
+            "json");
+  }
+</script>
+
+</body>
+</html>

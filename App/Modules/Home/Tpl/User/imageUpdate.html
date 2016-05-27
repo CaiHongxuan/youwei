@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>头像修改</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" type="image/png" href="__PUBLIC__/images/youwei30x30.png">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/zhongchou.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/launchproject.css">
+<link href="__PUBLIC__/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery1.min.js"></script>
+<link href="__PUBLIC__/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/alter.css">
+<script type="text/javascript" src="__PUBLIC__/js/preview.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/megamenu.js"></script>
+<script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+<script src="__PUBLIC__/js/jquery.easydropdown.js"></script>
+<!--[if lt IE 10]>
+<style type="text/css">
+.ipt-file input {
+  width: 150px;
+  height: 50px;
+  position: absolute;
+  left: 0px;
+  top: 0;
+}
+</style>
+<![endif]-->
+</head>
+<body>
+<!-- head begin -->
+  <include file="Public/header" />
+<!-- head end -->
+
+<!--main static-->
+<div class="wrap pb116 clearfix">
+  <h2 class="personal-set"><a href="{:U('User/percenter')}" class="mm-blue ml-pm a-personal-set  ">返回个人中心</a>个人设置</h2>
+  <!--left side static-->
+  <div class="personal-set-left">
+    <ul>
+      <li><a href="{:U('User/infoUpdate')}">资料修改</a></li>
+      <li><a href="{:U('User/pwdUpdate')}">密码修改</a></li>
+      <li class="selected"><a href="{:U('User/imageUpdate')}">头像修改</a></li>
+    </ul>
+  </div>
+  <!--left side end--> 
+  <!--right side static-->
+  <div class="personal-set-right">
+    <form method="POST" action="{:U('User/imageUpdate')}" enctype="multipart/form-data">
+      <div class="form-item clearfix pb70">
+        <div class="head-portrait">
+          <div id="localImag" class="previewImage"><img id="preview" src=
+          <empty name="headpic_path">"__PUBLIC__/images/noavatar_middle.gif" 
+          <else/> "{$headpic_path}" 
+          </empty> />
+          </div> 
+          <p class="p-browse">
+            <div class="ipt-file"><a><input type="file" name="headpic" id="image" onchange="javascript:setImagePreview();" style="display:block;height:50px;width:138px; " />上传</a></div>
+          <!-- 3.22 --> 
+          </p><input type="submit" class=" a-btn-blue btn-effect-blue" style="display:block;height:50px;width:138px; " value="提交">
+           
+          </p>
+          <p class="caption">只能上传jpg、jpeg、png格式的图片</p>
+          <!-- 3.22 --> 
+        </div>
+      </div>
+      <p class="text-caption">*保存成功后如果头像不更新，您可以多刷新几次浏览器</p>
+    </form>
+  </div>
+  <!--right side end--> 
+</div>
+
+<!-- footer begin -->
+<include file="Public/footer" />
+<!-- footer end -->
+
+</body>
+</html>

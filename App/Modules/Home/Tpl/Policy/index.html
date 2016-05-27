@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>政策</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" type="image/png" href="__PUBLIC__/images/youwei30x30.png">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/style.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/zhongchou.css">
+    <link href="__PUBLIC__/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="__PUBLIC__/js/projecteffect.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/megamenu.js"></script>
+    <script src="__PUBLIC__/js/jquery.easydropdown.js"></script>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/activityview.css">
+    <script>
+    $(document).ready(function() {
+        $(".megamenu").megamenu();
+    });
+    function perpol (pid) {
+        window.location = "{:U('Policy/message','','')}?id="+ pid;
+    }
+    </script>
+</head>
+
+<body>
+
+<!-- head begin -->
+<include file="Public/header" />
+<!-- head end -->
+
+    <div class="activity">
+        <div class="tit-wrap">
+            <h3>政策</h3>
+        </div>
+        <div id="bNav" class="bNav" >
+            <ul>
+                <li><a href="{:U('Policy/index')}">全部</a></li>
+                <volist name="category" id="cate">
+                    <li><a href="{:U('Policy/index',array('category_id'=>$cate['id']))}">{$cate.name}</a></li>
+                </volist>
+            </ul>
+        </div>
+
+        <table class="messages">
+            <tr>
+                <th width="30%">标题</th>
+                <th width="50%">简介</th>
+                <th width="10%">类别</th>
+                <th width="10%">发布时间</th>
+            </tr>
+            <empty name="policyInfos">
+                <tr>
+                    <td  colspan='100%' align='center'>当前暂无政策信息</td>
+                </tr>
+            <else /> 
+                <volist name="policyInfos" id="vo">
+                
+                <tr style="cursor: pointer" onclick="perpol({$vo['id']});"   <eq name="mod" value='1'>class='blue'</eq>>
+                 
+                    <td>{$vo.title}</td>
+                    <td>{$vo.description}</td>
+                    <td>{$vo.cate_name}</td>
+                    <td>{$vo.created_time|strtotime|date='Y-m-d',###}</td>
+                    
+                 </tr>
+                    
+                </volist>
+            </empty>
+        </table>
+
+        <noempty name="page">
+            <div class="pager">
+                {$page}
+            </div>
+        </noempty>
+    </div>
+
+<!-- footer begin -->
+<include file="Public/footer" />
+<!-- footer end -->
+
+    <script type="text/javascript" src="__PUBLIC__/js/projectview.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/prompt.js"></script>
+</body>
+
+</html>

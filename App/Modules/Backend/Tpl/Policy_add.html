@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Document</title>
+<link rel="stylesheet" href="__PUBLIC__/backend/utilLib/bootstrap.min.css" type="text/css" media="screen" />
+    <script charset="utf-8" src="__PUBLIC__/kindeditor/kindeditor-min.js"></script>
+    <script>
+    KE.show({
+        id : 'content1',
+        height : '500px',
+        
+        afterCreate : function(id) {
+        }
+    });
+    function getContent(){
+        KE.sync('content1');
+    }
+    function setContent(htmlContent){
+        KE.html('content1', htmlContent);
+        
+    }
+</script>
+</head>
+<body>
+    
+<div class="container-fluid" >
+  <div class="row-fluid" >
+
+      <form action="{:U('Policy/add')}" method='POST' enctype='multipart/form-data'>
+          <div class="form-group" >
+            <label>政策标题：</label>
+            <if condition="$errors['title']">
+              <span style='color: gray;'>{$errors['title']}</span><font style="color:red,font-size:16px;">&nbsp;*</font>
+            </if>
+            <input type="text" name="title" class="form-control" placeholder="政策标题：(不超过30字)" style="width:80%" value="{$formdata['title']}">
+            
+          </div>
+        <div class="form-group" >
+          <label>政策简介：</label> 
+          <if condition="$errors['description']">
+            <span style='color: gray;'>{$errors['description']}</span> <font style="color:red,font-size:16px;">&nbsp;*</font> 
+          </if>
+            <textarea class="form-control" name="description" rows="4" placeholder="政策简介：(不超过120字)" style="width:80%">{$formdata['description']}</textarea>
+           
+        </div>
+
+        <div class="form-group" >
+          <label>政策类别：</label>
+            <select name="category_id" class="form-control" style="width:20%" >
+              <volist name="category" id="vo">
+                <option value="{$vo.id}"
+                <if condition="$vo['id'] eq $formdata['category_id']">selected='selected'</if>
+
+                >{$vo.name}</option>
+              </volist>
+            </select>
+        </div>
+
+        <div class="form-group" >
+          <label>政策附件：</label>
+          <if condition="$errors['upfile']">
+            <span  style='color: gray;'>{$errors['upfile']}</span><font style="color:red,font-size:16px;">&nbsp;*</font>
+          </if>
+          <input type="file" name="attachment"/>
+       
+        </div>
+
+        <button type="submit" class="btn btn-success" >提交</button>
+      </form>
+    </div>
+
+  </div>
+</body>
+</html>
+

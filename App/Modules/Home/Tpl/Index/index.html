@@ -1,0 +1,418 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>首页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" type="image/png" href="__PUBLIC__/images/youwei30x30.png">
+    <link href="__PUBLIC__/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="__PUBLIC__/css/form.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="__PUBLIC__/js/jquery1.min.js"></script>
+    <link href="__PUBLIC__/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="__PUBLIC__/js/megamenu.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/css/fwslider.css" media="all">
+    <script src="__PUBLIC__/js/jquery-ui.min.js"></script>
+    <script src="__PUBLIC__/js/css3-mediaqueries.js"></script>
+    <script src="__PUBLIC__/js/fwslider.js"></script>
+    <script src="__PUBLIC__/js/jquery.easydropdown.js"></script>
+    <script>
+    $(document).ready(function() {
+        $(".megamenu").megamenu();
+    });
+    </script>
+    <script type="text/javascript">
+    function loginsubmit() {
+        $.ajax({
+            type: "POST",
+            url: "{:U('Index/login')}",
+            data: $("#loginform").serialize(),
+            async: false,
+            success: function(data) {
+                if (!data.status) {
+                    var oSpan_errors = document.getElementById('login_errors');
+                    oSpan_errors.innerHTML = data.info;
+                    oSpan_errors.style.display = "block";
+                    change_code();
+                    return flase;
+                }
+                window.location = data.data;
+            }
+        });
+    }
+
+    function favor(formId) {
+
+        if (!formId.split('_')[1])
+            return ;
+
+        $.ajax({
+            type: "POST",
+            url: "{:U('Index/favor')}",
+            data: $("#" + formId).serialize(),
+            async: false,
+            success: function(data) {
+
+                if (data.status) {
+
+                    document.getElementById(formId).getElementsByTagName('span')[0].innerHTML = data.data;
+                    return ;
+                }
+                return ;
+
+            }
+        });
+        return false;
+    }
+
+    function change_code() {
+        var verifyURL = "{:U('User/verify','','')}";
+        $("#code").attr("src", verifyURL + '/' + Math.random());
+        return false;
+    }
+    </script>
+<!--[if ! IE 9]>  
+<style type="text/css">
+.sidebar-bottom,.border {
+  border: 1px solid #ccc;
+}
+</style>
+<![endif]-->
+</head>
+
+<body>
+
+<!-- head begin -->
+<include file="Public/header" />
+<!-- head end -->
+
+    <!-- start slider -->
+    <div id="fwslider">
+        <div class="slider_container">
+            <empty name="focusPics">
+                <div class="slide">
+                    <!-- Slide image -->
+                    <img src="__PUBLIC__/images/banner.jpg" alt="" style="width:100%;height:281px;" />
+                    <!-- /Slide image -->
+                    <!-- Texts container -->
+                    <div class="slide_content">
+                        <div class="slide_content_wrap">
+                            <!-- Text title -->
+                            <h4 class="title">Aluminium Club</h4>
+                            <!-- /Text title -->
+                            <!-- Text description -->
+                            <p class="description">Experiance ray ban</p>
+                            <!-- /Text description -->
+                        </div>
+                    </div>
+                    <!-- /Texts container -->
+                </div>
+                <div class="slide">
+                    <img src="__PUBLIC__/images/banner1.jpg" alt="" style="width:100%;height:281px;" />
+                    <div class="slide_content">
+                        <div class="slide_content_wrap">
+                            <h4 class="title">consectetuer adipiscing </h4>
+                            <p class="description">diam nonummy nibh euismod</p>
+                        </div>
+                    </div>
+                </div>
+                <else/>
+                <volist name="focusPics" id='perPic'>
+                    <a href='{$perPic.link}'>
+                    <div class="slide">
+                        <!-- Slide image --><img src="__ROOT__/Uploads/show_pics/{$perPic['url']}" alt="" style="width:100%;height:281px;" />
+                        <!-- /Slide image -->
+                        <!-- Texts container -->
+                        <div class="slide_content">
+                            <div class="slide_content_wrap">
+                                <!-- Text title -->
+                                <h4 class="title">{$perPic['title']}</h4>
+                                <!-- /Text title -->
+                                <!-- Text description -->
+                                <p class="description">{$perPic['description']}</p>
+                                <!-- /Text description -->
+                            </div>
+                        </div>
+                        <!-- /Texts container -->
+                    </div>
+                    </a>
+                </volist>
+            </empty>
+        </div>
+        <div class="timers"></div>
+        <div class="slidePrev"><span></span></div>
+        <div class="slideNext"><span></span></div>
+    </div>
+    <!--/slider -->
+    <div class="main">
+        <div class="wrap">
+            <div class="section group">
+                <!-- 各类别项目精选展示 -->
+                <div class="cont span_2_of_3">
+                    <div id="bNav" class="bNav">
+                        <ul>
+                            <li><a href="{:U('Project/index')}">全部</a></li>
+                            <volist name="categories" id="vo">
+                                <li><a href="{:U('Project/index')}?cateId={$vo.id}">{$vo.name}</a></li>
+                            </volist>
+                        </ul>
+                    </div>
+                    <div class="top-box">
+                        <volist name="projects" id="pro">
+                            <div class="col_1_of_3 span_1_of_3">
+                                <div class="inner_content clearfix">
+                                    <div class="product_image">
+                                        <a href="{:U('Project/detail',array('id'=>$pro['id']))}">
+                                            <div class="type">
+                                                <img src="{$pro.pro_pic_url}" width="246px" height="185px";/>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="price">
+                                        <div class="cart-left">
+                                            <h3>
+                                                <a href="#">
+                                                    <p class="title">{$pro.name}</p>
+                                                </a> 
+                                            </h3>
+                                        </div>
+                                        <div class="cart-left">
+                                            <hr style="FILTER: alpha(opacity=100,finishopacity=0,style=1)" width="100%;" color=#4CB1CA SIZE=2 />
+                                            <span>目标：{$pro.days}天</span>&nbsp;&nbsp;<span>剩余：{$pro.remain_day}天</span>
+                                            <span class="hits">
+                                                <form id="{$pro.id}_{$Think.session.user_id}" method="post">
+                                                    <a title="赞" href="" class="z-like" onclick="return favor('{$pro.id}_{$Think.session.user_id}');"
+                                                    ></a>
+                                                    (<span style="display:inline;float:none;">{$pro.favor}</span>)
+                                                    <input type="hidden" name="proid" value="{$pro.id}" />
+                                                </form>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                            <if condition="$i%3===0">
+                                <div class="clear"></div>
+                            </div>
+                            <div class="top-box">
+                            </if>
+                        </volist>
+                    </div>
+                </div>
+
+                <!-- 首页右侧广告和登录 -->
+                <div class="rsidebar span_1_of_left">
+                    <div class="top-border"> </div>
+                    <div class="border">
+                        <link href="__PUBLIC__/css/default.css" rel="stylesheet" type="text/css" media="all" />
+                        <link href="__PUBLIC__/css/nivo-slider.css" rel="stylesheet" type="text/css" media="all" />
+                        <script src="__PUBLIC__/js/jquery.nivo.slider.js"></script>
+                        <script type="text/javascript">
+                        $(window).load(function() {
+                            $('#slider').nivoSlider();
+                        });
+                        </script>
+                        <div class="slider-wrapper theme-default">
+                            <div id="slider" class="nivoSlider">
+                                <empty name="advertPics">
+                                    <img src="__PUBLIC__/images/t-img1.jpg" alt="" />
+                                    <img src="__PUBLIC__/images/t-img2.jpg" alt="" />
+                                    <else/>
+                                    <volist name="advertPics" id="perAd">
+                                       <a href="{$perAd.link}"> 
+                                            <img src="__ROOT__/Uploads/show_pics/{$perAd['url']}" style="width:200px;" alt="" />
+                                       </a>
+                                    </volist>
+                                </empty>
+                            </div>
+                        </div>
+                    </div>
+                    <!--5.28 已登录用户隐藏登录框-->
+                    <if condition="session('type')==null">
+                        <div class="sidebar-bottom">
+                         <h2 class="m_1">LOGIN HERE</h2>
+                         <!--<p class="m_text">LOGIN HERE!</p>-->
+                            <div class="subscribe">
+                                <form id="loginform" method="post">
+                                    <input name="username" type="text" value="用户名" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = '用户名';}">
+                                    <input type="text" onfocus="changeTip(this);" id="passText" name="passText" value="密码" />
+                                    <input style="display:none;" type="password" onblur="changeTip(this);" id="pass" placeholder="" name="password" value="" />
+                                    <div>
+                                        <input name="verify_code" type="text" value="验证码" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = '验证码';}" class="" style="width:111px;">
+                                        <img src="{:U('User/verify','','')}" id="code" alt="看不清点击更换" style="width:50px;height:25px;" onclick='change_code();' />
+                                    </div>
+                                    <span style="display:none;font-size: 14px; margin:6px 4px;" class="errors" id="login_errors"></span>
+                                    <input type="button" id=" btn" value="登录" onclick="loginsubmit()" style="width:180px;height:30px;background-color:#4cb1ca;color:#fff;border:none;margin-top:4px;">
+                                </form>
+                            </div>
+                        </div>
+                    </if>
+                </div>
+            </div>
+            <div class="clear"> </div>
+
+            <!-- 各类别项目分栏 -->
+            
+            <volist name="categories" id="vo">
+                <if condition="in_array($vo['id'],$catesToShow)">
+                    <div>
+                        <div class="protitle">
+                            <span>{$vo.name}</span>
+                            <a href="{:U('Project/index')}?cateId={$vo.id}"><span class="right">浏览更多</span></a>
+                        </div>
+                        <div class="top-box">                        
+                            <volist name="projects" id="pro">
+                                <if condition="$pro['category_id'] eq $vo['id']">
+                                    
+                                    <div class="col_1_of_3 span_1_of_3">
+                                        <div class="inner_content clearfix">
+                                            <div class="product_image">
+                                                <a href="{:U('Project/detail',array('id'=>$pro['id']))}">
+                                                    <div class="type">
+                                                        <img src="{$pro.pro_pic_url}" width="246px" height="185px" />
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="price">
+                                                <div class="cart-left">
+                                                    <h3>
+                                                        <a href="#">
+                                                            <p class="title">{$pro.name}</p>
+                                                        </a> 
+                                                    </h3>
+                                                </div>
+                                                <div class="cart-left">
+                                                    <hr style="FILTER: alpha(opacity=100,finishopacity=0,style=1)" width="100%" color=#4CB1CA SIZE=2 />
+                                                    <span>目标：{$pro.days}天</span>&nbsp;&nbsp;<span>剩余：{$pro.remain_day}天</span>
+                                                    <span class="hits">
+                                                        <form id="{$pro.id}_{$Think.session.user_id}" method="post">
+                                                            <a title="赞" href="" class="z-like" onclick="return favor('{$pro.id}_{$Think.session.user_id}');"></a>
+                                                            (<span style="display:inline;float:none;">{$pro.favor}</span>)
+                                                            <input type="hidden" name="proid" value="{$pro.id}" />
+                                                        </form>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </div>
+                                    <if condition="$i%4===0">
+                                        <div class="clear"></div>
+                                        </div>
+                                        <div class="top-box">
+                                    </if>
+                                </if>
+                            </volist>
+                        </div>
+                    </div>
+                    <div class="clear"> </div>
+                </if>
+            </volist>
+
+            <div>
+                <div class="protitle">
+                    <span class="activity">活动</span>
+                    <a href="{:U('Activity/index')}"><span class="right">更多活动</span></a>
+                </div>
+                <div id="bNav" class="bNav">
+                    <ul>
+                        <li><a href="{:U('Activity/index')}">全部</a></li>
+                        <volist name="acategories" id="vo">
+                            <li><a href="{:U('Activity/index')}?cateId={$vo.id}">{$vo.name}</a></li>
+                        </volist>
+                    </ul>
+                </div>
+                <div class="top-box">
+                    <volist name="activitys" id="pro">
+                        <div class="col_1_of_3 span_1_of_3">
+                            <div class="inner_content clearfix">
+                                <div class="product_image">
+                                    <a href="{:U('Activity/message',array('id'=>$pro['id']))}">
+                                        <div class="type">
+                                            <img src="{$pro.pro_pic_url}" width="246px" height="185px" />
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="price">
+                                    <div class="cart-left">
+                                        <h3>
+                                <a href="#">
+                                   <p class="title">{$pro.name}</p>
+                                </a> 
+                              </h3>
+                                    </div>
+                                    <div class="cart-left">
+                                    <hr style="FILTER: alpha(opacity=100,finishopacity=0,style=1)" width="100%" color=#4CB1CA SIZE=2 />
+                                    <span>开始时间：{$pro.passed_time}</span>
+                                </div>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                        <if condition="$i%4===0">
+                            <div class="clear"></div>
+                            </div>
+                        <div class="top-box">
+                        </if>
+                    </volist>
+                </div>
+            </div>
+            <div class="clear"> </div>
+<!-- 各类别项目分栏 -->
+<volist name="acategories" id="vo">
+    <div>
+
+        <div class="protitle">
+            <span>{$vo.name}</span>
+            <a href="{:U('Activity/index')}?cateId={$vo.id}"><span class="right">浏览更多</span></a>
+        </div>
+        <div class="top-box">
+            <volist name="activitys" id="pro">
+                <if condition="$pro['category_id'] eq $vo['id']">
+                    <div class="col_1_of_3 span_1_of_3">
+                        <div class="inner_content clearfix">
+                            <div class="product_image">
+                                <a href="{:U('Activity/message',array('id'=>$pro['id']))}">
+                                    <div class="type">
+                                        <img src="{$pro.pro_pic_url}" width="246px" height="185px" />
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="price">
+                                <div class="cart-left">
+                                    <h3>
+                                        <a href="#">
+                                            <p class="title">{$pro.name}</p>
+                                        </a>
+                                    </h3>
+                                </div>
+                                <div class="cart-left">
+                                    <hr style="FILTER: alpha(opacity=100,finishopacity=0,style=1)" width="100%" color=#4CB1CA SIZE=2 />
+                                    <span>开始时间：{$pro.passed_time}</span>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <if condition="$i%4===0">
+                        <div class="clear"></div>
+        </div>
+        <div class="top-box">
+            </if>
+            </if>
+</volist>
+</div>
+</div>
+<div class="clear"> </div>
+
+</volist>
+        </div>
+    </div>
+
+<!-- footer begin -->
+<include file="Public/footer" />
+<!-- footer end -->
+
+</body>
+</html>

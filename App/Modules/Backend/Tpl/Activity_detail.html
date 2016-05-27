@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>活动详情</title>
+    <link rel="stylesheet" href="__PUBLIC__/backend/utilLib/bootstrap.min.css" type="text/css" media="screen" />
+    <style type="text/css">
+      .table—th{width: 15%;}
+    </style>
+</head>
+<body>
+    
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+          <label>活动详细</label>
+            <table class="table table-bordered table-hover table-striped">
+                <thead >
+                    <tr style="background-color:#37A0B9;">
+                        <th class="table—th">
+                          表信息
+                        </th>
+                        <th>
+                          活动信息
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                      <tr>
+                        <th>
+                         活动发起者
+                        </th>
+                        <th>
+                          {$user.name}&nbsp;|&nbsp;
+                          <a style="color:#37A0B9;" href="{:U('Activity/organiserInfos',array('id'=>$user['id']))}" >点击查看发起者信息</a>
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>
+                         活动名称
+                        </th>
+                        <th>
+                          {$activity.name}
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>
+                         活动编号
+                        </th>
+                        <th>
+                          <if condition="$activity.number eq null">
+                            未通过审核，暂无活动编号
+                          <else/>
+                            {$activity.number}
+                          </if>
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>
+                         活动封面
+                        </th>
+                        <th>
+                          <if condition="$image.path neq null">
+                            <img src="__ROOT__/Uploads/activity/{$image.path}" alt=""class="img-thumbnail" width='140px' height='140px'>
+                          </if>
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>
+                         活动分类
+                        </th>
+                        <th>
+                          {$cate.name}
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>
+                         活动简介
+                        </th>
+                        <th>
+                          {$activity.description}
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>
+                         活动详情
+                        </th>
+                        <th>
+                          {$activity.detail|htmlspecialchars_decode}
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>
+                         是否截止报名
+                        </th>
+                        <th>
+                          <if condition="$activity.isdead eq 1">
+                            是&nbsp;|&nbsp;截止时间为:{$activity.deadline}
+                          <else/>
+                            否
+                          </if>
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>
+                         是否审核通过
+                        </th>
+                        <th>
+                          <if condition="$activity.is_passed eq 0">
+                            待审核
+                          <elseif condition="$activity.is_passed eq 1"/>
+                            已通过审核&nbsp;|&nbsp;处理时间为:{$activity.passed_time}
+                          <else />
+                            审核不通过&nbsp;|&nbsp;处理时间为:{$activity.passed_time}
+                          </if>
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>
+                         附件下载
+                        </th>
+                        <th>
+                          <if condition="$activity.file_attachment_id eq 0">
+                            无附件
+                          <else />
+                            <a href="{:U('Activity/download',array('id'=>$activity['file_attachment_id']))}">{$activity.name}&nbsp;活动的附件</a>
+                          </if>
+                        </th>
+                      </tr>
+                      <tr>
+                          <th>
+                              操作
+                          </th>
+                        <th >
+                        <if condition="$activity.is_passed eq 0">
+                            <a class="btn btn-info" href="{:U('Activity/examine',array('id'=>$activity['id']
+                                                            ,'ispassed' => '1'))}" role="button">通过</a>
+                            <a class="btn btn-info" href="{:U('Activity/examine',array('id'=>$activity['id']
+                                                            ,'ispassed' => '2'))}" role="button">不通过</a>
+                          <elseif condition="$activity.is_passed eq 1"/>
+                            <a class="btn btn-info" href="{:U('Activity/examine',array('id'=>$activity['id']
+                                                            ,'ispassed' => '2'))}" role="button">不通过</a>
+                          <else />
+                            <a class="btn btn-info" href="{:U('Activity/examine',array('id'=>$activity['id']
+                                                            ,'ispassed' => '1'))}" role="button">通过</a>
+                          </if>
+                         </th>
+                      </tr>
+                      <if condition="$activity.is_passed eq 1">
+                          <tr>
+                              <th>
+                                  是否为精选活动
+                              <th>
+                                  <if condition="$activity.packed eq 1">
+                                      是
+                                      &nbsp;|&nbsp;
+                                      <a class="btn btn-info" href="{:U('Activity/packedOrNot',array('id'=>$activity['id'],'setTo'=>0))}" role="button">取消精选</a>
+                                      <else/>
+                                      否
+                                      &nbsp;|&nbsp;
+                                      <a class="btn btn-info" href="{:U('Activity/packedOrNot',array('id'=>$activity['id'],'setTo'=>1))}" role="button">设为精选</a>
+                                  </if>
+                              </th>
+                          </tr>
+                      </if>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

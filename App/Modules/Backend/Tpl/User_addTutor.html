@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="__PUBLIC__/backend/utilLib/bootstrap.min.css" type="text/css" media="screen" />
+    <style type="text/css">
+    .errors {
+       font-size: 14px;
+       color:red;
+       margin-left: 10px;
+       display: inline-block;
+    }
+    </style>
+</head>
+<body>
+    
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+       
+        <form action="{:U('User/addTutor')}" method='POST' >
+          <table class='table table-bordered table-hover table-striped'>
+            <tbody>
+              <tr style="background: #37a0b9">
+                <th  style='width:17%;'>新增导师</th>
+                <th></th>
+              </tr> 
+              <tr>
+                <th scope="row">
+                    用户名
+                </th>
+                <td>
+                  <input type="text" name="name"  style="width:80%;float:left;" class="form-control" placeholder="名称"value="{$tutor['name']}">
+                  <span class="errors">{$errors['name']}</span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">
+                    密码
+                </th>
+                <td>
+
+                  <input type="password" name="password" class="form-control" style="width:80%;float:left;" placeholder="密码">
+                  <span class="errors">{$errors['password']}</span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">
+                    确认密码
+                </th>
+                <td>
+                   <input type="password" name="repassword" class="form-control"  style="width:80%;float:left;" placeholder="确认密码">
+                   <span class="errors">{$errors['repassword']}</span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">
+                    邮箱
+                </th>
+                <td> 
+                    <input type="email" name="mail" class="form-control" style="width:80%;float:left;" placeholder="邮箱" value="{$tutor.mail}">
+                    <span class="errors">{$errors['mail']}</span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  学历  
+                </th>
+                <td>
+                    <input type="text" name="education" class="form-control" style="width:80%;float:left;" placeholder="学历" value="{$tutor.education}">
+                    <span class="errors">{$errors['education']}</span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  手机  
+                </th>
+                <td>
+                    <input type="text" name="tele" class="form-control" style="width:80%;float:left;" placeholder="手机" value="{$tutor.tele}">
+                    <span class="errors">{$errors['tele']}</span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  身份证号  
+                </th>
+                <td>
+                    <input type="text" name="idcard" class="form-control"  style="width:80%;float:left;" placeholder="身份证" value="{$tutor.idcard}">
+                   <span class="errors">{$errors['idcard']}</span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">
+                 级别
+                </th>
+                <td>
+                   <input type="text" name="level" class="form-control"  style="width:80%;float:left;" placeholder="级别" value="{$tutor.level}">
+                  <span class="errors">{$errors['level']}</span>  
+                </td>
+              </tr>
+              
+              <tr>
+                <th scope="row">
+                  单位  
+                </th>
+                <td>
+                  <input type="text"  name="unit" class="form-control"  style="width:80%;float:left;" placeholder="单位" value="{$tutor.unit}">
+                  <span class="errors">{$errors['unit']}</span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  职务  
+                </th>
+                <td>
+                  <input type="text" name="position" class="form-control"  style="width:80%;float:left;" placeholder="职务" value="{$tutor.position}">
+                  <span class="errors">{$errors['position']}</span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">
+            地址
+                </th>
+                <td>
+                  <input type="text" name="address" class="form-control"  style="width:80%;float:left;" placeholder="地址" value="{$tutor.address}">
+                  <span class="errors">{$errors['address']}</span>
+                </td>
+              </tr>
+
+              <tr>
+                <th scope="row">
+                  简介
+                </th>
+                <td>
+                    <textarea class="form-control" name="introduction" style="width:80%;float:left;"   placeholder="简介"></textarea>
+                    <span class="errors">{$errors['introduction']}</span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"></th>
+                <td>
+                  <button type="submit" class="btn btn-info form-control" style="width:20%;float:left;" >提交</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+         </form>
+
+
+    </div>
+
+  </div>
+</div>
+<br/></br>
+</body>
+</html>

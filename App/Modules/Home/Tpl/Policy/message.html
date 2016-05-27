@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>政策内容</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" type="image/png" href="__PUBLIC__/images/youwei30x30.png">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/style.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/zhongchou.css">
+    <link href="__PUBLIC__/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="__PUBLIC__/js/projecteffect.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/megamenu.js"></script>
+    <script src="__PUBLIC__/js/jquery.easydropdown.js"></script>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/projectview.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/activityview.css">
+    <script>
+    $(document).ready(function() {
+        $(".megamenu").megamenu();
+    });
+
+    function loginsubmit() {
+        $.ajax({
+            type: "POST",
+            url: "{:U('Index/login')}",
+            data: $("#loginform").serialize(),
+            async: false,
+            success: function(data) {
+                if (!data.status) {
+                    var oSpan_errors = document.getElementById('login_errors');
+                    oSpan_errors.innerHTML = data.info;
+                    oSpan_errors.style.display = "block";
+                    change_code();
+                    return flase;
+                }
+                window.location = data.data;
+            }
+        });
+    }
+
+    function change_code() {
+        var verifyURL = "{:U('User/verify','','')}";
+        $("#code").attr("src", verifyURL + '/' + Math.random());
+        return false;
+    }
+    </script>
+</head>
+
+<body>
+
+<!-- head begin -->
+<include file="Public/header" />
+<!-- head end -->
+
+    <div class="activity">
+        <div class="tit-wrap">
+            <h3>政策内容</h3>
+        </div>
+        <ul class="breadcrumb breadcrumb__t">
+            <div class="position"><span>当前位置：</span><a href="index.html">政策</a><span>->&nbsp;政策内容</span></div>
+        </ul>
+        <div class="content">
+            <div id="head_css">{$policyInfos.title}</div>
+            <div class="newtag"><span>类别：{$policyInfos.cate_name}</span>&nbsp;&nbsp;<span>发布者：</span><a href="">管理员</a>&nbsp;&nbsp;<span>点击数：123</span>&nbsp;&nbsp;<span>更新时间：{$policyInfos.created_time}</span></div>
+            <div class="main_m">
+                <h1>{$policyInfos.title}</h1><br>
+                <div class="abstruct">简介：<p>{$vo.description}</p></div>
+                {$policyInfos.description}
+            </div>
+            <div class="join"><a href="{:U('Policy/download',array('id'=>$policyInfos['id']))}">下载附件</a></div>
+            <div class="article">
+                <p><span>上一篇：</span><a href="">香港钻石青年团到访佛山 市青年商会盛情接待</a></p>
+                <p><span>下一篇：</span><a href="">南方日报：YEAP!企业员工援助培训制度化破冰</a></p>
+            </div>
+        </div>
+    </div>
+    <!-- 快捷登录弹出框 -->
+    <div style="height: 589px; display: none;" class="popwrap">
+        <div class="support-item">
+            <h2>登录<i class="close"></i></h2>
+            <div class="support-content">
+                <div class="subscribe">
+                    <form id="loginform" method="post">
+                        <input name="username" type="text" value="用户名" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = '用户名';}">
+                        <input type="text" onfocus="changeTip(this);" id="passText" name="passText" value="密码" />
+                        <input style="display:none;" type="password" onblur="changeTip(this);" id="pass" placeholder="" name="password" value="" />
+                        <div>
+                            <input name="verify_code" type="text" value="验证码" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = '验证码';}" class="" style="width:108px;">
+                            <img src="{:U('User/verify','','')}" id="code" alt="看不清点击更换" style="width:50px;height:25px;" onclick='change_code();' />
+                        </div>
+                        <span style="display:none;font-size: 14px; margin:6px 4px;" class="errors" id="login_errors"></span>
+                        <input type="button" id=" btn" value="登录" onclick="loginsubmit()" style="width:180px;height:30px;background-color:#4cb1ca;color:#fff;border:none;margin-top:4px;">
+                    </form>
+                    <p>没有账号？<a href="{:U('User/register')}">前往注册</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- footer begin -->
+<include file="Public/footer" />
+<!-- footer end -->
+
+    <script type="text/javascript" src="__PUBLIC__/js/projectview.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/prompt.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="__PUBLIC__/backend/utilLib/bootstrap.min.css" type="text/css" media="screen" />
+    <script type="text/javascript">
+    function selectChange() {
+        document.getElementById("Input4Key").value = '';
+        document.getElementById("subtn").click();
+    }
+    </script>
+</head>
+<body>
+    
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <!-- <div style="margin-bottom: 40px;">
+            <div class="form-group">
+                 <a class="btn btn-success" href="{:U('Category/add_show')}" role="button">快速新建分类</a>
+            </div> -->
+             <div style="margin-bottom: 40px;">
+                 <form  class="form-inline" action="{:U('Category/clist')}" method="POST">
+               
+                  <div class="form-group">
+                    <label for="StatuSelect">类型</label> 
+                    <select name='type' class="form-control" id="StatuSelect" onchange='selectChange()'> 
+                        <option value='project' class="form-control"
+                        <if condition="$type == 'project'">selected='selected'
+                        </if>
+                        >项目分类</option>
+                        <option value='activity'  class="form-control"
+                         <if condition="$type == 'activity'">selected='selected'
+                        </if>>活动分类</option>
+                        <option value='policy'  class="form-control"
+                        <if condition="$type == 'policy'">selected='selected'
+                        </if>>政策分类</option>
+                    </select>
+                  </div>    
+                   <div class="form-group">
+                   <!--  <label for="exampleInputEmail2">搜索</label> -->
+                    <input type="text" name='keyword' class="form-control" id="Input4Key" placeholder="名称、缩写" style='width:300px;' value="{$key}">
+                  </div>
+                  <button type="submit" id='subtn' class="btn btn-default">搜索</button>
+            
+                </form>
+
+            </div>
+            <table class="table table-bordered table-hover ">
+                <thead >
+                    <tr>
+                        <th>
+                           名称
+                        </th>
+                        <th>
+                            名称缩写
+                        </th>
+                        <th>类别</th>
+                        <th style="width:18%;">
+                            创建时间
+                        </th>
+                        <th>
+                            是否发布
+                        </th>
+                        <th style="width:20%;">
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <empty name="category">
+                        <tr>
+                            <td colspan='100%' align='center'>
+                                尚无活动
+                            </td>
+                         </tr>
+                    <else/>
+                    <volist name='category' id='vo'>
+                         <tr>
+                            <td>
+                                {$vo.name}
+                            </td>
+                            <td>
+                               {$vo.sign}
+                            </td>
+                            <td>
+                              <if condition="$vo.type == 'project'">
+                                项目分类
+                              <elseif condition="$vo.type == 'activity'"/>
+                                活动分类
+                              <elseif condition="$vo.type = 'policy'"/>
+                                政策分类
+                              <else/>
+                              </if>
+                            </td>
+                            <td>
+                              {$vo.created_time}
+                            </td>
+                            <td>
+                              <if condition="$vo.status eq 0">
+                                 未发布
+                                <else/>已发布
+                            </if>
+                            </td>
+                            <td>
+                              <if condition="$vo.status eq 0">
+                                 <a class="btn btn-info" href="{:U('Category/turnOn', array('id' =>
+                                  $vo['id'], 'type' =>$vo['type']))}" >发布</a>
+                                <else/>
+                                <a class="btn btn-info" href="{:U('Category/turnOff', array('id' =>
+                                  $vo['id'], 'type' =>$vo['type']))}" >不发布</a>
+                              </if>
+                              <a class="btn btn-danger" href="{:U('Category/delete', array('id' => $vo['id'], 'type' =>$vo['type']))}" onClick="return confirm('您确定要删除吗？请确认！')">删除</a>
+                              <a class="btn btn-success" href="{:U('Category/edit_show', array('id' => $vo['id']))}" >编辑</a>
+                            </td>
+                         </tr>
+                    </volist>
+                         <tr>
+                            <td colspan='100%' align='center'>
+                                {$page}
+                            </td>
+                         </tr>
+                </empty>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+    
+</body>
+</html>

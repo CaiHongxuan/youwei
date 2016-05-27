@@ -1,0 +1,925 @@
+@charset "UTF-8";
+.pb116 {
+    padding-bottom: 0px;
+}
+/*个人设置-资料左侧导航样式*/
+.personal-set {
+    padding: 10px 0px;
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    height: 34px;
+    line-height: 34px;
+    /*margin-left: -30px;*/
+}
+/*.personal-set .a-personal-set{
+	display:block;
+	float:right;
+	height:30px;
+	line-height:30px;
+	width:110px;
+	border:2px solid #e5e5e5;
+	font-size:12px;
+	color:#999999;
+	text-align:center;
+	font-weight:normal;
+}*/
+.personal-set .a-personal-set {
+    display: block;
+    float: right;
+    font-size: 12px;
+    font-weight: normal;
+    width: 110px;
+    padding: 0;
+    height: 26px;
+    line-height: 26px;
+}
+
+.personal-set-left {
+    width: 216px;/*19%;*/
+    /*210px;*/
+    
+    float: left;
+    border: 2px solid #e5e5e5;
+    padding: 4px 3px;
+    /*margin-left: -30px;*/
+}
+
+.personal-set-left li {
+    height: 48px;
+    line-height: 14px;
+    margin-bottom: 3px;
+}
+
+.personal-set-left li a {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    padding: 15px 34px;
+    /*height: 100%;*/
+}
+
+.personal-set-left li a:hover {
+    color: #55acef;
+}
+/*.personal-set-left  li i{
+	color:#ff3766;
+	padding:0 8px;
+	background:#f33a5e;
+	color:#fff;
+	text-align:center;
+	border-radius:10px;
+	font-weight:normal;
+	margin-left:8px;
+	height:14px;
+}*/
+
+.personal-set-left li .btn-msg-h20 {
+    padding: 0 8px;
+    background: #f33a5e;
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+    font-weight: normal;
+    margin-left: 6px;
+    height: 12px;
+    font-size: 12px;
+}
+
+.personal-set-left li.selected a {
+    background: #ededed;
+    color: #333333;
+}
+
+.personal-set-left li.end {
+    margin-bottom: 0;
+}
+/*个人设置-资料像右侧样式*/
+
+/* 导师星级评论begin */
+.rating {
+    /*cursor: pointer;*/
+    /*margin: 2em;*/
+    padding: 15px 0px 0px;
+    /*clear: both;*/
+    display: block;
+}
+.star {
+    float: left;
+    width: 17px;
+    height: 15px;
+    overflow: hidden;
+    text-indent: -999em;
+    cursor: pointer;
+}
+.star,
+.star a {background: url("../images/star.gif") no-repeat 0 0px;}
+.star a {
+    cursor: default;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-position: 0 0px;
+}
+div.rating div.on a {
+    background-position: 0 -16px;
+}
+/* 导师星级评论end */
+.personal-set-right {
+    width: 910px;/*81%;*/
+    float: right;
+    border-top: 2px solid #e5e5e5;
+}
+
+.mm-blue {
+    text-align: center;
+    border: 2px solid #55acef;
+    display: inline-block;
+    color: #55acef;
+    -webkit-transition: all .8s ease;
+    -moz-transition: all .8s ease;
+    -o-transition: all .8s ease;
+    transition: all .8s ease;
+}
+
+.mm-blue:hover {
+    background: #55acef;
+    color: #fff;
+}
+
+.form-item .row {
+    clear: both;
+    margin-top: 10px;
+}
+
+.form-item .row label,
+.form-item .row .span-style,
+.form-item .span-style .label-style {
+    height: 45px;
+    line-height: 45px;
+    font-size: 14px;
+}
+
+.form-item .row label {
+    display: block;
+    float: left;
+    width: 114px; /*84px;*/
+    padding-right: 20px;
+    text-align: right;
+}
+
+.form-item .row .span-style {
+    display: block;
+}
+
+.form-item input[type="text"],
+input[type="password"] {
+    height: 17px;
+    line-height: 17px;
+    border: solid #e4e4e4 1px;
+    margin-right: 10px;
+    font-size: 14px;
+    color: #333;
+    padding: 12px 0 12px 10px;
+    width: 652px;
+    float: left;
+}
+
+.form-item input.input-wid {
+    width: 168px;
+}
+
+.form-item .span-style .label-style {
+    display: block;
+    padding-right: 10px;
+    width: auto;
+}
+
+.form-item .span-style .label-style input {
+    margin-right: 6px;
+}
+
+.form-item .row select {
+    border: 1px solid #e5e5e5;
+    padding: 11px 34px;
+    margin-right: 10px;
+    *margin-top: 12px;
+    float: left;
+}
+
+.form-item .row textarea {
+    float: left;
+    border: 1px solid #e5e5e5;
+    width: 652px;
+    padding: 15px 10px;
+    height: 120px;
+    font-size: 14px;
+}
+
+.p-btn {
+    float: left;
+    padding: 20px 0px 0px 105px;
+}
+
+.a-btn-blue {
+    display: block;
+    margin: 0px;
+    width: 190px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: #fff;
+    font-size: 18px;
+}
+
+.a-btn-blue:hover {
+    color: #fff;
+}
+/*个人设置-头像右侧样式*/
+
+.pb70 {
+    padding-bottom: 70px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.head-portrait {
+    height: 152px;
+    padding-top: 20px;
+    margin-left: 20px;
+}
+
+.head-portrait img {
+    height: 150px;
+    width: 150px;
+}
+
+.head-portrait .caption {
+    font-size: 14px;
+    color: #999;
+    line-height: 40px;
+}
+
+.text-caption {
+    line-height: 32px;
+    color: #999;
+}
+
+.p-browse {
+    height: 50px;
+}
+
+.file,
+.file-input,
+.above-file {
+    height: 50px;
+    width: 110px;
+}
+
+.file {
+    display: block;
+    position: relative;
+    float: left;
+    background: #55acef;
+}
+
+.file-input,
+.above-file {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.file-input {
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    -khtml-opacity: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.above-file {
+    display: block;
+    line-height: 50px;
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+}
+/*关于右侧样式2014-9-24*/
+
+.about-h3 {
+    font-size: 24px;
+    line-height: 24px;
+    font-weight: bold;
+    padding: 26px 0 20px;
+}
+
+.m-block {
+    padding-top: 10px;
+    font-size: 14px;
+    line-height: 30px;
+}
+
+.m-block h4 {
+    font-weight: bold;
+}
+
+.m-block p {
+    color: #666666;
+}
+/*消息右侧样式2014-9-24*/
+
+.prompt-text {
+    padding-left: 350px;
+}
+/* .prompt{
+	height:190px;
+	width:100%;
+	background:url(../../../v3/static/images/icon/prompt.png?v=1421395597) no-repeat center 86px;
+} .prompt-sorry,.project-review{
+	text-align:center;
+} .prompt-sorry{
+	font-size:24px;
+	font-weight:bold;
+	line-height:24px;
+} .project-review{
+	color:#999999;
+	font-size:14px;
+	line-height:44px;
+}*/
+
+.prompt {
+    width: 86px;
+    height: 86px;
+    background: url(../../../v3/static/images/icon/prompt.png?v=1421395597) no-repeat;
+    margin: 80px 0 20px 66px;
+}
+
+.prompt-sorry {
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 24px;
+}
+
+.project-review {
+    color: #999999;
+    font-size: 14px;
+    line-height: 44px;
+    padding-left: 46px;
+}
+/*收到评论右侧样式2014-9-24*/
+
+.comment-list {
+    clear: both;
+}
+
+.comment-list li {
+    padding: 28px 0 10px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.comment-list li img {
+    display: block;
+    float: left;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    width: 46px;
+    height: 46px;
+}
+
+.content-mar {
+    margin-left: 66px;
+    width: 800px;
+    word-wrap: break-word;
+}
+
+.reply {
+    color: #999;
+    line-height: 20px;
+}
+
+.text-content {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 28px;
+}
+/*发出评论右侧样式2014-9-24*/
+
+.blue {
+    color: #55acef;
+    padding-right: 10px;
+}
+
+.net-name {
+    color: #999;
+    padding-right: 6px;
+}
+
+.time,
+.reply-comment {
+    padding-left: 6px;
+}
+
+.reply-comment a {
+    color: #999;
+}
+
+.reply-comment a:hover {
+    color: #55acef;
+}
+
+.time-padding-right {
+    padding: 0 6px 0 0;
+}
+
+.records-number {
+    text-align: right;
+    line-height: 16px;
+}
+
+.records-number a {
+    display: inline-block;
+    line-height: 16px;
+    color: #f33a5e;
+    margin-right: 20px;
+}
+/*找回密码1样式2014-9-25*/
+
+.password-step {
+    background: #f5f5f5;
+    padding: 40px 0 34px;
+}
+
+.password-step01,
+.password-step02,
+.password-step03 {
+    height: 62px;
+    width: 656px;
+    margin: 0 auto;
+}
+
+.password-step01 {
+    background: url(../../../v3/static/images/password/password.png?v=1421395597) no-repeat;
+}
+
+.password-step02 {
+    background: url(../../../v3/static/images/password/password2.png?v=1421395597) no-repeat;
+}
+
+.password-step03 {
+    background: url(../../../v3/static/images/password/password3.png?v=1421395597) no-repeat;
+}
+
+.password-step-h2 {
+    padding: 34px 0 15px;
+    border-bottom: 2px solid #e5e5e5;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 24px;
+}
+
+.yzm {
+    border: 1px solid #e5e5e5;
+    height: 43px;
+    line-height: 43px;
+    text-align: center;
+    display: block;
+    float: left;
+    padding: 0 10px;
+}
+
+.form-item .row .input-wid418 {
+    width: 418px;
+}
+
+.yzm img {
+    vertical-align: middle;
+}
+
+.pt30 {
+    padding-top: 30px;
+    *padding-top: 40px;
+}
+/*找回密码2style2014-9-25*/
+
+.yzm-way {
+    text-align: center;
+    padding: 64px 0 30px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.get-yzm {
+    margin: 0 auto;
+}
+/*找回密码3style2014-9-25*/
+
+.form-item-label .row label {
+    width: 126px;
+}
+/*个人收件地址style2014-9-25*/
+
+.receive-address {
+    padding: 10px 0;
+}
+
+.receive-address h3 {
+    font-size: 20px;
+    line-height: 40px;
+}
+
+.receive-address p {
+    font-size: 14px;
+    line-height: 24px;
+    color: #999;
+}
+
+.btn-address {
+    color: #55acef;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    width: 110px;
+    display: block;
+    margin-top: 10px;
+    border: 2px solid #55acef;
+    -webkit-transition: all .8s ease;
+    -moz-transition: all .8s ease;
+    -o-transition: all .8s ease;
+    transition: all .8s ease;
+}
+
+.btn-address:hover {
+    color: #fff;
+    background: #55acef;
+}
+
+.return {
+    border-bottom: 1px solid #e5e5e5;
+    padding: 10px 0;
+    height: 32px;
+    margin-bottom: 20px;
+}
+
+.return a {
+    float: right;
+    margin-top: 0;
+}
+
+.address-list {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.address-list tr {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.address-list th,
+.address-list td {
+    font-size: 14px;
+    height: 40px;
+    text-align: center;
+}
+
+.address-list th {
+    font-weight: bold;
+}
+
+.address-list td .editor {
+    margin: 0 3px;
+    color: #55acef;
+}
+/*优惠劵列表style2014-9-25*/
+
+.coupon {
+    padding-top: 20px;
+}
+
+.pb30 {
+    padding-bottom: 25px;
+}
+
+.coupon-list {
+    float: left;
+}
+
+.coupon-list li a.has-border {
+    border-left: 2px solid #e4e4e4;
+}
+
+.coupon-list li {
+    height: 40px;
+    position: relative;
+    float: left;
+}
+
+.coupon-list li a {
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    width: 138px;
+    border: 2px solid #e4e4e4;
+    border-left: none;
+    height: 38px;
+    line-height: 38px;
+}
+
+.coupon-list li.selected a {
+    background: #55acef;
+    color: #fff;
+    border: 2px solid #55acef;
+}
+
+.coupon-list li i {
+    display: block;
+    position: absolute;
+    background: url(../../../v3/static/images/icon/par.png?v=1421395597) no-repeat;
+    background-position: -75px -48px;
+    width: 20px;
+    height: 12px;
+    left: 50%;
+    margin-left: -10px;
+    bottom: -11px;
+}
+
+.coupon-table {
+    width: 100%;
+    clear: both;
+}
+
+.coupon-table th {
+    height: 42px;
+    background: #f7f7f7;
+    border: 1px solid #e4e4e4;
+    text-align: center;
+    color: #666;
+}
+
+.coupon-table td {
+    height: 60px;
+    border: 1px solid #e4e4e4;
+    text-align: center;
+}
+
+.coupon-table td.text-left {
+    text-align: left;
+    padding: 0 18px;
+}
+
+.instructions {
+    display: block;
+    float: right;
+}
+
+.instructions a {
+    color: #55acef;
+    display: block;
+    margin-top: 16px;
+}
+/*消息中心私信style2014-10-09*/
+
+.direct-messages {
+    padding: 40px 75px;
+}
+
+.m-dialogue {
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+}
+
+.net-name {
+    color: #55acef;
+    padding: 0 5px;
+}
+
+.m-dialogue .a-btn-return {
+    float: right;
+    display: block;
+    width: 36px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    margin-top: 4px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background: #afafaf;
+    color: #fff;
+}
+
+.m-dialogue .a-btn-return:hover {
+    background: #55acef;
+}
+
+.direct-messages li {
+    border-bottom: 1px solid #e5e5e5;
+    padding: 10px 0px 15px;
+}
+
+.direct-messages li .portrait {
+    width: 48px;
+    height: 48px;
+    float: left;
+    padding: 10px 0;
+}
+
+.direct-messages li .portrait img {
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    float: left;
+    width: 46px;
+    height: 46px;
+}
+
+.msg-box {
+    margin-left: 68px;
+}
+
+.msg-box .user-name {
+    line-height: 26px;
+}
+
+.msg-box .msg-tit {
+    font-size: 14px;
+    line-height: 26px;
+}
+
+.msg-box .user-name a {
+    font-size: 14px;
+    color: #55acef;
+}
+
+.msg-cnt {
+    font-size: 14px;
+    padding-bottom: 5px;
+    word-wrap: break-word;
+}
+
+.talk-handle {
+    line-height: 22px;
+    text-align: right;
+}
+
+.talk-handle a {
+    color: #55acef;
+    margin: 0px 5px;
+    display: inline-block;
+}
+
+.direct-messages .page {
+    padding: 20px 0px 10px;
+}
+
+.page a {
+    width: 25px;
+    height: 25px;
+    margin: 0px 1px;
+    font-size: 14px;
+    color: #FFF;
+    display: inline-block;
+    line-height: 25px;
+    text-align: center;
+    background-position: -37px 0;
+}
+
+.page a.prev,
+.page a.next {
+    width: 45px;
+    padding: 0px 10px;
+    color: #a4a4a4;
+}
+
+.common-sprite {
+    background-image: url('../../../v3/static/images/icon/icon_sprite.png?v=1421395597');
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+
+.common-sprite:hover {
+    background-position: 0 0;
+}
+
+.page a.select {
+    background-position: 0 0;
+}
+/*回复弹框*/
+
+.m-message {
+    background: none repeat scroll 0 0 #fff;
+    border: 1px solid #d6d6d6;
+    position: relative;
+    width: 457px;
+}
+
+.m-message .title {
+    background: none repeat scroll 0 0 #55acef;
+    height: 40px;
+    position: relative;
+    width: 100%;
+}
+
+.m-message .title h3 {
+    color: #fff;
+    float: left;
+    font-size: 16px;
+    line-height: 22px;
+    padding-left: 10px;
+}
+
+.m-message .btn-close {
+    color: white;
+    font-size: 30px;
+    height: 22px;
+    position: absolute;
+    right: 9px;
+    top: 5px;
+    width: 22px;
+}
+
+.m-message .pop-msg {
+    padding: 10px 25px 0px;
+}
+
+.m-message h3 {
+    font-size: 16px;
+    height: 22px;
+    padding: 10px 0;
+}
+
+.m-message textarea {
+    border: 1px solid #bababa;
+    border-radius: 3px;
+    height: 136px;
+    padding: 5px;
+    position: relative;
+    width: 390px;
+}
+
+.m-message .btn {
+    height: 30px;
+    padding: 10px 20px 20px;
+    text-align: right;
+}
+
+.m-message .a-btn-blue {
+    width: 100px;
+    height: 35px;
+    line-height: 35px;
+    float: right;
+    color: white;
+    font-size: 12px;
+    text-align: center;
+}
+
+.m-message .a-btn-gray {
+    width: 100px;
+    height: 35px;
+    line-height: 35px;
+    color: #fff;
+    display: block;
+    font-size: 12px;
+    text-align: center;
+    background: #ccc;
+    float: right;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.error-text {
+    float: left;
+    height: 43px;
+    line-height: 43px;
+}
+
+.couponWarning {
+    width: 480px;
+    background: white;
+    padding: 10px;
+}
+
+.couponWarning .inner {
+    border: 1px solid #d4d4d4;
+    padding: 20px;
+}
+
+.couponWarning h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.couponWarning .confirm {
+    margin: 20px auto 0;
+    display: block;
+    width: 100px;
+    padding: 5px 10px;
+}
+
+.pb116 {
+    margin-bottom: 40px;
+    min-height: 345px;
+}

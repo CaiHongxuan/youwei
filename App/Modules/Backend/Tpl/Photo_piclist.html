@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="__PUBLIC__/backend/utilLib/bootstrap.min.css" type="text/css" media="screen" />
+    <script type="text/javascript">
+    function selectChange() {
+        document.getElementById("Input4Key").value = '';
+        document.getElementById("subtn").click();
+    }
+    </script>
+</head>
+<body>
+    
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <div style="margin-bottom: 40px;">
+                 <form class="form-inline" action="{:U('Photo/piclist')}" method="POST">
+                  <div class="form-group">
+                    <label for="TypeSelect">类型</label>
+                    <select name='type' class="form-control" onchange='selectChange()'> 
+
+                        <option value=''  class="form-control">所有</option>
+                        <option value='1' class="form-control"<if condition="$type=='1'">selected='selected'</if>>轮显图</option>
+                        <option value='0' class="form-control" <if condition="$type=='0'">selected='selected'</if>> 广告图</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <!-- <label for="exampleInputEmail2">搜索</label> -->
+                    <input type="text" name='keyword' class="form-control" id="Input4Key" placeholder="标题、描述、上传时间">
+                  </div>
+                  <button type="submit" id='subtn' class="btn btn-default">查看</button>
+                    <a class="btn btn-default" href="{:U('Photo/addpic')}" role="button">新增</a>
+                </form>
+
+
+            </div>
+            <table class="table table-bordered table-hover table-condensed">
+                <thead>
+                    <tr>
+                        <th>
+                           图片
+                        </th>
+                        <th>
+                            类型
+                        </th>
+                        <th>
+                            上传时间
+                        </th>
+                        <th>
+                            状态
+                        </th>
+                        <th>
+                             标题
+                        </th>
+                        <th>
+                             描述
+                        </th>
+                        <th>
+                            是否显示
+                        </th>
+                        <th>
+                            查看
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <empty name="pics">
+                        <tr>
+                            <td colspan='100%' align='center'>
+                                尚无图片
+                            </td>
+                         </tr>
+                    <else/>
+                    <volist name='pics' id='pic'>
+                         <tr>
+                            <td>
+                                <img src="__ROOT__/Uploads/show_pics/{$pic.url}" width='40px' height='34px'/>
+                            </td>
+                            <td>
+                                <if condition="$pic.type eq 1">轮显图<else/>广告图</if>
+                            </td>
+                            <td>{$pic.upload_time}</td>
+                            <td>
+                               <if condition="$pic.status eq 1">
+                                已显示
+                                 
+                                <else/>
+                                未显示
+                                 
+                            </if>
+                            </td>
+
+                            </td>
+                            <td>
+                                {$pic.title}
+                            </td>
+                            <td>
+                                {$pic.description}
+                            </td>
+                            <td>
+                                 <if condition="$pic.status eq 1">
+                                 
+                                 <a class="btn btn-default" href="{:U('Photo/hiddenpic',array('id'=>$pic['id']))}" role="button">否</a>
+                                <else/>
+                                
+                                 <a class="btn btn-default" href="{:U('Photo/showpic',array('id'=>$pic['id']))}" role="button">是</a>
+                            </if>
+                            </td>
+                            <td>  <a class="btn btn-default" href="{:U('Photo/editpic',array('id'=>$pic['id']))}" role="button">详细</a></td>
+                            <td>
+                               <a class="btn btn-default" href="{:U('Photo/deletepic',array('delId'=>$pic['id']))}" onclick="javascript:return confirm('确定删除该图片?')"role="button">删除</a>
+                            </td>
+                         </tr>
+                    </volist>
+                         <tr>
+                            <td colspan='100%' align='center'>
+                                {$page}
+                            </td>
+                         </tr>
+                </empty>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+    
+</body>
+</html>

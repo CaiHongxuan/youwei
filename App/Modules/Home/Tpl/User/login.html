@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>登录</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" type="image/png" href="__PUBLIC__/images/youwei30x30.png">
+<link href="__PUBLIC__/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery1.min.js"></script>
+<!-- start menu -->
+<link href="__PUBLIC__/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="__PUBLIC__/js/megamenu.js"></script>
+<script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+<!-- dropdown -->
+<script src="__PUBLIC__/js/jquery.easydropdown.js"></script>
+<script type="text/javascript">
+function change_code(){
+  var verifyURL = "{:U('User/verify','','')}";
+  $("#code").attr("src",verifyURL+'/'+Math.random());
+  return false;
+}
+
+
+function loginsubmit(){
+   $.ajax({ 
+    type: "POST", 
+    url: "{:U('User/login')}", 
+    data: $("#loginform").serialize() , 
+    async : false, 
+    success: function(data) { 
+      if(!data.status) {
+        var oSpan_errors =  document.getElementById(data.data);
+        oSpan_errors.innerHTML = data.info;
+        oSpan_errors.style.display="block";
+        change_code();
+        return flase;
+      }
+      window.location= data.data;
+    }
+  });
+ }
+</script>
+</head>
+<body>
+
+<!-- head begin -->
+<include file="Public/header" />
+<!-- head end -->
+
+<div class="login">
+  <div class="wrap">
+    <div class="col_1_of_login span_1_of_login">
+      <h4 class="title">快速注册</h4>
+      <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan</p>
+      <div class="button1"> <a href="register.html">
+        <input type="submit" name="Submit" value="注册">
+        </a> </div>
+      <div class="clear"></div>
+    </div>
+    <div class="col_1_of_login span_1_of_login">
+      <div class="login-title">
+        <h4 class="title">用户登录</h4>
+        <div id="loginbox" class="loginbox">
+          <!-- <form action="{:U('User/login')}" method="post" name="login" id="login-form"> -->
+          <form action="" method="post" name="login" id="loginform">
+            
+            <fieldset class="input">
+              <p id="login-form-username">
+                <label for="modlgn_username">邮箱：</label><br />
+                <input id="modlgn_username" type="text" name="email" class="inputbox" size="18" autocomplete="off">
+                <span class="errors" id="account_error"></span>
+              </p>
+              <p id="login-form-password">
+                <label for="modlgn_passwd">密码：</label><br />
+                <input id="modlgn_passwd" type="password" name="password" class="inputbox" size="18" autocomplete="off">
+              </p>
+              <p id="login-form-code">
+                <label for="modlgn_code">验证码：</label><br />
+                <input id="modlgn_code" type="code" name="code" class="inputbox"><img src="{:U('User/verify','','')}" id="code" style="margin-left:2px;"/> <a href="javascript:change_code();">看不清</a>
+              <span class="errors" id="verify_error" ></span>
+              </p>
+              <div class="remember">
+                <p id="login-form-remember">
+                  <label for="modlgn_remember"><a href="{:U('User/reset_pwd')}">忘记密码？ </a></label>
+                </p>
+                <input type="button" name="Submit" class="button" value="登录" style="background: #555;border: none;color: #FFF;padding: 10px 20px;cursor: pointer;float: right;outline: none;font-size: 1em;" onclick="loginsubmit()">
+                <div class="clear"></div>
+              </div>
+            </fieldset>
+            <input type="hidden" name="jurl" value="{$jurl}">
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+
+
+<!-- footer begin -->
+<include file="Public/footer" />
+<!-- footer end -->
+
+</body>
+</html>

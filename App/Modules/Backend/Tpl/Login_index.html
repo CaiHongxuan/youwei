@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<title>后台登录</title>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="__PUBLIC__/backend/js/jquery.min.js"></script>
+    <script type="text/javascript">
+    var verifyURL = '{:U("Backend/Login/verify", '', '')}';
+    </script>
+    <script type="text/javascript" src="__PUBLIC__/backend/js/login.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/backend/css/add.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="__PUBLIC__/backend/utilLib/bootstrap.min.css" type="text/css" media="screen" />
+</head>
+
+<body>
+    <div id="headtop">
+        <h1>有为系统后台登录</h1>
+    </div>
+    <div class="login">
+        <form id="login" method="post">
+            <div class="control-group">
+                <label class="laber_from">邮&nbsp;&nbsp;箱</label>
+                <div class="controls">
+                    <input class="input_from" type="email" name="email" placeholder="请输入邮箱" /><span></span></div>
+            </div>
+            <div class="control-group">
+                <label class="laber_from">密&nbsp;&nbsp;码</label>
+                <div class="controls">
+                    <input class="input_from" type="password" name="password" placeholder="请输入密码" /><span></span></div>
+            </div>
+            <div class="control-group">
+                <label class="laber_from">验证码</label>
+                <div class="controls">
+                    <input class="vercode" type="code" name="code" placeholder="验证码"><img src="{:U('Backend/Login/verify')}" id="code" /> <a href="javascript:void(change_code(this));">看不清</a></div>
+            </div>
+            <input type="submit" class="btn-success" value="确认" onClick="login_ajax();" />
+        </form>
+    </div>
+    <script type="text/javascript">
+    function login_ajax() {
+        $.post("{:U('Backend/Login/login')}",
+            $("#login").serialize(),
+            function(data) {
+                if (data.status) {
+                    window.location = data.data;
+                } else {
+                    alert(data.info);
+                    $("#code").attr("src", verifyURL + '/' + Math.random());
+                }
+            },
+            "json"); //这里返回的类型有：json,html,xml,text
+        return false;
+    }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>个人设置</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" type="image/png" href="__PUBLIC__/images/youwei30x30.png">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/zhongchou.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/launchproject.css">
+<link href="__PUBLIC__/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
+<link href="__PUBLIC__/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/alter.css">
+<script src="__PUBLIC__/js/jquery.easydropdown.js"></script>
+<script type="text/javascript">  
+$(document).ready(function() {
+  $('#rate').rating('', {maxvalue:5, curvalue:4}); //maxvalue是最大级数，curvalue是默认级数
+});
+
+function isselectedfile() {
+   var oTxt_isupload = document.getElementById('isUpload');
+   var oSpan_filepath = document.getElementById('filepath');
+   var oInput_file = document.getElementById('upfile');
+
+   if(oInput_file.value==='') {
+      oSpan_filepath.innerHTML='未选择文件';
+      oTxt_isupload.value='' ;
+   } else {
+      var filename = oInput_file.value.split('\\');
+      oSpan_filepath.innerHTML=filename[filename.length-1]; 
+      oTxt_isupload.value='1';
+   }
+}
+
+function isselectedfile1() {
+   var oTxt_isupload1 = document.getElementById('isUpload1');
+   var oSpan_filepath1 = document.getElementById('filepath1');
+   var oInput_file1 = document.getElementById('upfile1');
+
+   if(oInput_file1.value==='') {
+      oSpan_filepath1.innerHTML='未选择文件';
+      oTxt_isupload1.value='' ;
+   } else {
+      var filename1 = oInput_file1.value.split('\\');
+      oSpan_filepath1.innerHTML=filename1[filename1.length-1]; 
+      oTxt_isupload1.value='1';
+   }
+}
+
+</script>
+</head>
+<body>
+
+<!-- head begin -->
+<include file="Public/header" />
+<!-- head end -->
+
+<div class="wrap pb116 clearfix">
+  <h2 class="personal-set"><a href="{:U('User/perCenter')}" class="mm-blue ml-pm a-personal-set  ">返回个人中心</a>个人设置</h2>
+  <!--left side static-->
+    <div class="personal-set-left">
+      <ul>
+        <li class="selected"><a href="{:U('User/infoUpdate')}">资料修改</a></li>
+        <li><a href="{:U('User/pwdUpdate')}">密码修改</a></li>
+        <li><a href="{:U('User/imageUpdate')}">头像修改</a></li>
+      </ul>
+    </div>
+    <!--left side end-->
+  
+    <!--right side static-->
+    <div class="personal-set-right">
+      <!-- 普通用户 -->
+      <if condition="$_SESSION['type'] eq 'General' ">
+      <form method="POST" action="{:U('User/infoUpdate')}" autocomplete="off" class="setting-form" name="modify"  wx-validator="" >
+        <!-- <input name="user_id" value="{$user_Infos['user_id']}" type="hidden"> -->
+        <div class="form-item clearfix">
+          <div class="row clearfix">
+            <label>用户名：</label>
+            <input name="username" class="input-wid" placeholder="" value="{$userInfos['name']}" type="text">
+          </div>
+          <div class="row clearfix">
+            <label>手机：</label>
+            <!-- <span class="span-style">{$userInfos['telephone']}</span>  -->
+            <input name="tele" class="input-wid" placeholder="" value="{$userInfos['telephone']}" type="text">
+          </div>
+          <div class="row clearfix">
+            <label>邮箱：</label>
+            <span class="span-style">{$userInfos['email']}</span> 
+            <!-- <input name="email" class="input-wid" placeholder="" value="{$userInfos['email']}" type="text" onfocus="this.blur()"> -->
+          </div>
+          <div class="row clearfix">
+            <label>性别：</label>
+            <span class="span-style">
+            <label class="label-style">
+              <input checked="checked" name="sex" value="男" type="radio" <if condition="$userInfos['gender'] eq '男'">checked='checked'</if>>
+              男</label>
+            <label class="label-style">
+              <input name="sex" value="女" type="radio" <if condition="$userInfos['gender'] eq '女'">checked='checked'</if>>
+              女</label>
+            <label class="label-style">
+              <input name="sex" value="保密" type="radio" <if condition="$userInfos['gender'] eq '保密'">checked='checked'</if> >
+              保密</label>
+            </span> </div>
+          <div class="row clearfix">
+            <label>身份证：</label>
+            <input name="personID" class="input-wid" placeholder="" value="{$userInfos['idcard']}" type="text">
+          </div>
+          <div class="row clearfix">
+            <a href="javascript:void(0)" onClick="javascript:document.getElementById('upfile').click();" style="display:block;">
+              <span class='filespan'>本人与身份证的合照（一张）</span>
+              <img src="__PUBLIC__/images/upload_log.png" alt="选择文件上传" style="width:40px;height:30px"/>
+              <span type="text" id="filepath" class='filespan'>未选择文件</span>
+              <input type="file" name="file" style="display:none;" onChange="isselectedfile();" id="upfile"/>
+              <input type="hidden" name="isUpload" id="isUpload" value=''/>
+            </a>
+          </div>
+          <div class="row clearfix">
+            <label>住址：</label>
+            <input placeholder="" name="addr" type="text" value="{$userInfos['address']}">
+          </div>
+          <div class="row clearfix">
+            <label>所在单位：</label>
+            <input placeholder="" name="unit" type="text" value="{$userInfos['unit']}">
+          </div>
+          <div class="row clearfix">
+            <label>现任职务：</label>
+            <input placeholder="" name="unit" type="text" value="{$userInfos['position']}">
+          </div>
+          <div class="row clearfix">
+            <label>个人说明：</label>
+            <textarea name="intro" placeholder="您的介绍可更有效的帮助支持者了解您和了解项目的背景">{$userInfos['resume']}</textarea>
+          </div>
+          <p class="p-btn"><input type="submit" class=" a-btn-blue btn-effect-blue" value="保存修改"></p>
+        </div>
+      </form>
+      <elseif condition="$_SESSION['type'] eq 'Tutor' " />
+      <!-- 企业用户 -->
+      <form method="POST" action="{:U('User/infoUpdate')}" autocomplete="off" class="setting-form" name="modify"  wx-validator="" >
+        <!-- <input name="user_id" value="{$user_Infos['user_id']}" type="hidden"> -->
+        <div class="form-item clearfix">
+          <div class="row clearfix">
+            <label>企业名称：</label>
+            <input name="enterprisename" class="input-wid" placeholder="" value="" type="text">
+          </div>
+          <div class="row clearfix">
+            <label>联系电话：</label>
+            <!-- <span class="span-style">18316960780</span>  -->
+            <input name="enterprisetele" class="input-wid" placeholder="" value="" type="text">
+          </div>
+          <div class="row clearfix">
+            <label>电子邮箱：</label>
+            <span class="span-style">{$userInfos['email']}</span> 
+            <!-- <input name="email" class="input-wid" placeholder="" value="{$userInfos['email']}" type="text" onfocus="this.blur()"> -->
+          </div>
+          <div class="row clearfix">
+            <label>企业联系人：</label>
+            <!-- <span class="span-style">18316960780</span>  -->
+            <input name="username" class="input-wid" placeholder="" value="" type="text">
+          </div>
+          <div class="row clearfix">
+            <label>联系人电话：</label>
+            <!-- <span class="span-style">18316960780</span>  -->
+            <input name="usertele" class="input-wid" placeholder="" value="" type="text">
+          </div>
+          <div class="row clearfix">
+            <label>员工总数：</label>
+            <!-- <span class="span-style">18316960780</span>  -->
+            <input name="staff" class="input-wid" placeholder="" value="" type="text">
+          </div>
+          <div class="row clearfix">
+            <label>企业地址：</label>
+            <input name="addr" placeholder="" type="text" value="">
+          </div>
+          <div class="row clearfix">
+            <label>注册资金：</label>
+            <input name="fund" class="input-wid" placeholder="" value="" type="text">
+          </div>
+          <div class="row clearfix">
+            <label>企业执照所在地：</label>
+            <input placeholder="" name="licenseaddr" type="text" value="">
+          </div>
+          <div class="row clearfix">
+            <label>营业执照有效期：</label>
+            <!-- <span class="span-style">2015.5.1-2020.5.1</span> -->
+            <input name="licensevalid" class="input-wid" type="text" placeholder="" value=""/>
+          </div>
+          <div class="row clearfix">
+            <a href="javascript:void(0)" onClick="javascript:document.getElementById('upfile').click();" style="display:block;">
+              <span class='filespan'>企业营业执照(图片)</span>
+              <img src="__PUBLIC__/images/upload_log.png" alt="选择文件上传" style="width:40px;height:30px"/>
+              <span type="text" id="filepath" class='filespan'>未选择文件</span>
+              <input type="file" name="file" style="display:none;" onChange="isselectedfile();" id="upfile"/>
+              <input type="hidden" name="isUpload" id="isUpload" value=''/>
+            </a>
+          </div>
+          <div class="row clearfix">
+            <label>组织机构代码：</label>
+            <input name="organisation" placeholder="" class="input-wid" value="" type="text">
+          </div>
+          <div class="row clearfix">
+            <a href="javascript:void(0)" onClick="javascript:document.getElementById('upfile1').click();" style="display:block;">
+              <span class='filespan'>组织机构代码证(图片)</span>
+              <img src="__PUBLIC__/images/upload_log.png" alt="选择文件上传" style="width:40px;height:30px"/>
+              <span type="text" id="filepath1" class='filespan1'>未选择文件</span>
+              <input type="file" name="file" style="display:none;" onChange="isselectedfile1();" id="upfile1"/>
+              <input type="hidden" name="isUpload1" id="isUpload1" value=''/>
+            </a>
+          </div>
+          <div class="row clearfix">
+            <label>法定经营范围：</label>
+            <textarea name="scope" placeholder="您的介绍可更有效的帮助支持者了解您和了解项目的背景">{$userInfos['resume']}</textarea>
+          </div>
+          <div class="row clearfix">
+            <label>注册时间：</label>
+            <input name="registertime" placeholder="" type="text" value="">
+          </div>
+          <p class="p-btn"><input type="submit" class=" a-btn-blue btn-effect-blue" value="保存修改"></p>
+        </div>
+      </form>
+      <else />
+      <!-- 导师用户 -->
+      <form method="POST" action="{:U('User/infoUpdate')}" autocomplete="off" class="setting-form" name="modify"  wx-validator="" >
+        <!-- <input name="user_id" value="{$user_Infos['user_id']}" type="hidden"> -->
+        <div class="form-item clearfix">
+          <div class="row clearfix">
+            <label>导师姓名：</label>
+            <span class="span-style">{$userInfos['name']}</span>
+          </div>
+          <div class="row clearfix">
+            <label>联系电话：</label>
+            <!-- <span class="span-style">{$userInfos['telephone']}</span>  -->
+            <input name="tele" class="input-wid" placeholder="" value="{$userInfos['telephone']}" type="text">
+          </div>
+          <div class="row clearfix">
+            <label>电子邮箱：</label>
+            <span class="span-style">{$userInfos['email']}</span> 
+          </div>
+          <div class="row clearfix">
+            <label>星级：</label>
+            <span class="span-style"><div id="rate" class="rating">&nbsp;<input id="ratevalue" class="hidden" name="ratevalue" value="4"></div></span><!-- 这里value值为默认值 -->
+            
+          </div>
+          <div class="row clearfix">
+            <label>学历：</label>
+            <input name="personID" class="input-wid" placeholder="" value="{$userInfos['idcard']}" type="text">
+          </div>
+          <div class="row clearfix">
+            <label>身份证：</label>
+            <input name="personID" class="input-wid" placeholder="" value="{$userInfos['idcard']}" type="text">
+          </div>
+          <div class="row clearfix">
+            <label>住址：</label>
+            <input placeholder="" name="addr" type="text" value="{$userInfos['address']}">
+          </div>
+          <div class="row clearfix">
+            <label>所在单位：</label>
+            <input placeholder="" name="unit" type="text" value="{$userInfos['unit']}">
+          </div>
+          <div class="row clearfix">
+            <label>现任职务：</label>
+            <input placeholder="" name="unit" type="text" value="{$userInfos['position']}">
+          </div>
+          <div class="row clearfix">
+            <label>导师简介：</label>
+            <textarea name="intro" placeholder="您的介绍可更有效的帮助支持者了解您和了解项目的背景">{$userInfos['resume']}</textarea>
+          </div>
+          <p class="p-btn"><input type="submit" class=" a-btn-blue btn-effect-blue" value="保存修改"></p>
+        </div>
+      </form>
+      </if>
+    </div>
+    <!--right side end--> 
+</div>
+
+<!-- footer begin -->
+<include file="Public/footer" />
+<!-- footer end -->
+
+<script type="text/javascript" src="__PUBLIC__/js/prompt.js"></script>
+</body>
+</html>

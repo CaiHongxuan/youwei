@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="__PUBLIC__/backend/utilLib/bootstrap.min.css" type="text/css" media="screen" />
+    <script type="text/javascript">
+    function selectChange() {
+        document.getElementById("Input4Key").value = '';
+        document.getElementById("subtn").click();
+    }
+    </script>
+</head>
+<body>
+    
+<div class="container-fluid">
+    <div class="row-fluid">
+            <div class="span12">
+            <div style="margin-bottom: 40px;">
+                 <form  class="form-inline" action="{:U('Project/projectList')}" method="POST">
+               
+                  <div class="form-group">
+                    <label for="StatuSelect">状态</label> 
+                    <select name='ispassed' class="form-control" id="StatuSelect" onchange='selectChange()'> 
+                        <option value='1' class="form-control"
+                        <if condition="$ispassed eq 1">selected='selected'
+                        </if>
+                        >已通过</option>
+                        <option value='2'  class="form-control"
+                         <if condition="$ispassed eq 2">selected='selected'
+                        </if>>未通过</option>
+                        <option value='0'  class="form-control"
+                        <if condition="$ispassed eq 0">selected='selected'
+                        </if>>待审核</option>
+                    </select>
+                  </div>    
+                   <div class="form-group">
+                   <!--  <label for="exampleInputEmail2">搜索</label> -->
+                    <input type="text" name='keyword' class="form-control" id="Input4Key" placeholder="名称、序号、地点" style='width:300px;' value="{$key}">
+                  </div>
+                  <button type="submit" id='subtn' class="btn btn-default">搜索</button>
+            
+                </form>
+                <php>$action = U('Project/projectList',array('ispassed'=>$ispassed,'keyword'=>$key));</php>
+            </div>
+            <table class="table table-bordered table-hover table-condensed">
+                <thead>
+                    <tr>
+                        <th>
+                            名称
+                        </th>
+
+                        <th>
+                            序号
+                        </th>
+                        <th>
+                            募集天数
+                        </th>
+                        <th>
+                            地点
+                        </th>
+                        <th>
+                            发起人
+                        </th>
+                        <th>
+                           查看
+                        </th>
+                        <th>
+                           审核
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <empty name="projects">
+                        <tr>
+                            <td colspan='100%' align='center'>
+                                尚无记录
+                            </td>
+                         </tr>
+                    <else/>
+                    <volist name='projects' id='vo'>
+                         <tr>
+                            <td>{$vo.name}</td>
+                            <td>{$vo.number}</td>
+                            <td>{$vo.days}</td>
+                            <td>{$vo.address}</td>
+                           
+                            <td>
+                              <a href="{:U('Project/organiserInfos',array('id'=>$vo['user_id']))}">{$vo.organiser}</a>
+                            </td>
+                            <td>  
+                              <a class="btn btn-info" href="{:U('Project/detailProject',array('id'=>$vo['id']))}" role="button">详细</a>
+
+                            </td>
+                            <td>
+                                <if condition="$vo.ispassed eq 1">
+                                    <!-- 已通过 -->
+                                    <a class="btn btn-danger" href="{:U('Project/isPassed',array('id'=>$vo['id'],'setStatusTo'=>2)).'?action='.$action}">撤销通过</a>
+                                <elseif condition="$vo.ispassed eq 0"/>  
+                                   <!--  待审核    -->
+                                    <a  class="btn btn-warning" href="{:U('Project/isPassed',array('id'=>$vo['id'],'setStatusTo'=>1)).'?action='.$action}">通过</a>
+                                    <a class="btn btn-warning" href="{:U('Project/isPassed',array('id'=>$vo['id'],'setStatusTo'=>2)).'?action='.$action}">不通过</a>
+                                <else/>
+                                    不通过 <a  class="btn btn-warning" href="{:U('Project/isPassed',array('id'=>$vo['id'],'setStatusTo'=>1)).'?action='.$action}">通过</a>
+                                </if>
+                            </td>
+                            <td>  
+                              <a class="btn btn-info" href="{:U('Project/delProject',array('id'=>$vo['id'])).'?action='.$action}" role="button">删除</a>
+                            </td>
+                         </tr>
+                    </volist>
+                         <tr>
+                            <td colspan='100%' align='center'>
+                                {$page}
+                            </td>
+                         </tr>
+                </empty>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+    
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>项目详情</title>
+  <link rel="stylesheet" href="__PUBLIC__/backend/utilLib/bootstrap.min.css" type="text/css" media="screen" />
+  <script src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+  <script type="text/javascript" src="__PUBLIC__/backend/js/fancybox/fancybox.js"></script>
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/backend/js/fancybox/fancybox.css" />
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $("#fancybox").fancybox({});
+    
+    // 还原
+    var photo_w = $('#images').css('width');
+    var photo_y = $('#images').css('height');
+      $('#normal').click(function(){
+      $('#images').css('width',photo_w);
+      $('#images').css('height',photo_y);
+      $('#fancybox').click();
+      });
+    
+    // 放大
+      $('#big').click(function(){
+      var photoWidth = parseInt($('#images').css("width"));
+      var w = photoWidth + photoWidth*0.3;
+      var photoHeight = parseInt($('#images').css("height"));
+      var h = photoHeight + photoHeight*0.3;
+      if (w >= 915 || h >= 688){
+        alert("图片已经不能再放大啦")
+        }
+      else{
+        $('#images').css('width',w+'px');
+        $('#images').css('height',h+'px');
+        $('#fancybox').click();
+        }
+      });
+    
+    //缩小
+      $('#small').click(function(){
+      var photoWidth = parseInt($('#images').css("width"));
+      var w = photoWidth - photoWidth*0.2;
+      var photoHeight = parseInt($('#images').css("height"));
+      var h = photoHeight - photoHeight*0.2;
+      if (w <= 192 || h <=144){
+        alert("图片已经不能再缩小啦")
+        }
+      else{
+      $('#images').css('width',w+'px');
+      $('#images').css('height',h+'px');
+      $('#fancybox').click();
+      }
+      });
+    
+  });
+  </script>
+  <style type="text/css">
+    * {
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+      }
+    .table—th{width: 15%;}
+    .table—head{background-color: red;}
+  </style>
+</head>
+<body>
+    
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+          <label>项目详情</label>
+            <table class="table table-bordered table-hover table-condensed">
+                <thead >
+                    <tr style="background-color:#37A0B9;">
+                        <th class="table—th">
+                          表信息
+                        </th>
+                        <th>
+                          项目信息
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                      <tr>
+                        <th>
+                         项目发起者
+                        </th>
+                        <th> 
+                          {$theProject.organiser}&nbsp;|&nbsp;
+                          <a style="color:#37A0B9;" href="{:U('Project/organiserInfos',array('id'=>$theProject['user_id']))}" >点击查看发起者信息</a>
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>
+                         项目名称
+                        </th>
+                        <th>
+                          {$theProject.name}
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>
+                         项目编号
+                        </th>
+                        <th>
+                          <if condition="$theProject.number eq null">
+                            未通过审核，暂无活动编号
+                          <else/>
+                            {$theProject.number}
+                          </if>
+                        </th>
+                      </tr>
+  
+                      <tr>
+                        <th>
+                         募集天数
+                        </th>
+                        <th>
+                            {$theProject.days}
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>
+                         项目封面
+                        </th>
+                        <th>
+                          <if condition="$theProject.atta_url neq null">
+                            <a id="fancybox" href="#fancybox-main" title="项目封面"><img src="__ROOT__/Uploads/pro_pics/{$theProject.atta_url}" alt="" class="img-thumbnail" width='140px' height='140px'></a>
+                            <div style="display:none;">
+                                <div id="fancybox-main">
+                                    <img src="__ROOT__/Uploads/pro_pics/{$theProject.atta_url}" id="images" width="320" height="240" />
+                                    <br/>
+                                    <div class="photoButton">
+                                        <a id="small" title="缩小"></a><a id="normal" title="正常大小"></a><a id="big" title="放大"></a>
+                                    </div>
+                                </div>
+                            </div>
+                          </if>
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>
+                         项目分类
+                        </th>
+                        <th>
+                          {$theProject.cate_name}
+                        </th>
+                      </tr><tr>
+                        <th>
+                         标签
+                        </th>
+                        <th>
+                          {$theProject.label}
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>
+                         项目简介
+                        </th>
+                        <th>
+                          {$theProject.introduce}
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>
+                         项目详情
+                        </th>
+                        <th>
+                          {$theProject.detail|htmlspecialchars_decode}
+                        </th>
+                      </tr> 
+                      <tr>
+                        <th>
+                          项目地址                 
+                        </th>
+                        <th>
+                          {$theProject.address}
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>
+                          项目回报                 
+                        </th>
+                        <th> 
+                         <a href="{:U('Project/rewardsOfPro',array('pro_id'=>$theProject['id']))}" class="btn btn-success">查看项目回报</a>               
+                        </th>
+                      </tr>
+                      <if condition="$theProject['ispassed'] eq 1">
+                        <tr>
+                          <th>
+                            点赞数                 
+                          </th>
+                          <th>
+                            {$theProject.favor}
+                          </th>
+                        </tr>
+                        <tr>
+                          <th>
+                            支持人数                 
+                          </th>
+                          <th>
+                            {$theProject.supportNum}
+                            <if condition="$theProject.supportNum gt 0">
+                              <a style="color:#37A0B9;" href="{:U('Project/supportersList',array('project_id'=>$theProject['id'],'project_name'=>$theProject['name']))}" >点击支持者名单</a>
+                            </if>
+                          </th>
+                        </tr>
+                        <tr>
+                          <th>
+                            项目进程                
+                          </th>
+                          <th>
+                            <a href="{:U('Project/progressOfPro',array('project_id'=>$theProject['id']))}" class="btn btn-success">查看项目进度</a>
+                          </th>
+                        </tr>
+                        <tr>
+                          <th>
+                            项目评论              
+                          </th>
+                          <th>
+                            <a href="" class="btn btn-success">查看项目评论</a>
+                          </th>
+                        </tr>
+                      </if>
+                      <if condition="$theProject['finish_time'] neq null">
+                        <tr>
+                            <th>
+                              项目评分              
+                            </th>
+                            <th>
+                              <a href="" class="btn btn-success">查看项目评分</a>
+                            </th>
+                        </tr>
+                      </if>
+                      <tr>
+                        <th>
+                         是否审核通过
+                        </th>
+                        <th>
+                          <if condition="$theProject['ispassed'] eq 0">
+                            待审核
+                          <elseif condition="$theProject['ispassed'] eq 1"/>
+                            已通过审核&nbsp;|&nbsp;处理时间为:{$theProject.pass_time}
+                          <else />
+                            审核不通过&nbsp;|&nbsp;处理时间为:{$theProject.pass_time}
+                          </if>
+                        </th>
+                      </tr>
+                    <if condition="$theProject['ispassed'] eq 1">
+                      <tr>
+                        <th>
+                         是否为精选项目
+                        <th>
+                          <if condition="$theProject.packed eq 1">
+                            是
+                            &nbsp;|&nbsp;
+                            <a class="btn btn-info" href="{:U('Project/packedOrNot',array('id'=>$theProject['id'],'setTo'=>0))}" role="button">取消精选</a>
+                          <else/>
+                            否
+                            &nbsp;|&nbsp;
+                            <a class="btn btn-info" href="{:U('Project/packedOrNot',array('id'=>$theProject['id'],'setTo'=>1))}" role="button">设为精选</a>
+                          </if>
+                        </th>
+                      </tr>
+                  </if>
+                   
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

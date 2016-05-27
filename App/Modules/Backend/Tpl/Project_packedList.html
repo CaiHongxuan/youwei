@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="__PUBLIC__/backend/utilLib/bootstrap.min.css" type="text/css" media="screen" />
+    <script type="text/javascript">
+    function selectChange() {
+        document.getElementById("Input4Key").value = '';
+        document.getElementById("subtn").click();
+    }
+    </script>
+</head>
+<body>
+    
+<div class="container-fluid">
+    <div class="row-fluid">
+            <div class="span12">
+            <div style="margin-bottom: 40px;">
+                 <form  class="form-inline" action="{:U('Project/packedList')}" method="POST">
+               
+                  
+                    <div class="form-group">
+                    <!-- <label for="exampleInputEmail2">搜索</label> -->
+                    <input type="text" name='keyword' class="form-control" id="Input4Key" placeholder="名称、序号、地点" style='width:300px;' value="{$key}">
+                  </div>
+                  <button type="submit" id='subtn' class="btn btn-default">搜索</button>
+            
+                </form>
+                
+            </div>
+            <table class="table table-bordered table-hover table-condensed">
+                <thead>
+                    <tr>
+                        <th>
+                            名称
+                        </th>
+
+                        <th>
+                            序号
+                        </th>
+                        <th>
+                            募集天数
+                        </th>
+                        <th>
+                            地点
+                        </th>
+                        <th>
+                            发起人
+                        </th>
+                        <th>
+                           查看
+                        </th>
+                        
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <empty name="projects">
+                        <tr>
+                            <td colspan='100%' align='center'>
+                                尚无记录
+                            </td>
+                         </tr>
+                    <else/>
+                    <volist name='projects' id='vo'>
+                         <tr>
+                            <td>{$vo.name}</td>
+                            <td>{$vo.number}</td>
+                            <td>{$vo.days}</td>
+                            <td>{$vo.address}</td>
+                           
+                            <td>
+                              <a href="{:U('Project/organiserInfos',array('id'=>$vo['user_id']))}">{$vo.organiser}</a>
+                            </td>
+                            <td>  
+                              <a class="btn btn-info" href="{:U('Project/detailProject',array('id'=>$vo['id']))}" role="button">详细</a>
+                            </td>
+                            
+                            <td>  
+                              <a class="btn btn-info" href="{:U('Project/packedOrNot',array('id'=>$vo['id']))}" role="button">取消精选</a>
+                            </td>
+                         </tr>
+                    </volist>
+                         <tr>
+                            <td colspan='100%' align='center'>
+                                {$page}
+                            </td>
+                         </tr>
+                </empty>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+    
+</body>
+</html>

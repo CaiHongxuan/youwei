@@ -1,0 +1,44 @@
+<!-- 公用页头 -->
+    <div class="header-top">
+        <div class="wrap">
+            <div class="logo">
+                <a href="{:U('Index/index')}"><img style="height: 49px; width: 54px;" src="__PUBLIC__/images/logo.jpg" alt="" /></a>
+            </div>
+            <div class="menu">
+                <ul class="megamenu skyblue">
+                    <li class="active grid"><a href="{:U('Index/index')}">主页</a></li>
+                    <li><a class="color4" href="{:U('Project/index')}">项目</a></li>
+                    <li><a class="color5" href="{:U('Project/launchProject')}">发起项目</a></li>
+                    <li><a class="color6" href="{:U('Activity/index')}">活动</a></li>
+                    <li><a class="color7" href="{:U('Policy/index')}">政策</a></li>
+                    <li><a class="color8" href="{:U('Public/about')}">关于</a></li>
+                    <li><a class="color9" href="{:U('Public/help')}">帮助</a></li>
+                </ul>
+            </div>
+            <div class="cssmenu">
+                <ul>
+                    <empty name="Think.session.name">
+                        <!-- <li class="active"><a href="{:U('User/percenter')}">个人中心</a></li>
+        | -->
+                        <li><a href="{:U('User/login')}">登录</a></li>
+                        |
+                        <li><a href="{:U('User/register')}">注册</a></li>
+                        <else />
+                        <li class="active"><a href="{:U('User/percenter')}">欢迎您,{$Think.session.name} </a></li>
+                        |
+                        <li class="active"><a href="{:U('User/percenter')}">个人中心</a></li>
+                        |
+                        <li><a href="{:U('User/logout')}">注销</a></li>
+                    </empty>
+                </ul>
+            </div>
+            <div class="search">
+                <form action="{:U('Index/index')}" method="POST">
+                    <input type="text" name="keywords" class="textbox" value="" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = '标题、介绍、标签';}" placeholder="标题、介绍、标签">
+                    <input type="submit" value="Subscribe" id="submit" name="submit">
+                </form>
+                <div id="response"> </div>
+            </div>
+            <div class="clear"> </div>
+        </div>
+    </div>

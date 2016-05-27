@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="__PUBLIC__/backend/utilLib/bootstrap.min.css" type="text/css" media="screen" />
+  <script charset="utf-8" src="__PUBLIC__/kindeditor/kindeditor.js"></script>
+  <script>
+    KindEditor.ready(function(K) {
+      window.editor = K.create('#content1',{
+        themeType : 'simple',
+        items : ['source', '|', 'undo', 'redo', '|', 'preview', 'template', 'code', 'cut', 'copy', 'paste',
+        'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+        'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+        'superscript', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+        'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+        'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 'multiimage',
+        'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+        'anchor', 'link', 'unlink']
+      });
+    });
+  </script>
+</head>
+<body>
+    
+<div class="container-fluid" >
+  <div class="row-fluid" >
+
+      <form action="{:U('Activity/add')}" method='POST' enctype='multipart/form-data'>
+          <div class="form-group" >
+            <label>活动名称：</label>
+            <input type="text" name="name" class="form-control" placeholder="活动名称(不超过30字)" style="width:80%">
+          </div>
+        <div class="form-group" >
+          <label>活动简介：</label>
+            <textarea class="form-control" name="description" rows="4" placeholder="活动名称(不超过100字)" style="width:80%"></textarea>
+        </div>
+        <div class="form-group" >
+          <label>活动封面：</label>
+          <input type="file" name="image"/>
+        </div>
+        <div class="form-group" >
+          <label>活动类别：</label>
+            <select name="category_id" class="form-control" style="width:20%">
+              <volist name="category" id="vo">
+                <option value="{$vo.id}">{$vo.name}</option>
+              </volist>
+            </select>
+        </div>
+        <div class="form-group" >
+          <label>活动详情：</label>
+            <textarea class="form-control" name="detail" id="content1"  style="width:80%"></textarea>
+        </div>
+        <div class="form-group" >
+          <label>附件：<input type="file" name="attachment"/></label>
+        </div>
+        <div class="form-group" >
+          <label>是否发布：</label>
+            <label>是&nbsp;&nbsp;</label><input type="radio" name="is_published" value="1" checked/><label>&nbsp;&nbsp;否&nbsp;&nbsp;</label><input type="radio" name="is_published" value="0"/>
+        </div>
+        <button type="submit" class="btn btn-success" >提交</button>
+      </form>
+    </div>
+
+  </div>
+</body>
+</html>
+

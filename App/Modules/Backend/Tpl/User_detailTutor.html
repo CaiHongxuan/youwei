@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="__PUBLIC__/backend/utilLib/bootstrap.min.css" type="text/css" media="screen" />
+</head>
+<body>
+
+	<div class="container-fluid">
+		<div class="row-fluid">
+		<div class="span12">
+
+			    <table class='table table-bordered table-hover table-striped'>
+			   
+			      <tbody>
+
+			      	<tr style="background: #37a0b9">
+			      		<th style='width:15%;'>表格信息</th>
+			      		<th>导师信息</th>
+			      	</tr>
+			        <tr>
+			          <th scope="row">
+			          		用户名
+			          </th>
+			          <td>{$userInfos['name']}</td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+			              邮箱
+			          </th>
+			          <td>{$userInfos['account']}</td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+			           	学历	
+			          </th>
+			          <td>{$tutorInfos['education']}</td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+			           	手机	
+			          </th>
+			          <td>{$tutorInfos['tele']}</td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+			           	身份证号	
+			          </th>
+			          <td>{$tutorInfos['idcard']}</td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+			           级别
+			          </th>
+			          <td>
+							{$tutorInfos['level']}		
+					  </td>
+			        </tr>
+			        
+			        <tr>
+			          <th scope="row">
+			           	单位	
+			          </th>
+			          <td>{$tutorInfos['unit']}</td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+			           	职务	
+			          </th>
+			          <td>{$tutorInfos['position']}</td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+						地址
+			          </th>
+			          <td>{$tutorInfos['address']}</td>
+			        </tr><!-- 
+			        <tr>
+			          <th scope="row">
+			           	简介	
+			          </th>
+			          <td>
+							<p>{$tutorInfos['introduction']}</p>
+			          </td>
+			        </tr> -->
+			        <tr>
+			          <th scope="row">
+			            简介
+			          </th>
+			          <td>{$tutorInfos['introduction']}</td>
+			        </tr>
+			        <tr>
+			          <th scope="row">
+			            注册时间
+			          </th>
+			          <td>{$userInfos['created_time']}</td>
+			        </tr>
+			      </tbody>
+			    </table>
+		</div></div>
+	</div>
+
+ 
+	
+</body>
+</html>

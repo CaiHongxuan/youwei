@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="__PUBLIC__/backend/utilLib/bootstrap.min.css" type="text/css" media="screen" />
+    <script type="text/javascript">
+    function selectChange() {
+        document.getElementById("Input4Key").value = '';
+        document.getElementById("subtn").click();
+    }
+    </script>
+</head>
+<body>
+    
+<div class="container-fluid">
+    <div class="row-fluid">
+            <div class="span12">
+            <div style="margin-bottom: 40px;">
+                 <form  class="form-inline" action="{:U('User/enterpriseList')}" method="POST">
+               
+                  <div class="form-group">
+                    <label for="StatuSelect">状态</label> 
+                    <select name='status' class="form-control" id="StatuSelect" onchange='selectChange()'> 
+                        <option value='0'  class="form-control"
+                        <if condition="$status eq 0">selected='selected'
+                        </if>>待审核</option>
+
+                        <option value='1' class="form-control"
+                        <if condition="$status eq 1">selected='selected'
+                        </if>
+                        >已通过</option>
+                        <option value='2'  class="form-control"
+                        <if condition="$status eq 2">selected='selected'
+                        </if>
+                        >未通过</option>
+                    </select>
+                  </div>    
+                   <div class="form-group">
+                   <!--  <label for="Input4Key">搜索</label> -->
+                    <input type="text" name='keyword' class="form-control" id="Input4Key" placeholder="联系人、联系电话、邮箱、地址" style='width:300px;' value="{$key}">
+                  </div>
+                  <button type="submit" id='subtn' class="btn btn-default">搜索</button>
+  
+                </form>
+              <php>$action = U('User/enterpriseList',array('status'=>$status,'keyword'=>$key));</php>
+            </div>
+            <table class="table table-bordered table-hover table-condensed ">
+                <thead>
+                    <tr>
+                        <th>
+                            企业名称
+                        </th>
+                        <th>
+                            联系人
+                        </th>
+                        <th>
+                            联系电话
+                        </th>
+                        <th>
+                            邮箱
+                        </th>
+                        <th>
+                            地址
+                        </th>
+                        <th>
+                            审核状态
+                        </th>
+                    <if condition="$status eq 1">
+                        <th>
+                           启/禁用
+                        </th> 
+                    </if>
+                        <th>
+                            查看
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <empty name="companys">
+                        <tr>
+                            <td colspan='100%' align='center'>
+                                尚无记录
+                            </td>
+                         </tr>
+                    <else/>
+                    <volist name='companys' id='vo'>
+                         <tr> 
+                            <td>{$usrInfos[$i-1]['name']}</td>
+                            <td>{$vo.linkman}</td>
+                            <td>{$vo.linkman_tele}</td>
+                            <td>{$vo.mail}</td>
+                            <td>{$vo.address}</td>
+                            <td>
+                                <if condition="$vo.status eq 1">
+                                    已通过
+                                    <a class="btn btn-danger" href="{:U('User/examineEnter',array('id'=>$vo['id'],'setStatusTo'=>2)).'?action='.$action}">撤销通过</a>
+                                    
+                                <elseif condition="$vo.status eq 0"/>  
+                                    待审核   
+                                    <a  class="btn btn-warning" href="{:U('User/examineEnter',array('id'=>$vo['id'],'setStatusTo'=>1)).'?action='.$action}">通过</a>
+                                    <a class="btn btn-warning" href="{:U('User/examineEnter',array('id'=>$vo['id'],'setStatusTo'=>2)).'?action='.$action}">不通过</a>
+                                <else/>
+                                    不通过 <a  class="btn btn-warning" href="{:U('User/examineEnter',array('id'=>$vo['id'],'setStatusTo'=>1)).'?action='.$action}">通过</a>
+                                </if>
+                            </td>
+                             
+
+                            <if condition="$status eq 1">
+                              <td>
+                                   <if condition="$usrInfos[$i-1]['status'] eq 0">
+                                        <a class="btn btn-danger" href="{:U('User/lockOrUnlock',array('id'=>$vo['user_id'],'islock'=>0))}" onclick="javascript:return confirm('确定解锁该用户?')" role="button">解锁</a>
+                                   <else/> 
+                                        <a class="btn btn-danger" href="{:U('User/lockOrUnlock',array('id'=>$vo['user_id'],'islock'=>1))}" onclick="javascript:return confirm('确定锁定该用户?')" role="button">锁定</a>
+                                   </if>         
+                              </td>     
+                            </if>      
+                            <td> 
+                                <a class="btn btn-info" href="{:U('User/detailEnterprise',array('id'=>$vo['id'],'user_id'=>$vo['user_id']))}" role="button">详细</a>
+
+                            </td>
+                            <td>  
+
+                               <a class="btn btn-danger" href="{:U('User/deleteUser',array('id'=>$vo['user_id'],'type'=>'Enterprise'))}" onclick="javascript:return confirm('确定删除该用户?')"role="button">删除</a>
+                            </td>
+                         </tr>
+                    </volist>
+                         <tr>
+                            <td colspan='100%' align='center'>
+                                {$page}
+                            </td>
+                         </tr>
+                </empty>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+    
+</body>
+</html>

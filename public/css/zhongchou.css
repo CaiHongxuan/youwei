@@ -1,0 +1,521 @@
+@charset "utf-8";
+html, body, button, /*input,*/ select, textarea {
+	font: 14px/1.5 "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+body, div, dl, dt, dd, ul, ol, li, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, hr, button {
+	margin: 0;
+	padding: 0;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+caption, th {
+	text-align: left;
+	font-weight: normal;
+}
+html, body, fieldset, img, iframe, abbr {
+	border: 0;
+}
+html {
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+}
+i, em {
+	font-style: normal;
+}
+ol, ul, li {
+	list-style: none;
+}
+h1, h2, h3, h4, h5, h6, small {
+	font-size: 100%;
+	font-weight: normal;
+}
+textarea {
+	overflow: auto;
+	resize: none;
+}
+label {
+	cursor: default;
+}
+a, button {
+	cursor: pointer;
+}
+a, a:hover {
+	text-decoration: none;
+}
+iframe {
+	display: block;
+}
+input[type="submit"] {
+	border: none;
+}
+button,/*input,*/ select, textarea {
+	font-size: 100%;
+}
+button[disabled], html input[disabled] {
+	cursor: default;
+}
+input[type="checkbox"], input[type="radio"] {
+	padding: 0;
+	box-sizing: border-box;
+	vertical-align: -2px;
+	margin: 0px 3px 0px 0px;
+	cursor: pointer;
+}
+.inline-block {
+	display: inline-block;
+*display: inline;
+	zoom: 1;
+}
+::-webkit-input-placeholder {
+color:#ccc;
+}
+:-moz-placeholder {
+color:#999;
+}
+::-moz-placeholder {
+color:#999;
+}
+::-ms-input-placeholder {
+color:#999;
+}
+.form-item input[type="text"]:focus, .form-item textarea:focus, .form-item .row textarea:focus, .form-item input[type="password"]:focus {
+	border: 1px solid #55acef;
+}
+a {
+	outline: none;
+}
+.tl {
+	text-align: left !important;
+}
+.tc {
+	text-align: center;
+}
+.tr {
+	text-align: right;
+}
+.bc {
+	margin-left: auto;
+	margin-right: auto;
+}
+.fl {
+	float: left;
+}
+.fr {
+	float: right;
+}
+.vm {
+	vertical-align: middle;
+}
+.vt {
+	vertical-align: top;
+}
+.pr {
+	position: relative;
+}
+.pa {
+	position: absolute;
+}
+.abs-right {
+	position: absolute;
+	right: 0;
+}
+.abs-left {
+	position: absolute;
+	left: 0;
+}
+.none {
+	display: none;
+}
+.fb {
+	font-weight: bold;
+}
+.fn {
+	font-weight: normal;
+}
+.no-unl {
+	text-decoration: none;
+}
+.word-break {
+	word-break: break-all;
+	word-wrap: break-word;
+}
+.bg-none {
+	background: none !important;
+}
+.bn {
+	border: none !important;
+}
+/*by xiaofengyun*/
+.red {
+	color: #ED5E58;
+}
+.green {
+	color: #55acef;
+}
+.pink {
+	color: #fd729d;
+}
+.black {
+	color: #000;
+}
+.gray {
+	color: #999;
+}
+/*字号大小*/
+.fs12 {
+	font-size: 12px;
+}
+.fs14 {
+	font-size: 14px;
+}
+.fs16 {
+	font-size: 16px;
+}
+.fs18 {
+	font-size: 18px;
+}
+.fs36 {
+	font-size: 36px;
+}
+.hidden {
+	display: none;
+}
+ @charset "UTF-8";
+/* CSS Document */
+	/* 注： 
+	*  
+	* 图片垂直居中    使用样式 .vertical-middle-val    
+	* 内含元素：<span class="hook"></span> 
+	* 示例》》 
+	* <div class="vertical-middle"> 
+	*		<span class="hook"></span> 
+	*		<img src="static/temp/0.jpg" /> 
+	* </div> 
+	* ************************ * 圆角布局    使用    .radius  
+	* 示例》》 
+	* <div class="radius"> 
+	*		<div class="radius-hd">//头部圆角 
+	*			<div class="radius-hl common-sprite"></div> 
+	*			<div class="radius-hc w300"></div>  //此处 w300 为宽度  必须 定义 
+	*			<div class="radius-hr common-sprite"></div> 
+	*		</div> 
+	*		<div class="radius-bd w308">     //此处w308为宽度   必须定义     两个角各占10像素 出去边框  多8像素 
+	*		 .........   这里是内容部分 
+	*		</div> 
+	*		<div class="radius-ft"> 
+	*			<div class="radius-fl common-sprite"></div> 
+	*			<div class="radius-fc w300"></div> //此处 w300 为宽度  必须 定义 
+	*			<div class="radius-fr common-sprite"></div> 
+	*		</div> 
+	*</div> 
+	* **************************** *  
+	* 带小三角的 按钮  /标签    
+	* btn-tag  基本定义     
+	* .btn-tag.red     红色 
+	* .btn-tag.yellow  黄色 
+	* .btn-tag.blue    蓝色 
+	* .btn-tag.gray    灰色 
+	* 示例》》 
+	* <div class="btn-tag red"> 
+	* <span class="triangle"></span> 
+	* </div>  
+	*  
+	* *************************** 
+	* 圆角按钮    
+	* 必须包含 样式  btn-base *  
+	*          20高度样式 
+	* btn-blue-h20      20高度样式    蓝色 
+	* btn-yellow-h20    20高度样式    黄色 
+	* btn-gray-h20      20高度样式    灰色 
+	* btn-red-h20       20高度样式    红色 
+	*  
+	*         37高度样式 
+	* btn-red-h37       37高度样式    红色 
+	* btn-gray-h37      37高度样式    灰色 
+	*         48高度样式 
+	* btn-red-h48       48高度样式    红色 
+	* btn-blue-h48      48高度样式    蓝色 
+	* 示例》》 
+	* <span class="btn-blue-h20 btn-base common-sprite"> 
+	*		<span class="common-sprite">圆角btn</span> 
+	* </span> 
+	*  
+	* 
+	*/
+	/*基本布局*/
+body {
+	color: #333;
+	line-height: 22px;
+	background: #ffffff;
+}
+a {
+	color: #333;
+}
+a:hover {
+	color: #55acef;
+}
+/*内容宽度*/
+.particulars {
+	width: 1024px;
+	margin: 0 auto;
+}
+.content {
+	width: 630px;
+}
+.sidebar {
+	width: 310px;
+}
+.w413 {
+	width: 370px;
+}
+.block-list {
+	margin: 0 0 20px;
+}
+.main {
+	min-height: 700px;
+	_height: 700px;
+}
+.font-yen {
+	font-family: 'Microsoft YaHei';
+}
+/* CLEARFIX */
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+.clearfix {
+	display: inline-block;
+}
+* html .clearfix {
+	height: 1%;
+}
+.clearfix {
+	display: block;
+}
+/*图片垂直居中*/
+.vertical-middle {
+	overflow: hidden;
+	text-align: center;
+	font-size: 0;
+}
+.vertical-middle .hook {
+	display: inline-block;
+	width: 0;
+	height: 100%;
+	overflow: hidden;
+	margin-left: -1px;
+	font-size: 0;
+	line-height: 0;
+	vertical-align: middle;
+}
+.vertical-middle img {
+	vertical-align: middle;
+	border: 0 none;
+}
+/*by xiaofengyun*/
+.btn-sub {
+	color: #fff;
+	font-size: 18px;
+	display: inline-block;
+	height: 50px;
+	line-height: 50px;
+	text-align: center
+}
+.btn-sub:hover {
+	color: #fff;
+}
+.wrap-1024 {
+	width: 1024px;
+	margin: 0 auto;
+}
+.w170 {
+	width: 170px;
+}
+.w217 {
+	width: 217px;
+}
+.error-text {
+	color: #ff0000;
+	margin-left: 10px;
+}
+.common-height {
+	height: 80px;
+}
+.z-document01-red {
+	color: #ed5f8a
+}
+.wx-placeholder {
+	color: #ccc;
+	font-size: 16px;
+	padding-left: 10px;
+	padding-top: 10px;
+	display: none;
+}
+.m-right .wx-placeholder {
+	padding-top: 0px
+}
+.wx-inputErrBorder {
+	border-color: red;
+}
+ @charset "UTF-8";
+.login-register-wrap {
+	width: 536px;
+	margin: 0 auto;
+	background: #fff;
+	padding: 15px;
+}
+.m-login-register {
+	padding: 15px;
+	border-bottom: 0;
+	background: white;
+	width: 526px;
+}
+.p-shut-down {
+	padding-right: 20px;
+}
+.p-shut-down a.shut-down-icon {
+	background: url( ../images/login_reg.png) no-repeat;
+	background-position: 0 0;
+	width: 16px;
+	height: 16px;
+	float: right;
+	display: block;
+}
+.p-shut-down a.shut-down-icon:hover {
+	background-position: 0 -24px;
+}
+.m-login-register h2 {
+	font-size: 30px;
+	color: #333;
+	text-align: center;
+	line-height: 30px;
+}
+.red-color {
+	color: #ff0000;
+}
+.blue-color {
+	color: #55acef;
+}
+.m-login-register .inner {
+	border: 2px solid #e4e4e4;
+	padding-top: 15px;
+}
+.m-login-register .form-item {
+	padding: 0 87px;
+}
+.m-login-register .form-item .dis-span {
+	display: block;
+	font-size: 12px;
+	line-height: 12px;
+	height: 14px;
+}
+.m-login-register .form-item .row {
+	width: 100%;
+	padding: 6px 0;
+}
+.m-login-register .row input[type="text"], .m-login-register .row input[type="password"] {
+	border: 1px solid #e4e4e4;
+	padding: 12px 0 12px 10px;
+	height: 17px;
+	line-height: 17px;
+	width: 338px;
+	font-size: 14px;
+	color: #333;
+}
+.m-login-register .row input[type="text"]:focus, .row input[type="password"]:focus {
+	border: 1px solid #55acef;
+}
+.m-login-register .row input.verification-code {
+	width: 198px;
+	float: left;
+	margin-right: 0;
+}
+.m-login-register .row input[type="text"].wx-inputErrBorder, .m-login-register .row input[type="password"].wx-inputErrBorder {
+	border-color: red;
+}
+.m-login-register .row a.get-verification-code {
+	display: inline-block;
+	border: 1px solid #e4e4e4;
+	height: 42px;
+	line-height: 42px;
+	width: 126px;
+	text-align: center;
+	color: #55acef;
+	float: left;
+	font-size: 14px;
+	margin-left: 10px;
+}
+.m-login-register .row a.sendCode {
+	color: #ccc;
+}
+.m-login-register .p-checked {
+	line-height: 12px;
+}
+.m-login-register .form-item .row label {
+	display: inline;
+	height: auto;
+	line-height: 12px;
+	width: auto;
+}
+.m-login-register .p-checked label input {
+*vertical-align: middle;
+}
+.m-login-register .p-checked a {
+*line-height:18px;
+	padding-left: 5px;
+}
+.m-login-register .p-checked .fine-tuning {
+	margin-top: 2px;
+	display: inline-block;
+	float: right;
+}
+.m-login-register .p-btn {
+	padding: 10px 0 20px 0;
+}
+.m-login-register .a-btn {
+	background: #55acef;
+	height: 44px;
+	line-height: 44px;
+	display: block;
+	width: 100%;
+	color: #fff;
+	font-size: 18px;
+	text-align: center;
+}
+.m-login-register .a-btn:hover {
+	color: #fff;
+}
+.m-login-register .bottom-style {
+	height: 30px;
+	line-height: 30px;
+	background: #e4e4e4;
+	text-align: center;
+	margin-top: 10px;
+}
+/*2014-9-23 login style*/
+.m-login-register .change-pt {
+	padding-top: 13px;
+}
+.p-login {
+	text-align: center;
+	font-size: 14px;
+	line-height: 18px;
+}
+.p-login a {
+	display: inline-block;
+	margin: 10px 7px 18px;
+	background: url( ../images/login_reg.png) no-repeat;
+	width: 22px;
+	height: 22px;
+}
+.p-login .weibo {
+	background-position: 0 -54px;
+}
+.p-login .weixin {
+	background-position: 0 -88px;
+}

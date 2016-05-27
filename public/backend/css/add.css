@@ -1,0 +1,88 @@
+/*
+    后台系统登录界面样式
+    start
+ */
+body{padding: 0px;
+    margin: 0px;
+    line-height: 1.6;
+    font-family: "Helvetica Neue","Hiragino Sans GB","Microsoft YaHei","\9ED1\4F53",Arial,sans-serif !important;
+    color: #222;
+    font-size: 14px;
+}
+#headtop {
+    background-color:#1BD6E4;
+    border-radius: 20px 20px 0px 0px;
+    border:1px solid #aaa;
+    border-bottom: 0px;
+    padding:10px;
+    width: 460px;
+    text-align: center;
+    margin: 60px auto 0px auto;
+}
+input{
+    transition: all 0.30s ease-in-out;
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    padding-left: 10px;
+    height: 34px;
+    width: 200px;
+}
+.vercode {
+    width: 100px;
+    margin-top: 3px;
+}
+input:focus{
+    border:1px solid rgb(55, 182, 238);;
+    box-shadow: 0 0 2px rgb(33, 162, 238);
+    -webkit-box-shadow: 0 0 2px rgb(33, 162, 238);
+    -moz-box-shadow: 0 0 2px rgb(33, 162, 238);
+}
+.login{
+    background: #F1F1F1;
+    width:460px;
+    border:solid 1px #ccc;
+    border-top: 0px;
+    padding:30px 10px 30px 50px;
+    margin:0px auto;
+    margin-top:0px;
+    border-radius:0px 0px 12px 12px ;
+}
+.laber_from{
+    width: 80px;
+    float: left;
+    line-height: 35px;
+    color: #222;
+    word-spacing: 3px;
+    font-weight: normal;
+}
+.control-group{
+    padding-bottom: 20px;
+}
+.control-group img{
+    margin: 0px 5px;
+}
+.btn {
+    margin-top: 10px;
+    width: 120px;
+}
+.btn-success {
+    width: 120px;
+    margin-top: 15px;
+    position: relative;
+    left: 120px;
+    text-align: center;
+}
+.error {
+    padding: 3px;
+    line-height: 1.2em;
+    margin-top: 8px;
+    font-size: 14px;
+    color: #f00;
+}
+/*
+    后台系统登录界面样式
+    end
+ */

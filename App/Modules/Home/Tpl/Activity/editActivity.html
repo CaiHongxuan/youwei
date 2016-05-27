@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>编辑活动</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" type="image/png" href="__PUBLIC__/images/logo.jpg">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/zhongchou.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/launchproject.css">
+<link href="__PUBLIC__/css/style.css" rel="stylesheet" type="text/css" media="all" />
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery1.min.js"></script>
+<link href="__PUBLIC__/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="__PUBLIC__/js/megamenu.js"></script>
+<script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+<script src="__PUBLIC__/js/jquery.easydropdown.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/prompt.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/preview.js"></script>
+<!-- <script charset="utf-8" src="__PUBLIC__/kindeditor/kindeditor-min.js"></script> -->
+<script charset="utf-8" src="__PUBLIC__/kindeditor/kindeditor.js"></script>
+
+<script>
+    KindEditor.ready(function(K) {
+      window.editor = K.create('#content1',{
+        themeType : 'simple',
+        items : ['source', '|', 'undo', 'redo', '|', 'preview', 'template', 'code', 'cut', 'copy', 'paste',
+        'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+        'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+        'superscript', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+        'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+        'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 'multiimage',
+        'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+        'anchor', 'link', 'unlink']
+      });
+    });
+</script>
+</head>
+<body onload="init()">
+
+<!-- head begin -->
+<include file="Public/header" />
+<!-- head end -->
+
+<!-- main static -->
+<div class="main clearfix">
+  <div class="process-wrap clearfix">
+    <form action="{:U('Activity/edit')}" method="post" name="HwForm" id="form" enctype="multipart/form-data">
+      <div class="tit-wrap">
+        <h3>活动编辑<a href="{:U('User/perCenter')}" class="back">返回个人中心</a></h3>
+      </div>
+      <!-- project start -->
+      <div class="project-box">
+        <div class="project-con fl w751">
+          <div class="project-edit">
+            <div class="form-item clearfix">
+              <label>活动标题：</label>
+              <input placeholder="活动标题(不超过30字)" name="name" class="w655"  type="text" value="{$activity.name}" style="width:540px;">
+            </div>
+            <div class="form-item clearfix">
+              <label>活动简介：</label>
+              <textarea placeholder="活动简介(不超过100字)" name="description" rows="4" type="text">{$activity.description}</textarea>
+              </div>
+            <div class="form-item clearfix">
+              <label>活动类别：</label>
+              <div id="Js-select-cate" class="option-sort">
+                <volist name="category" id="vo">
+                  <span data-id="{$vo.id}">{$vo.name}</span>
+                </volist>
+              </div>
+              <span id="Js-cate" class="hidden" name="cate_id" value="{$activity.category_id}"></span>
+            </div>
+            <div class="form-item clearfix">
+              <label>活动封面：</label>
+              <div class="up-btn fs14">
+                <div class="ipt-file"> <a class="">上传封面
+                  <input type="file" name="image" id="image"  onchange="javascript:setImagePre();" style="display:inline;height:45px;width:138px;" >
+                  </a> </div>
+                <span class="gray" id="gray">可不选。支持jpg、jpeg、png，大小不超过5M。建议尺寸：640 x 480px&nbsp;
+                <span style="color:red;font-size:14px;">{$error[file]}</span></span></div>
+            </div>
+            <div class="form-item clearfix form-group">
+              <label>活动详情：</label>
+              <textarea name="detail" class="form-control" id="content1">{$activity.detail}</textarea>
+            </div>
+            <div class="form-item clearfix">
+                <label>报名方式：</label>
+                <span class="span-style">
+                    <label class="label-style">
+                        <input checked="checked" name="method" value="系统报名" type="radio">系统报名</label>
+                    <label class="label-style">
+                        <input name="method" value="文件报名" type="radio">文件报名</label><!-- 如果选择文件报名方式，则需在对应的活动详情页里显示上传文件的按钮 -->
+                </span>
+            </div>
+            <div class="form-item clearfix">
+              <label>附件：</label>
+              <div class="up-btn fs14">
+                <div class="ipt-file"> <a class="">上传附件
+                  <input type="file" name="attachment" id="upfile"  onchange="javascript:setName();" style="display:inline;height:45px;width:138px;" >
+                  </a></div>
+                <span class="gray" id="showname">可不选&nbsp;<span style="color:red;font-size:14px;">{$error[file]}</span></span>
+                <div class="ipt-file" id="reset-file" style="margin-left:10px;display:none;"><a class="">取消附件
+                  <input type="text" style="display:inline;height:45px;width:138px;" >
+                  </a></div>
+              </div>
+            </div>
+            <div class="action">
+              <input type="hidden" name="id" value="{$activity.id}"/>
+              <input class="btn-effect-blue btn-sub w170" type="submit" value="编辑活动">
+              <input class="btn-effect-blue btn-sub w170" type="reset" value="取消编辑">
+            </div>
+          </div>
+        </div>
+        <!-- project end --> 
+        <!-- side static -->
+        <div class="right-cart">
+          <div class="pretitle" style="width:302px;height:70px;text-align:center">
+            <label style="line-height:70px;text-align:center;font-size:20px;font-weight:bold;">预览区域</label>
+          </div>
+          <div class="list-item" style="border:1px solid #E4E4E4;width:246px;height:185px;">
+            <div class="pre">
+              <img id="preview" src="
+                <empty name='activity.path'>
+                  __PUBLIC__/images/default.jpg
+                  <else/> __ROOT__/Uploads/activity/{$activity.path}
+                </empty>
+              " style="width:246px;height:185px;"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!--main end--> 
+
+<!-- footer begin -->
+<include file="Public/footer" />
+<!-- footer end -->
+
+<script type="text/javascript">
+  $("input[name='name']").blur(function(){
+    var project_name = $("input[name='name']");
+    if (project_name.val().trim() == '') {
+      project_name.parent().find("span").remove().end().append("<span class='error-text' style='color:red;margin:0px;'>&nbsp;*不能为空</span>");
+      return;
+    }
+    else if($(this).val().length>30){
+      project_name.parent().find("span").remove().end().append("<span class='error-text' style='color:red;'>&nbsp;*不能超过30个字</span>");
+      return;
+    }
+    else{
+      project_name.parent().find("span").remove();
+    }
+  });
+
+  $("textarea[name='description']").blur(function(){
+    var introduce = $("textarea[name='description']");
+    if (introduce.val().trim() == '') {
+      introduce.parent().find("span").remove().end().append("<span class='error-text' style='color:red;'>&nbsp;*不能为空</span>");
+      return;
+    }
+    else if($(this).val().length>100){
+      introduce.parent().find("span").remove().end().append("<span class='error-text' style='color:red;'>&nbsp;*不能超过100个字</span>");
+      return;
+    }
+    else{
+      introduce.parent().find("span").remove();
+    }
+  });
+    
+  $("#Js-select-cate").delegate('span', 'click', function(event) {
+    $(this).addClass('select').siblings().removeClass('select');
+    $("#Js-cate").attr("value",$(this).attr("data-id"));
+  });
+</script>
+</body>
+</html>

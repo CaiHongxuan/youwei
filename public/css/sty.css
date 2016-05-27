@@ -1,0 +1,351 @@
+.main .sidebar {
+	background: #fafafa;
+	border: 1px solid #e4e4e4;
+}
+.up-btn .gray {
+	float: left;
+	padding-left: 10px;
+	line-height: 45px;
+}
+.action {
+	padding: 20px 0px 0 86px;
+}/*project-set*/
+.project-set {
+	padding: 0 0px 20px;
+}
+.project-set .action .btn-base {
+	margin-right: 20px;
+}
+.project-info {
+	padding: 0 20px 20px;
+}
+.project-info table {
+	width: 100%;/*670px;*/
+	border: 1px solid #e4e4e4;
+}
+.project-info table th, .project-info table td {
+	border-right: 1px solid #e4e4e4;
+	border-bottom: 1px solid #e4e4e4;
+	text-align: center;
+	padding: 5px;
+}
+.project-info table thead th, .project-info table thead td {
+	height: 30px;
+	background: #f0f0ee;
+	color: #000;
+}
+.project-set-form {
+	padding: 0px 0 20px;
+}
+.project-set-form form {
+	padding-top: 20px;
+}
+.project-set-form .form-item textarea {
+	width: 550px;
+}
+.edui-image {
+	float: left;
+}
+.edui-image p {
+	line-height: 28px;
+}
+.edui-image ul li {
+	width: 92px;
+	height: 90px;
+	padding: 10px 20px 10px 0px;
+	float: left;
+}
+.edui-image ul li a {
+	width: 90px;
+	height: 90px;
+	border: 1px solid #eaeaea;
+	background: #f8f8f8 url(../../../v3/static/images/icon/bg-upd.jpg?v=1421395597) no-repeat 50% 40%;
+	display: block;
+	position: relative;
+}
+.edui-image ul li a .pos-bg {
+	width: 100%;
+	height: 22px;
+	display: block;
+	background: #FFF;
+ filter:alpha(opacity:70);
+	opacity: 0.7;
+	position: absolute;
+	left: 0;
+	top: 70px;
+	z-index: 2;
+}
+.edui-image ul li a .pos-opt {
+	width: 100%;
+	height: 22px;
+	text-align: center;
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 70px;
+	z-index: 3;
+}
+.edui-image ul li a .pos-upd {
+	width: 100%;
+	height: 22px;
+	text-align: center;
+	display: block;
+	color: #999;
+	padding: 68px 0px 0px;
+}
+.edui-image ul li input {
+	width: 90px;
+	height: 90px;
+	cursor: pointer;
+	display: block;
+	margin: 0px;
+	padding: 0px;
+	position: absolute;
+	left: 0;
+	top: 0;
+ filter:alpha(opacity:0);
+	opacity: 0;
+}
+.edui-image ul li img {
+	width: 90px;
+	height: 90px;
+}
+.form-item .input-notes {
+	line-height: 48px;
+	display: block;
+	padding: 0px 5px;
+	float: left;
+}
+.hblx {
+	height: 36px;
+	float: left;
+	font-size: 14px;
+	line-height: 18px;
+	color: #555;
+	padding: 4px 5px;
+	margin-left: 5px;
+	border: 1px solid #bababa;
+	border-radius: 3px;
+	position: relative;
+}
+.form-submit {
+	padding: 10px 0px 10px 105px;
+}							/*project-msg*/
+.project-msg {
+	padding: 0 10px 20px;
+}
+.form-item-tit {
+	font-size: 20px;
+	line-height: 30px;
+	padding: 10px 0px;
+	margin: 10px 0 20px;
+	color: #000;
+	border-bottom: 1px solid #e4e4e4;
+}/*project-start*/
+.project-start {
+	padding: 30px 50px 30px 380px;
+	min-height: 300px;
+	_height: 300px;
+	background: url(../../../v3/static/images/common/bg-projects.png?v=1421395597) no-repeat 50px 50%;
+}
+.project-start h3 {
+	height: 70px;
+	text-indent: -9999px;
+	padding: 20px 0px;
+}
+.project-start p {
+	font-size: 14px;
+	line-height: 24px;
+	padding: 0 0 20px;
+}
+.pro-agr-chk {
+	padding-bottom: 10px;
+	color: #999999;
+}
+.pro-agr-btn {
+	padding: 20px 0px;
+}
+.ke-container {
+	border: 1px solid #BABABA;
+	border-radius: 3px;
+	float: left;
+	position: relative;
+}/*detail-con*/
+.detail-con .comment {
+	padding: 15px 15px 0;
+}
+.detail-con .flbq {
+	border-bottom: none;
+	border-top: 1px dotted #CCCCCC;
+	padding: 10px 0 0;
+}
+.error {
+	color: #f00;
+	display: inline-block;
+	line-height: 45px;
+	padding-left: 10px;
+}
+.project-box {
+	padding-top: 40px;
+}
+.view-area {
+	height: 70px;
+	line-height: 70px;
+	text-align: center;
+	color: #333;
+}
+.sidebar .list-item {
+	margin: 0 auto 45px;
+	height: 300px;
+	background: #fff;
+}
+.sidebar .project-name {
+	height: 25px;
+}
+.sidebar .block-list {
+	margin: 0 0 20px;
+}
+.sidebar .list-item h3 {
+	padding: 0 12px;
+	margin: 10px 0;
+	font-size: 14px;
+	line-height: 20px;
+	height: 40px;
+	overflow: hidden;
+	font-weight: bold;
+}
+.sidebar .item-caption {
+	padding: 0px 12px 8px;
+	height: 20px;
+	line-height: 20px;
+	color: #A4A4A4;
+	margin-top: 44px;
+}
+.sidebar .item-caption .caption-title {
+	float: left;
+}
+.sidebar .caption-title em {
+	color: #555;
+}
+.sidebar .item-caption .btn-base {
+	float: right;
+}/*发起人信息*/
+.project-msg .s-01 {
+	font-size: 12px;
+	color: #999;
+	padding: 0px 0 5px 105px;
+	width: 320px;
+}
+.project-msg .btn-sub, .project-set-form .btn-sub {
+	margin-right: 10px;
+}
+.project-msg .action {
+	margin-top: 20px;
+}
+.reminder {
+	padding: 0 40px 36px 40px;
+	color: #a0a0a0;
+}
+.reminder h3 {
+	font-size: 20px;
+	padding: 30px 0 30px;
+	color: #333;
+}
+.reminder p {
+	line-height: 25px;
+}/*回报设置*/
+.form-item textarea.return-textarea {
+	width: 503px;
+	height: 225px !important;
+}
+.remin-save {
+	margin-top: 10px;
+	transition: all 1s ease;
+	border: 2px solid #55acef;
+	width: 96px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	color: #55acef;
+	margin-right: 10px;
+	display: inline-block;
+	font-size: 14px;
+}
+.project-set-form .form-submit {
+	padding-left: 82px;
+}
+.project-set-form .action {
+	padding: 35px 0 0 82px;
+}
+.ml5 {
+	margin-left: 5px;
+}
+.remin-save:hover {
+	color: #fff;
+	background: #55acef;
+}/*完成*/
+.operating-tips {
+	width: 400px;
+	margin: 0px auto;
+	padding: 80px 0px;
+	text-align: center;
+}
+.operating-tips .remin-save {
+	width: 150px;
+	margin-top: 20px;
+}
+.icon-success {
+	width: 86px;
+	height: 86px;
+	display: inline-block;
+}
+.operating-tips h3 {
+	font-size: 24px;
+	line-height: 50px;
+	color: #000;
+}
+.operating-tips p {
+	color: #999;
+	font-size: 14px;
+	letter-spacing: -1px;
+}/*发起*/
+.launch {
+	background: url(../../../v3/static/images/icon/launch-bg.jpg?v=1421395597);
+	height: 550px;
+}
+.tree {
+	height: 100%;
+	background: url(../../../v3/static/images/icon/tree.png?v=1421395597) no-repeat center bottom;
+	color: #fff;
+}
+.tree .txt-1 {
+	line-height: 45px;
+	padding: 90px 0 15px 0;
+	color: #fff09d;
+}
+.agreement {
+	padding-top: 20px;
+	color: #333;
+}
+.agreement a:hover {
+	color: #fff;
+}
+.start-dream {
+	-webkit-transition: all 1s ease;
+	transition: all 1s ease;
+	border: 2px solid #fff;
+	width: 454px;
+	height: 76px;
+	line-height: 78px;
+	display: inline-block;
+	font-size: 30px;
+	color: #fff;
+	margin-top: 18px;
+}
+.start-dream:hover {
+	color: #55acef;
+	background: #fff;
+}
+#wx-validator-description-required {
+	margin-left: 85px;
+}

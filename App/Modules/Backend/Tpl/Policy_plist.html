@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="__PUBLIC__/backend/utilLib/bootstrap.min.css" type="text/css" media="screen" />
+    <script type="text/javascript">
+    function selectChange() {
+        document.getElementById("Input4Key").value = '';
+        document.getElementById("subtn").click();
+    }
+    </script>
+</head>
+<body>
+    
+<div class="container-fluid">
+    <div class="row-fluid">
+            <div class="span12">
+            <div style="margin-bottom: 40px;">
+                 <form  class="form-inline" action="{:U('Policy/plist')}" method="POST">
+               
+                  <div class="form-group">
+                    <label for="StatuSelect">政策类别：</label> 
+                    <select name="category_id" class="form-control" onchange='selectChange()'  id="StatuSelect">
+                      <volist name="category" id="vo">
+                        <option value="{$vo.id}"
+                        <if condition="$vo['id'] eq $category_id">selected='selected'</if>
+                        >{$vo.name}</option>
+                      </volist>
+                        <option value="0" <if condition="'' eq $category_id">selected='selected'</if>>全部</option>
+                    </select>
+                  </div>    
+                   <div class="form-group">
+                   <!--  <label for="exampleInputEmail2">搜索</label> -->
+                    <input type="text" name='keyword' class="form-control" id="Input4Key" placeholder="标题、简介" style='width:300px;' value="{$keyword}">
+                  </div>
+                  <button type="submit" id='subtn' class="btn btn-default">搜索</button>
+                  <a class="btn btn-info" href="{:U('Policy/add')}" role="button">新增政策</a>
+                </form>
+                <php>$action = U('Policy/plist',array('category_id'=>$category_id))</php>
+            </div>
+            <table class="table table-bordered table-hover table-condensed">
+                <thead>
+                    <tr>
+                        <th>
+                            标题
+                        </th>
+
+                        <th>
+                            简介
+                        </th>
+                        <th style="width:60px;">
+                            类别
+                        </th>
+                        <th style="width:80px;">
+                            下载次数
+                        </th>
+              
+                        <th style="width:150px;">
+                            创建时间
+                        </th>
+                        <th>
+                            附件
+                        </th>
+                        <th style="width:150px;">
+                            操作
+                        </th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <empty name="policy">
+                        <tr>
+                            <td colspan='100%' align='center'>
+                                尚无记录
+                            </td>
+                         </tr>
+                    <else/>
+                    <volist name='policy' id='vo'>
+                         <tr>
+                            <td>{$vo.title}</td>
+                            <td>{$vo.description}</td>
+                            <td>{$vo.cate_name}</td>
+                            <td style="text-align: center;">{$vo.download_times}</td>
+                            <td>{$vo.created_time}</td>
+                          
+
+                            <td>
+                                <a class="btn btn-default" href="{:U('Policy/download',array('id'=>$vo['id']))}" onclick="javascript:return confirm('确定下载?')" role="button">下载</a>
+                            </td>
+                            <td> 
+                                <a class="btn btn-info" href="{:U('Policy/edit',array('id'=>$vo['id']))}" role="button" >编辑</a>
+                                <a class="btn btn-danger" href="{:U('Policy/delete',array('id'=>$vo['id'])).'?action='.$action}" role="button" onclick="javascript:return confirm('确定删除该记录?')">删除</a>
+                            </td>
+                         </tr>
+                    </volist>
+                         <tr>
+                            <td colspan='100%' align='center'>
+                                {$page}
+                            </td>
+                         </tr>
+                </empty>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+    
+</body>
+</html>

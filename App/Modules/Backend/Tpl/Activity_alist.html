@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="__PUBLIC__/backend/utilLib/bootstrap.min.css" type="text/css" media="screen" />
+    <style type="text/css">
+      .table—th{width: 10%;}
+    </style>
+    <script type="text/javascript">
+    function selectChange() {
+        document.getElementById("Input4Key").value = '';
+        document.getElementById("subtn").click();
+    }
+    </script>
+</head>
+<body>
+    
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+           <!--  <div style="margin-bottom: 40px;">
+            <div class="form-group">
+                 <a class="btn btn-success" href="{:U('Activity/add_show')}" role="button">快速新建活动</a>
+                 <a class="btn btn-success" href="{:U('Activity/alist', array('type'=>1))}" role="button">查看已审通过</a>
+            </div> -->
+            <div style="margin-bottom: 40px;">
+                 <form class="form-inline" action="{:U('Activity/alist')}" method="POST">
+                  <div class="form-group">
+                    <label for="TypeSelect">类型</label>
+                    <select name='ispassed' class="form-control" onchange='selectChange()'> 
+
+                        <option value='2'  class="form-control"<if condition="$ispassed=='2'">selected='selected'</if>>未通过</option>
+                        <option value='1' class="form-control"<if condition="$ispassed=='1'">selected='selected'</if>>已通过</option>
+                        <option value='0' class="form-control" <if condition="$ispassed=='0'">selected='selected'</if>> 待审核</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <!-- <label for="exampleInputEmail2">搜索</label> -->
+                    <input type="text" name='keyword' class="form-control" id="Input4Key" placeholder="标题、描述、编号" value="{$key}">
+                  </div>
+                  <button type="submit" id='subtn' class="btn btn-default">查看</button>
+                    <a class="btn btn-success" href="{:U('Activity/add_show')}" role="button">快速新建活动</a>
+                   
+                </form>
+                <php>$action = U('Activity/alist',array('ispassed'=>$ispassed,'keyword'=>$key),'');</php>
+              
+            </div>
+            <table class="table table-bordered table-hover">
+                <thead >
+                    <!-- <tr style="background-color:#37A0B9;"> -->
+                    <tr>
+                        <th class="table—th">
+                           活动名称
+                        </th>
+                        <th>
+                            活动编号
+                        </th>
+                        <th>
+                            活动描述
+                        </th>
+                        <th>
+                            创建时间
+                        </th>
+                        <th>
+                             截止时间
+                        </th>
+                        <th>
+                            审核状态
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <empty name="activity">
+                        <tr>
+                            <td colspan='100%' align='center'>
+                                尚无活动
+                            </td>
+                         </tr>
+                    <else/>
+                    <volist name='activity' id='vo'>
+                         <tr>
+                            <td>
+                                {$vo.name}
+                            </td>
+                            <td>
+                              <!--  <if condition="$vo.number eq null">未审核，无活动号<else/></if> -->
+
+                               {$vo.number}
+                            </td>
+                            <td>{$vo.description}</td>
+                            <td style="width:170px;">
+                               {$vo.created_time}
+                            </if>
+                            </td>
+                            <td>
+                                {$vo.deadline}
+                            </td>
+                            <td style="width:100px">
+                              <if condition="$vo.is_passed eq 0">
+                                待审核
+                              <elseif condition="$vo.is_passed eq 1"/>
+                                已通过审核
+                              <else />
+                                审核不通过
+                              </if>
+                            </td>
+                            <td>  
+                              <a class="btn btn-info" href="{:U('Activity/detail',array('id'=>$vo['id']))}" role="button">详细</a>
+                               <a class="btn btn-info" href="{:U('Activity/delete',array('id'=>$vo['id'])).'?action='.$action}" onClick="return confirm('您确定要删除吗？请确认！')"role="button">删除</a>
+
+                            </td>
+                         </tr>
+                    </volist>
+                         <tr>
+                            <td colspan='100%' align='center'>
+                                {$page}
+                            </td>
+                         </tr>
+                </empty>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+    
+</body>
+</html>

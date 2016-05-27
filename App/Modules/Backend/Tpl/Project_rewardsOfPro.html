@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>项目回报</title>
+    <link rel="stylesheet" href="__PUBLIC__/backend/utilLib/bootstrap.min.css" type="text/css" media="screen" />
+    <style type="text/css">
+      .table—th{width: 15%;}
+      .table—head{background-color: red;}
+    </style>
+</head>
+<body>
+    
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+          <label>项目回报详情</label>
+            <span>-- [{$project_name}] </span>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <!-- <th style="width:110px;">
+                            说明图片
+                        </th> -->
+                        <th style="">
+                            回报内容
+                        </th>
+                        <th style="width:20%;">
+                            回报时间
+                        </th>
+                        <th style="width:80px;">
+                            回报类型
+                        </th>
+                        <th style="width:60px;">限额</th>
+                        <th style="width:70px;">
+                            已支持
+                        </th>
+                      
+                    </tr>
+                </thead>
+                <tbody>
+                    <empty name="rewards">
+                        <tr>
+                            <td colspan='100%' align='center'>
+                                该项目尚未设置回报
+                            </td>
+                        </tr>
+                    <else/>
+                    <volist name='rewards' id='reward'>
+
+                         <tr>
+                            
+                            <!-- <td>
+                                <img src="{$reward.reward_pic}" width='100px' height='100px'/>
+                            </td> -->
+                            <td><p>{$reward.reward_content}<p></td>
+                            <td>{$reward.reward_time}</td>  
+                            <td>
+                                <if condition="$reward.reward_type eq 0">
+                                实物回报 
+                                <else/>
+                                虚拟回报 
+                                </if>
+                            </td>
+                            <td>{$reward.reward_quota}</td>
+                            <td>{$reward.supporterNum}</td>
+                        </tr>
+
+                    </volist>
+                         <tr>
+                            <td colspan='100%' align='center'>
+                                {$page}
+                            </td>
+                         </tr>
+                </empty>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

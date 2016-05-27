@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>注册</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" type="image/png" href="__PUBLIC__/images/youwei30x30.png">
+<link href="__PUBLIC__/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery1.min.js"></script>
+<link href="__PUBLIC__/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="__PUBLIC__/js/megamenu.js"></script>
+<script src="__PUBLIC__/js/jquery.easydropdown.js"></script>
+<!--[if ! IE 9]>  
+<style type="text/css">
+.register_account form input[type="text"], .register_account form input[type="password"], register_account form select {
+  border: 1px solid #eee;
+}
+</style>
+<![endif]-->
+</head>
+<body>
+
+<!-- head begin -->
+<include file="Public/header" />
+<!-- head end -->
+
+<div class="register_account">
+  <div class="wrap">
+    <p class="title">注册企业用户
+    <!-- 企业用户注册 -->
+    <form id="enterprise" action="{:U('User/register')}" method="POST" enctype="multipart/form-data">
+      <div class="col_1_of_2 span_1_of_2">
+        <div class="messagebox">
+          <div class="message">企业名称: </div>
+          <input type="text"  onblur="changeTip(this);" id="user" placeholder="" name="username" value="{$form_data['username']}"/>
+          <span class='errors'>{$errors['name']}</span>
+        </div>
+
+        <div class="messagebox">
+          <div class="message">企业联系电话: </div>
+          <input type="text"  onblur="changeTip(this);" id="tele" placeholder="" name="telephone" value="{$form_data['telephone']}"/> 
+          <span class='errors'>{$errors['telephone']}</span>
+        </div>
+
+        <div class="messagebox">
+          <div class="message">企业电子邮箱: </div>
+          <input type="text"  onblur="changeTip(this);" id="mail" placeholder="" name="email" value="{$form_data['email']}"/>
+          <span class='errors'>{$errors['account']}</span>
+        </div>
+
+        <div class="messagebox">
+          <div class="message">用户密码: </div>
+          <input type="password" onblur="changeTip(this);" id="pass" placeholder="" name="pass" value=""/>
+          <span class='errors'>{$errors['password']}</span>
+        </div>
+
+        <div class="messagebox">
+          <div class="message">确定密码: </div>
+          <input type="password"  onblur="changeTip(this);" id="recog" placeholder="" name="repass" value=""/>
+          <span class='errors'>{$errors['repassword']}</span>
+        </div>
+        <button class="grey">提交</button>
+        <p class="terms">By clicking 'Create Account' you agree to the <a href="#">Terms &amp; Conditions</a>.</p>
+      </div>
+      <div class="clear"></div>
+    </form>
+  </div>
+</div>
+
+<!-- footer begin -->
+<include file="Public/footer" />
+<!-- footer end -->
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<title>有为后台管理系统</title>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<link rel="stylesheet" href="__PUBLIC__/backend/css/index.css" type="text/css"  />
+
+<script type="text/javascript" src="__PUBLIC__/backend/js/jquery.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/backend/js/tendina.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/backend/js/common.js"></script>
+
+</head>
+<body>
+    <!--顶部-->
+    <div class="layout_top_header" style="background-color: #37A0B9;">
+        <div style="float: left;">
+            <span style="font-size: 16px;line-height: 45px;padding-left: 20px;color: #fff">有为后台管理系统</span>
+        </div>
+        <div id="ad_setting" class="ad_setting">
+            <a class="ad_setting_a" href="javascript:; ">
+                <i class="icon-user glyph-icon" style="font-size: 20px"></i>
+                <span>管理员</span>
+                <i class="icon-chevron-down glyph-icon"></i>
+            </a>
+            <ul class="dropdown-menu-uu" style="display: none" id="ad_setting_ul">
+               
+                <li class="ad_setting_ul_li"> <a href="{:U('Backend/Login/changePasswordForAdmin')}"  target="menuFrame"><i class="icon-cog glyph-icon"></i> 修改密码 </a> </li>
+                <li class="ad_setting_ul_li"> <a href="{:U('Backend/Index/logout')}"><i class="icon-signout glyph-icon"></i> <span class="font-bold">退出</span> </a> </li>
+            </ul>
+        </div>
+    </div>
+    <!--顶部结束-->
+    <!--菜单-->
+    <div class="layout_left_menu" id='leftMenuPanel'>
+        <ul id="menu">
+            <li class="childUlLi">
+               <a href=""  target="menuFrame"><i class="glyph-icon icon-home"></i>图片管理</a>
+                <ul>
+                    <li><a href="{:U('Photo/piclist')}" target="menuFrame"><i class="glyph-icon icon-chevron-right"></i>图片列表</a></li>
+                     <li><a href="{:U('Photo/addpic')}" target="menuFrame"><i class="glyph-icon icon-chevron-right"></i>添加图片</a></li>
+                </ul>
+            </li>
+            <li class="childUlLi">
+                <a href="user.html"  target="menuFrame"> <i class="glyph-icon icon-reorder"></i>用户管理</a>
+                <ul>
+                    <li><a href="{:U('User/userList')}" target="menuFrame"><i class="glyph-icon icon-chevron-right"></i>用户列表</a></li>
+                    <li><a href="{:U('User/tutorList')}" target="menuFrame"><i class="glyph-icon icon-chevron-right"></i>导师列表</a></li>
+                    <li><a href="{:U('User/EnterpriseList')}" target="menuFrame"><i class="glyph-icon icon-chevron-right"></i>企业列表</a></li>
+                </ul>
+            </li>
+            <li class="childUlLi">
+                <a href="role.html" target="menuFrame"> <i class="glyph-icon icon-reorder"></i>项目管理</a>
+                <ul>
+                    <li><a href="{:U('Project/projectList')}" target="menuFrame"><i class="glyph-icon icon-chevron-right"></i>项目列表</a></li>
+                    <li><a href="{:U('Project/packedList')}" target="menuFrame"><i class="glyph-icon icon-chevron-right"></i>精选项目</a></li>
+                </ul>
+            </li>
+            <li class="childUlLi">
+                <a href="#"  target="menuFrame"> <i class="glyph-icon icon-reorder"></i>活动管理</a>
+                <ul>
+                    <li><a href="{:U('Activity/alist')}" target="menuFrame"><i class="glyph-icon icon-chevron-right"></i>活动列表</a></li>
+                    <li><a href="{:U('Activity/add_show')}" target="menuFrame"><i class="glyph-icon icon-chevron-right"></i>添加活动</a></li>
+                </ul>
+            </li>
+            <li class="childUlLi">
+                <a href="#" target="menuFrame"> <i class="glyph-icon icon-reorder"></i>分类管理</a>
+                <ul>
+                    <li><a href="{:U('Category/clist', array('type' => 'project'))}" target="menuFrame"><i class="glyph-icon icon-chevron-right"></i>分类列表</a></li>
+                 <!--    <li><a href="{:U('Category/clist', array('type' => 'activity'))}" target="menuFrame"><i class="glyph-icon icon-chevron-right"></i>活动分类列表</a></li>
+                    <li><a href="{:U('Category/clist', array('type' => 'policy'))}" target="menuFrame"><i class="glyph-icon icon-chevron-right"></i>政策分类列表</a></li> -->
+                    <li><a href="{:U('Category/add_show')}" target="menuFrame"><i class="glyph-icon icon-chevron-right"></i>添加分类</a></li>
+                </ul>
+            </li>
+            <li class="childUlLi">
+                <a href="#" target="menuFrame"> <i class="glyph-icon icon-reorder"></i>政策中心</a>
+                <ul>
+                    <li><a href="{:U('Policy/plist')}" target="menuFrame"><i class="glyph-icon icon-chevron-right"></i>政策列表</a></li>
+                    <li><a href="{:U('Policy/add')}" target="menuFrame"><i class="glyph-icon icon-chevron-right"></i>新增政策</a></li>
+                    
+                </ul>
+            </li>
+            <li class="childUlLi">
+                <a href="#"> <i class="glyph-icon  icon-location-arrow"></i>评论管理</a>
+                <ul>
+                    <li><a href="{:U('Comment/clist')}" target="menuFrame"><i class="glyph-icon icon-chevron-right"></i>评论列表</a></li>
+                   
+                </ul>
+            </li>
+            <li class="childUlLi">
+                <a href="#"> <i class="glyph-icon  icon-location-arrow"></i>管理员操作日志</a>
+                <ul>
+                    <li><a href="{:U('Log/loglist')}" target="menuFrame"><i class="glyph-icon icon-chevron-right"></i>查看所有</a></li>
+                </ul>
+            </li>
+        </ul>        
+    </div>
+
+    <div class="hidden"><a title="隐藏侧边栏" onclick="javascript:hideLeftMenuMethod();"><img src="__PUBLIC__/images/publish_pic_show_normal.png" onmouseover="this.src='__PUBLIC__/images/publish_pic_show_pressed.png'" onmouseout="this.src='__PUBLIC__/images/publish_pic_show_normal.png'"></a></div>
+    <div class="show" style="display:none"><a title="显示侧边栏" onclick="javascript:showLeftMenuMethod();"><img src="__PUBLIC__/images/publish_pic_hide_normal.png" onmouseover="this.src='__PUBLIC__/images/publish_pic_hide_pressed.png'" onmouseout="this.src='__PUBLIC__/images/publish_pic_hide_normal.png'"></a></div>
+
+    <!--菜单-->
+    <div id="layout_right_content" class="layout_right_content">
+
+        <div class="route_bg">
+            <a href="#" style='padding-left: 8px;'>主页</a><i class="glyph-icon icon-chevron-right"></i>
+            <div style='float:right;margin-top:-14px;'>
+                <input type="button" class='btn btn-info btn-sm' value='刷新' onclick="javascript:menuFrame.location.reload();"/>
+                <input type="button" class='btn btn-info btn-sm' value='返回' onclick="javascript:history.go(-1);"/>
+            </div>
+        </div>
+        <div class="mian_content">
+            <div id="page_content">
+                <iframe id="menuFrame" name="menuFrame" src="{:U('User/userlist')}" style="overflow:visible;"
+                        scrolling="yes" frameborder="no" width="100%" height="86%"></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="layout_footer" STYLE="background-color:#37A0B9;color:white;">
+        <p>Copyright © 2015 - CHOCOLATE</p>
+    </div>
+    <script type="text/javascript">
+    function hideLeftMenuMethod(){
+        $("#leftMenuPanel").fadeOut();
+        document.getElementById('layout_right_content').style.margin='0px 0px 0px 19px';
+        $(".hidden").hide();
+        $(".show").show();
+    }
+    function showLeftMenuMethod(){
+        $("#leftMenuPanel").fadeIn();
+        document.getElementById('layout_right_content').style.margin='0px 0px 0px 220px';
+        $(".hidden").show();
+        $(".show").hide();
+    }
+    </script>
+</body>
+</html>

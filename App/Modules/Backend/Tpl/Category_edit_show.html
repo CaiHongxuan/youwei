@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Document</title>
+<link rel="stylesheet" href="__PUBLIC__/backend/utilLib/bootstrap.min.css" type="text/css" media="screen" />
+</head>
+<body>
+    
+<div class="container-fluid" >
+  <div class="row-fluid" style="width:45%;">
+      <h3 style="color:red;">修改分类</h3>
+      <form action="{:U('Category/edit')}" method='POST' >
+          <div class="form-group" >
+            <label>分类名称：</label>
+            <input type="text" name="name" class="form-control" placeholder="分类名称(不超过4个字)" value="{$category.name}">
+          </div>
+
+        <div class="form-group" >
+          <label>分类缩写：</label>
+          <input type="text" name="sign" class="form-control" placeholder="分类缩写(大写字母缩写)"
+          value="{$category.sign}">
+        </div>
+        <div class="form-group" >
+          <label>类型：{$category.name}</label>
+        </div>
+        <input type="hidden" name="id" value="{$category.id}"/>
+        <input type="hidden" name="type" value="{$category.type}"/> 
+        <!--<div class="form-group" style="width:30%;">
+          <label>选择类型：</label>
+          <select class="form-control" name="type">
+            <option value="project">项目分类</option>
+            <option value="activity">活动分类</option>
+          </select>
+        </div>-->
+        <button type="submit" class="btn btn-success" >修改</button>
+      </form>
+    </div>
+
+  </div>
+</body>
+</html>
+
